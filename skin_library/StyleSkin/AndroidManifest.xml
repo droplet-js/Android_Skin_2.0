@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.v7lin.style.news"
+    android:versionCode="1000"
+    android:versionName="1.0" >
+
+    <!-- 应用安装限制 -->
+    <!-- API: 11 Android 3.0 ActionBar targetSdkVersion >= 11 -->
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="19" />
+
+    <application
+        android:allowBackup="false"
+        android:allowClearUserData="false"
+        android:label="@string/skin_name"
+        android:persistent="true" >
+        
+    </application>
+
+</manifest>

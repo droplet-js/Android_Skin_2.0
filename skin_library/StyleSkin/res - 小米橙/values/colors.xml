@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <color name="tab_text_normal">#000000</color>
+    <color name="tab_text_pressed">#ff5200</color>
+    <color name="tab_indicator">#ff5200</color>
+    
+</resources>
