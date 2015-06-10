@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 自定义属性 -->
+    <!-- Text attributes -->
+    <dimen name="textSizeNormal">14sp</dimen>
+    <dimen name="textSizeLarge">18sp</dimen>
+    <dimen name="textSizeMedium">16sp</dimen>
+    <dimen name="textSizeSmall">12sp</dimen>
+
+    <!-- ProgressBar -->
+    <dimen name="bar_spinner_min_width">48dip</dimen>
+    <dimen name="bar_spinner_max_width">48dip</dimen>
+    <dimen name="bar_spinner_min_height">48dip</dimen>
+    <dimen name="bar_spinner_max_height">48dip</dimen>
+
+    <!-- ProgressBar.Large -->
+    <dimen name="bar_spinner_large_min_width">72dip</dimen>
+    <dimen name="bar_spinner_large_max_width">72dip</dimen>
+    <dimen name="bar_spinner_large_min_height">72dip</dimen>
+    <dimen name="bar_spinner_large_max_height">72dip</dimen>
+
+    <!-- ProgressBar.Small -->
+    <dimen name="bar_spinner_small_min_width">16dip</dimen>
+    <dimen name="bar_spinner_small_max_width">16dip</dimen>
+    <dimen name="bar_spinner_small_min_height">16dip</dimen>
+    <dimen name="bar_spinner_small_max_height">16dip</dimen>
+
+    <!-- ProgressBar.Horizontal -->
+    <dimen name="bar_horizontal_max_height">17dip</dimen>
+    <dimen name="bar_horizontal_min_height">17dip</dimen>
+
+    <!-- SeekBar -->
+    <dimen name="bar_seek_max_height">13dip</dimen>
+    <dimen name="bar_seek_min_height">13dip</dimen>
+    <dimen name="bar_seek_thumb_offset">0dip</dimen>
+
+    <!-- RatingBar -->
+    <dimen name="bar_rating_min_height">32dip</dimen>
+    <dimen name="bar_rating_max_height">32dip</dimen>
+    
+</resources>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!-- 约会大作战·夜刀神十香 -->
+    <!-- 约会大作战·鸢一折纸 -->
+    <!-- 约会大作战·五河琴里 -->
+    <!-- 约会大作战·四糸乃 -->
+    <!-- 约会大作战·时崎狂三 -->
+    <!-- 约会大作战·崇宫真那 -->
+    
+    <!-- 中二病也要谈恋爱·小鸟游六花 -->
+    <!-- 中二病也要谈恋爱·丹生谷森夏 -->
+    <!-- 中二病也要谈恋爱·五月七日茴香 -->
+    <!-- 中二病也要谈恋爱·凸守早苗 -->
+
+    <!-- Shadow -->
+    <color name="shadow_start">#80000000</color>
+    <color name="shadow_end">#00000000</color>
+
+    <!-- Cab -->
+    <color name="cab_title_text">#ffffff</color><!-- Theme -->
+    <color name="cab_shadow_start">#1a000000</color>
+    <color name="cab_shadow_end">#00000000</color>
+
+    <!-- Tab -->
+    <color name="tab_text_normal">#000000</color><!-- Theme -->
+    <color name="tab_text_pressed">#0089e6</color><!-- Theme -->
+    <color name="tab_indicator">#0089e6</color><!-- Theme -->
+
+    <!-- SwipeRefresh -->
+    <color name="swipe_refresh_text">#565656</color>
+    
+    <!-- Skin -->
+    <color name="skin_text_color">#ffffff</color>
+
+</resources>

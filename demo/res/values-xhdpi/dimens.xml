@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- top bar -->
+    <dimen name="topbar_height">48dp</dimen>
+    
+    <!-- tab bar -->
+    <dimen name="tab_strip_linear_vertical_width">120dp</dimen>
+    <dimen name="tab_divider_padding">10dp</dimen>
+    <dimen name="tab_text_min_height">32dp</dimen>
+    <dimen name="tab_text_padding_lr">15dp</dimen>
+    
+    <!-- swipe refresh -->
+    <dimen name="swipe_refresh_padding">10dip</dimen>
+    <dimen name="swipe_refresh_text_margin_left">10dip</dimen>
+    
+    <dimen name="bar_refresh_min_width">22.5dip</dimen>
+    <dimen name="bar_refresh_max_width">22.5dip</dimen>
+    <dimen name="bar_refresh_min_height">22.5dip</dimen>
+    <dimen name="bar_refresh_max_height">22.5dip</dimen>
+    
+    <!-- footer -->
+    <dimen name="footer_padding">10dip</dimen>
+    <dimen name="footer_text_margin_left">10dip</dimen>
+
+</resources>

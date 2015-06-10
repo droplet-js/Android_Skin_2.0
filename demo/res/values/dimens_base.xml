@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="navigation_bar_height">0dp</dimen>
+    <dimen name="navigation_bar_height_landscape">0dp</dimen>
+    <dimen name="navigation_bar_width">0dp</dimen>
+    
+    <dimen name="status_bar_height">0dp</dimen>
+</resources>

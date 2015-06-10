@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!-- Refresh & Loading -->
+    <string name="tag_pull">下拉刷新\u2026</string>
+    <string name="tag_release">释放刷新\u2026</string>
+    <string name="tag_refresh">正在加载\u2026</string>
+    <string name="tag_loading">正在加载\u2026</string>
+
+    <!-- Dialog -->
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+
+    <!-- Wait -->
+    <string name="wait">正在加载\u2026</string>
+
+    <!-- Retry -->
+    <string name="retry">请重试\u2026</string>
+
+    <!-- Network -->
+    <string name="error_network">网络传输错误</string>
+    <string name="error_unknown">未知错误</string>
+    
+    <!-- exit -->
+    <string name="exit_tips_format">再按一次退出%1$s</string>
+    
+    <string name="skin_name">不撸蓝（默认）</string>
+    <string name="font_name">默认</string>
+    
+    <!-- Settings -->
+    <string name="skin_label">皮肤</string>
+    <string name="font_label">字体</string>
+
+</resources>

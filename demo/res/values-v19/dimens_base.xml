@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!-- 会被反射到系统的navigation_bar_height（默认 48dip）上 -->
+    <dimen name="navigation_bar_height">0dp</dimen>
+    <!-- 会被反射到系统的navigation_bar_height_landscape（默认 48dip）上 -->
+    <dimen name="navigation_bar_height_landscape">0dp</dimen>
+    <!-- 会被反射到系统的navigation_bar_width（默认 42dip）上 -->
+    <dimen name="navigation_bar_width">0dp</dimen>
+    
+    <!-- 会被反射到系统的status_bar_height（默认 25dip）上 -->
+    <dimen name="status_bar_height">0dip</dimen>
+    
+</resources>

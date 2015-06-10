@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Style -->
+    <!-- primary_text -->
+    <color name="primary_text">#000000</color>
+
+    <!-- secondary_text -->
+    <color name="secondary_text">#7d7d7d</color>
+
+    <!-- tertiary_text -->
+    <color name="tertiary_text">#8e8e8e</color>
+
+    <!-- other_text -->
+    <color name="link_text">#ff33b5e5</color>
+    <color name="hint_text">#898989</color>
+    <color name="highlight_text">#6633b5e5</color>
+
+    <!-- other -->
+    <color name="list_divider">#1A000000</color>
+    <color name="device_bg">#ffffffff</color>
+    
+    <!--  -->
+    <color name="status_bar_bg">#99000000</color>
+    <color name="navigation_bar_bg">#99000000</color>
+
+</resources>

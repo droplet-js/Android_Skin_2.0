@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="Animation" parent="@android:style/Animation">
+        <!--  -->
+    </style>
+
+    <style name="Animation.Dialog" parent="@android:style/Animation.Dialog">
+        <!--  -->
+        <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_exit</item>
+    </style>
+
+    <style name="Animation.Activity" parent="@android:style/Animation.Activity">
+        <!--  -->
+        <item name="android:activityOpenEnterAnimation">@null</item>
+        <item name="android:activityOpenExitAnimation">@null</item>
+        <item name="android:activityCloseEnterAnimation">@null</item>
+        <item name="android:activityCloseExitAnimation">@null</item>
+        <item name="android:taskOpenEnterAnimation">@null</item>
+        <item name="android:taskOpenExitAnimation">@null</item>
+        <item name="android:taskCloseEnterAnimation">@null</item>
+        <item name="android:taskCloseExitAnimation">@null</item>
+        <item name="android:taskToFrontEnterAnimation">@null</item>
+        <item name="android:taskToFrontExitAnimation">@null</item>
+        <item name="android:taskToBackEnterAnimation">@null</item>
+        <item name="android:taskToBackExitAnimation">@null</item>
+    </style>
+    
+    <style name="Animation.Activity.Normal" parent="@style/Animation.Activity">
+    </style>
+
+    <style name="TextAppearance" parent="@android:style/TextAppearance">
+        <!--  -->
+        <item name="android:textColor">@color/primary_text_selector</item>
+        <item name="android:textColorHighlight">@color/highlight_text</item>
+        <item name="android:textColorHint">@color/hint_text</item>
+        <item name="android:textColorLink">@color/link_text</item>
+        
+        <item name="android:typeface">normal</item>
+        <item name="android:textSize">@dimen/textSizeNormal</item>
+    </style>
+
+    <style name="TextAppearance.Large" parent="@android:style/TextAppearance.Large">
+        <!--  -->
+        <item name="android:textColor">@color/primary_text_selector</item>
+        <item name="android:textColorHighlight">@color/highlight_text</item>
+        <item name="android:textColorHint">@color/hint_text</item>
+        <item name="android:textColorLink">@color/link_text</item>
+        
+        <item name="android:typeface">normal</item>
+        <item name="android:textSize">@dimen/textSizeLarge</item>
+    </style>
+
+    <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.Medium">
+        <!--  -->
+        <item name="android:textColor">@color/primary_text_selector</item>
+        <item name="android:textColorHighlight">@color/highlight_text</item>
+        <item name="android:textColorHint">@color/hint_text</item>
+        <item name="android:textColorLink">@color/link_text</item>
+        
+        <item name="android:typeface">normal</item>
+        <item name="android:textSize">@dimen/textSizeMedium</item>
+    </style>
+
+    <style name="TextAppearance.Small" parent="@android:style/TextAppearance.Small">
+        <!--  -->
+        <item name="android:textColor">@color/secondary_text_selector</item>
+        <item name="android:textColorHighlight">@color/highlight_text</item>
+        <item name="android:textColorHint">@color/hint_text</item>
+        <item name="android:textColorLink">@color/link_text</item>
+        
+        <item name="android:typeface">normal</item>
+        <item name="android:textSize">@dimen/textSizeSmall</item>
+    </style>
+
+    <style name="TextAppearance.Widget.Button" parent="@android:style/TextAppearance.Widget.Button">
+        <!--  -->
+        <item name="android:textAppearance">?android:attr/textAppearance</item>
+    </style>
+
+    <style name="Widget.AutoCompleteTextView" parent="@android:style/Widget.AutoCompleteTextView">
+        <!--  -->
+        <item name="android:typeface">normal</item>
+        <item name="android:dropDownSelector">@drawable/list_selector</item>
+        <item name="android:popupBackground">@drawable/spinner_dropdown_background</item>
+        <item name="android:dropDownVerticalOffset">-6dip</item>
+        <item name="android:dropDownHorizontalOffset">0dip</item>
+        <item name="android:dropDownWidth">wrap_content</item>
+    </style>
+
+    <style name="Widget.Button" parent="@android:style/Widget.Button">
+        <!--  -->
+    </style>
+
+    <style name="Widget.Button.Small" parent="@android:style/Widget.Button.Small">
+        <!--  -->
+    </style>
+
+    <style name="Widget.CompoundButton.CheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <!--  -->
+        <item name="android:button">?android:attr/listChoiceIndicatorMultiple</item>
+    </style>
+
+    <style name="Widget.CompoundButton.RadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <!--  -->
+        <item name="android:button">?android:attr/listChoiceIndicatorSingle</item>
+    </style>
+
+    <style name="Widget.EditText" parent="@android:style/Widget.EditText">
+        <!--  -->
+        <item name="android:ellipsize">end</item>
+    </style>
+    
+    <style name="Widget.AbsListView" parent="@android:style/Widget.AbsListView">
+        <!--  -->
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+        <item name="android:listSelector">@drawable/list_selector</item>
+        <item name="android:descendantFocusability">blocksDescendants</item>
+    </style>
+
+    <style name="Widget.ExpandableListView" parent="@android:style/Widget.ExpandableListView">
+        <!--  -->
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+        <item name="android:listSelector">@drawable/list_selector</item>
+        <item name="android:divider">@drawable/list_divider</item>
+    </style>
+
+    <style name="Widget.GridView" parent="@android:style/Widget.GridView">
+        <!--  -->
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+        <item name="android:listSelector">@drawable/list_selector</item>
+    </style>
+
+    <style name="Widget.ImageButton" parent="@android:style/Widget.ImageButton">
+        <!--  -->
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="Widget.ListView" parent="@android:style/Widget.ListView">
+        <!--  -->
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+        <item name="android:listSelector">@drawable/list_selector</item>
+        <item name="android:divider">@drawable/list_divider</item>
+    </style>
+
+    <style name="Widget.PopupWindow" parent="@android:style/Widget.PopupWindow">
+        <!--  -->
+        <item name="android:popupBackground">@drawable/spinner_dropdown_background</item>
+    </style>
+
+    <style name="Widget.ProgressBar" parent="@android:style/Widget.ProgressBar">
+        <!--  -->
+        <item name="android:indeterminateDrawable">@drawable/progressbar_spinner_layer</item>
+        <item name="android:indeterminateBehavior">repeat</item>
+        <item name="android:indeterminateDuration">3500</item>
+        <item name="android:minWidth">@dimen/bar_spinner_min_width</item>
+        <item name="android:maxWidth">@dimen/bar_spinner_max_width</item>
+        <item name="android:minHeight">@dimen/bar_spinner_min_height</item>
+        <item name="android:maxHeight">@dimen/bar_spinner_max_height</item>
+        <!-- 特别定制 -->
+        <item name="android:textAppearance">?android:attr/textAppearance</item>
+    </style>
+
+    <style name="Widget.ProgressBar.Large" parent="@android:style/Widget.ProgressBar.Large">
+        <!--  -->
+        <item name="android:indeterminateDrawable">@drawable/progressbar_spinner_large_layer</item>
+        <item name="android:indeterminateBehavior">repeat</item>
+        <item name="android:indeterminateDuration">3500</item>
+        <item name="android:minWidth">@dimen/bar_spinner_large_min_width</item>
+        <item name="android:maxWidth">@dimen/bar_spinner_large_max_width</item>
+        <item name="android:minHeight">@dimen/bar_spinner_large_min_height</item>
+        <item name="android:maxHeight">@dimen/bar_spinner_large_max_height</item>
+        <!-- 特别定制 -->
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+    </style>
+
+    <style name="Widget.ProgressBar.Small" parent="@android:style/Widget.ProgressBar.Small">
+        <!--  -->
+        <item name="android:indeterminateDrawable">@drawable/progressbar_spinner_small_layer</item>
+        <item name="android:indeterminateBehavior">repeat</item>
+        <item name="android:indeterminateDuration">3500</item>
+        <item name="android:minWidth">@dimen/bar_spinner_small_min_width</item>
+        <item name="android:maxWidth">@dimen/bar_spinner_small_max_width</item>
+        <item name="android:minHeight">@dimen/bar_spinner_small_min_height</item>
+        <item name="android:maxHeight">@dimen/bar_spinner_small_max_height</item>
+        <!-- 特别定制 -->
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    </style>
+
+    <style name="Widget.ProgressBar.Horizontal" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <!--  -->
+        <item name="android:progressDrawable">@drawable/progressbar_horizontal_layer</item>
+        <item name="android:indeterminateDrawable">@drawable/progressbar_horizontal_layer</item>
+        <item name="android:maxHeight">@dimen/bar_horizontal_max_height</item>
+        <item name="android:minHeight">@dimen/bar_horizontal_min_height</item>
+        <!-- 特别定制 -->
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    </style>
+
+    <style name="Widget.SeekBar" parent="@android:style/Widget.SeekBar">
+        <!--  -->
+        <item name="android:progressDrawable">@drawable/seekbar_layer</item>
+        <item name="android:indeterminateDrawable">@drawable/seekbar_layer</item>
+        <item name="android:maxHeight">@dimen/bar_seek_max_height</item>
+        <item name="android:minHeight">@dimen/bar_seek_min_height</item>
+        <item name="android:thumb">@drawable/seekbar_thumb_selector</item>
+        <item name="android:thumbOffset">@dimen/bar_seek_thumb_offset</item>
+    </style>
+
+    <style name="Widget.RatingBar" parent="@android:style/Widget.RatingBar">
+        <!--  -->
+        <item name="android:progressDrawable">@drawable/ratingbar_layer</item>
+        <item name="android:indeterminateDrawable">@drawable/ratingbar_layer</item>
+        <item name="android:minHeight">@dimen/bar_rating_min_height</item>
+        <item name="android:maxHeight">@dimen/bar_rating_max_height</item>
+    </style>
+
+    <style name="Widget.ScrollView" parent="@android:style/Widget.ScrollView">
+        <!--  -->
+        <item name="android:fillViewport">true</item>
+    </style>
+
+    <!-- @hide @android:style/Widget.HorizontalScrollView -->
+    <style name="Widget.HorizontalScrollView" parent="@android:style/Widget">
+        <!--  -->
+        <item name="android:scrollbars">horizontal</item>
+    </style>
+
+    <style name="Widget.BaseSpinner" parent="@android:style/Widget.Spinner">
+        <!--  -->
+        <item name="android:background">@drawable/spinner_background</item>
+        <item name="android:dropDownSelector">@drawable/list_selector</item>
+    </style>
+    
+    <style name="Widget.Spinner" parent="@style/Widget.BaseSpinner">
+        <!--  -->
+    </style>
+
+    <style name="Widget.TextView" parent="@android:style/Widget.TextView">
+        <!--  -->
+        <item name="android:textAppearance">@style/TextAppearance.Small</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="Widget.TextView.ListSeparator" parent="@style/Widget.TextView">
+        <!--  -->
+        <item name="android:background">@drawable/list_section_divider</item>
+    </style>
+
+    <style name="Widget.WebView" parent="@android:style/Widget.WebView">
+        <!--  -->
+        <item name="android:background">@null</item>
+        <!-- 防止 WebView 右侧空白 -->
+        <item name="android:scrollbarStyle">insideOverlay</item>
+        <item name="android:scrollbars">vertical</item>
+    </style>
+
+    <!-- 以下均与 ActionBar 有关 -->
+    <!-- ActionBar Style The Overflow Menu DropDown List -->
+    <style name="Widget.ListView.DropDown" parent="@android:style/Widget.ListView.DropDown">
+        <!--  -->
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+        <item name="android:listSelector">@drawable/list_selector</item>
+        <item name="android:divider">@drawable/list_divider</item>
+        <item name="android:headerDividersEnabled">true</item>
+        <item name="android:footerDividersEnabled">true</item>
+    </style>
+
+    <style name="TextAppearance.Widget.DropDownItem" parent="@android:style/TextAppearance.Widget.DropDownItem">
+        <!--  -->
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+
+    <style name="Widget.DropDownItem.Spinner" parent="@android:style/Widget.DropDownItem.Spinner">
+        <!--  -->
+        <item name="android:textAppearance">@style/TextAppearance.Widget.DropDownItem</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="TextAppearance.Widget.TextView.SpinnerItem" parent="@android:style/TextAppearance.Widget.TextView.SpinnerItem">
+        <!--  -->
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+
+    <style name="Widget.TextView.SpinnerItem" parent="@android:Widget.TextView.SpinnerItem">
+        <!--  -->
+        <item name="android:textAppearance">@style/TextAppearance.Widget.TextView.SpinnerItem</item>
+    </style>
+
+</resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/cab_bg"
+    android:orientation="vertical" >
+
+    <view
+        android:id="@+id/status_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        class="com.v7lin.android.env.widget.CompatStatusBar"
+        android:minHeight="@dimen/status_bar_height"
+        android:background="@color/status_bar_bg"
+        android:orientation="vertical" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <!-- 返回键 -->
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="@dimen/topbar_height"
+            android:layout_height="@dimen/topbar_height"
+            android:background="@drawable/item_selector"
+            android:scaleType="center"
+            android:src="@drawable/ic_menu_back" />
+
+        <!-- 内容 -->
+
+        <FrameLayout
+            android:id="@+id/overlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <!-- 标题 -->
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/Widget.TextView.TopBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
+        <!-- 菜单 -->
+
+        <ImageView
+            android:id="@+id/menu"
+            android:layout_width="@dimen/topbar_height"
+            android:layout_height="@dimen/topbar_height"
+            android:background="@drawable/item_selector"
+            android:scaleType="center"
+            android:src="@drawable/ic_menu_overflow" />
+    </LinearLayout>
+
+</LinearLayout>

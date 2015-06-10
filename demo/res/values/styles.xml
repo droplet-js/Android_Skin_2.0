@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="Animation.Toast" parent="@android:style/Animation.Toast">
+        <!--  -->
+        <item name="android:windowEnterAnimation">@anim/toast_enter</item>
+        <item name="android:windowExitAnimation">@anim/toast_exit</item>
+    </style>
+
+    <style name="TextAppearance.Toast" parent="@style/TextAppearance.Medium">
+        <!--  -->
+    </style>
+    
+    <style name="Animation.Activity.Shell" parent="@style/Animation.Activity.Normal">
+
+        <!--  -->
+    </style>
+    
+    <style name="Animation.Activity.Home" parent="@style/Animation.Activity.Normal">
+
+        <!--  -->
+    </style>
+
+    <style name="Animation.Activity.Slide" parent="@style/Animation.Activity.Normal">
+
+        <!--  -->
+        <item name="android:activityOpenEnterAnimation">@anim/activity_slide_open_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_slide_holder</item>
+        <item name="android:activityCloseEnterAnimation">@anim/activity_slide_holder</item>
+        <item name="android:activityCloseExitAnimation">@anim/activity_slide_close_exit</item>
+    </style>
+    
+    <style name="Widget.TextView.TopBar" parent="@style/Widget.TextView">
+        <!--  -->
+        <item name="android:textAppearance">@style/TextAppearance.TopBar</item>
+        <item name="android:maxEms">9</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="TextAppearance.TopBar" parent="@style/TextAppearance.Large">
+        <!--  -->
+        <item name="android:textColor">@color/cab_title_text</item>
+    </style>
+
+    <style name="TextAppearance.Tab.Text" parent="@style/TextAppearance.Medium">
+        <!--  -->
+        <item name="android:textColor">@color/tab_text_selector</item>
+        <item name="android:paddingLeft">@dimen/tab_text_padding_lr</item>
+        <item name="android:paddingRight">@dimen/tab_text_padding_lr</item>
+    </style>
+
+    <style name="TextAppearance.Swipe.Refresh" parent="@style/TextAppearance.Medium">
+        <!--  -->
+        <item name="android:textColor">@color/swipe_refresh_text</item>
+    </style>
+
+    <style name="Widget.ProgressBar.Refresh" parent="@style/Widget.ProgressBar">
+        <!--  -->
+        <item name="android:indeterminateDrawable">@drawable/ic_refresh_spinner_layer</item>
+        <item name="android:indeterminateBehavior">repeat</item>
+        <item name="android:indeterminateDuration">3500</item>
+        <item name="android:minWidth">@dimen/bar_refresh_min_width</item>
+        <item name="android:maxWidth">@dimen/bar_refresh_max_width</item>
+        <item name="android:minHeight">@dimen/bar_refresh_min_height</item>
+        <item name="android:maxHeight">@dimen/bar_refresh_max_height</item>
+    </style>
+
+</resources>

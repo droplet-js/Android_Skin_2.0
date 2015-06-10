@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="Theme.Dialog" parent="@android:style/Theme.Dialog">
+        <!--  -->
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:backgroundDimAmount">0.3</item>
+    </style>
+
+    <style name="Theme.Dialog.Normal" parent="@style/Theme.Dialog">
+        <!--  -->
+    </style>
+    
+    <style name="Theme.Platform" parent="@android:style/Theme"/>
+
+    <style name="Theme.Base" parent="@style/Theme.Platform">
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 是否悬浮在activity上 -->
+        <item name="android:windowIsFloating">false</item>
+        <!-- 背景 -->
+        <item name="android:windowBackground">@color/device_bg</item>
+        <!-- 背景缓存颜色 -->
+        <!-- <item name="android:colorBackgroundCacheHint">@null</item> -->
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!-- 设背景为系统壁纸 -->
+        <item name="android:windowShowWallpaper">false</item>
+        <!-- 对话框是否有遮盖 -->
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 是否无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 是否全屏 -->
+        <item name="android:windowFullscreen">false</item>
+        <!-- 输入法 -->
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustUnspecified</item>
+        <!-- 弹出或者进入时的动画效果 -->
+        <item name="android:windowAnimationStyle">@null</item>
+
+        <!-- 模糊 -->
+        <item name="android:backgroundDimEnabled">false</item>
+        <!-- 灰度 -->
+        <item name="android:backgroundDimAmount">0.6</item>
+
+        <!-- 按钮在禁用时透明度 -->
+        <item name="android:disabledAlpha">0.5</item>
+
+        <!-- List Style -->
+        <item name="android:listSeparatorTextViewStyle">@style/Widget.TextView.ListSeparator</item>
+
+        <!-- Button styles -->
+        <item name="android:buttonStyle">@style/Widget.Button</item>
+        <item name="android:buttonStyleSmall">@style/Widget.Button.Small</item>
+        <item name="android:listChoiceIndicatorSingle">@drawable/btn_radio_selector</item>
+        <item name="android:listChoiceIndicatorMultiple">@drawable/btn_check_selector</item>
+
+        <!-- Scrollbar attributes -->
+        <item name="android:scrollbarFadeDuration">250</item>
+        <item name="android:scrollbarDefaultDelayBeforeFade">300</item>
+        <item name="android:scrollbarSize">3dp</item>
+        <item name="android:scrollbarThumbHorizontal">@drawable/scrollbar_handle</item>
+        <item name="android:scrollbarThumbVertical">@drawable/scrollbar_handle</item>
+        <item name="android:scrollbarTrackHorizontal">@null</item>
+        <item name="android:scrollbarTrackVertical">@null</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:fadingEdge">none</item>
+        <item name="android:fadeScrollbars">true</item>
+
+        <!-- Widget styles -->
+        <item name="android:autoCompleteTextViewStyle">@style/Widget.AutoCompleteTextView</item>
+        <item name="android:checkboxStyle">@style/Widget.CompoundButton.CheckBox</item>
+        <item name="android:editTextStyle">@style/Widget.EditText</item>
+        <item name="android:absListViewStyle">@style/Widget.AbsListView</item>
+        <item name="android:expandableListViewStyle">@style/Widget.ExpandableListView</item>
+        <item name="android:gridViewStyle">@style/Widget.GridView</item>
+        <item name="android:listViewStyle">@style/Widget.ListView</item>
+        <item name="android:popupWindowStyle">@style/Widget.PopupWindow</item>
+        <item name="android:progressBarStyle">@style/Widget.ProgressBar</item>
+        <item name="android:progressBarStyleHorizontal">@style/Widget.ProgressBar.Horizontal</item>
+        <item name="android:progressBarStyleLarge">@style/Widget.ProgressBar.Large</item>
+        <item name="android:progressBarStyleSmall">@style/Widget.ProgressBar.Small</item>
+        <item name="android:seekBarStyle">@style/Widget.SeekBar</item>
+        <item name="android:ratingBarStyle">@style/Widget.RatingBar</item>
+        <item name="android:radioButtonStyle">@style/Widget.CompoundButton.RadioButton</item>
+        <item name="android:scrollViewStyle">@style/Widget.ScrollView</item>
+        <item name="android:spinnerStyle">@style/Widget.Spinner</item>
+        <item name="android:textViewStyle">@style/Widget.TextView</item>
+        <item name="android:webViewStyle">@style/Widget.WebView</item>
+
+        <!-- 以下均与 ActionBar 有关，但是不能放到 value-v11 文件夹下 -->
+
+        <!-- List attributes -->
+        <item name="android:listPreferredItemHeight">48dip</item>
+
+        <!-- Widget styles -->
+        <item name="android:dropDownListViewStyle">@style/Widget.ListView.DropDown</item>
+        <item name="android:spinnerDropDownItemStyle">@style/Widget.DropDownItem.Spinner</item>
+        <item name="android:spinnerItemStyle">@style/Widget.TextView.SpinnerItem</item>
+        <item name="android:panelBackground">@drawable/menu_hardkey_panel</item>
+    </style>
+
+    <style name="Theme.Normal" parent="@style/Theme.Base">
+        <!--  -->
+        <!-- 弹出或者进入时的动画效果 -->
+        <item name="android:windowAnimationStyle">@style/Animation.Activity.Normal</item>
+    </style>
+    
+    <style name="Theme.Device" parent="@style/Theme.Normal">
+        <!-- 背景 -->
+        <item name="android:windowBackground">@drawable/device_bg</item>
+    </style>
+</resources>

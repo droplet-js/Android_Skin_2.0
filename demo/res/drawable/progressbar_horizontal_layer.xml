@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@android:id/background"
+        android:drawable="@drawable/progress_bg"/>
+    <item android:id="@android:id/secondaryProgress">
+        <clip
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:clipOrientation="horizontal"
+            android:drawable="@drawable/progress_secondary"
+            android:gravity="left" />
+        <!-- 使用 ScaleDrawable，在小米 1 上显示不正常 -->
+        <!--
+        <scale
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:drawable="@drawable/progress_secondary"
+            android:scaleWidth="100%" />        -->
+    </item>
+    <item android:id="@android:id/progress">
+        <clip
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:clipOrientation="horizontal"
+            android:drawable="@drawable/progress_primary"
+            android:gravity="left" />
+        <!-- 使用 ScaleDrawable，在小米 1 上显示不正常 -->
+        <!--
+        <scale
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:drawable="@drawable/progress_primary"
+            android:scaleWidth="100%" />        -->
+    </item>
+
+</layer-list>

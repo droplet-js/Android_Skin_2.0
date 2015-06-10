@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tabstrip"
+    android:layout_width="@dimen/tab_strip_linear_vertical_width"
+    android:layout_height="wrap_content"
+    class="com.v7lin.android.widget.tabbar.impl.LinearTabStrip"
+    android:orientation="vertical"
+    android:gravity="center_horizontal" >
+
+</view>
