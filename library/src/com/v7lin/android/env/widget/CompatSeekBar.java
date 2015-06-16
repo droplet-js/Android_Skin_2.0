@@ -14,7 +14,6 @@ import com.v7lin.android.env.EnvCallback;
 public class CompatSeekBar extends SeekBar implements EnvCallback {
 
 	private EnvUIChanger<CompatSeekBar> mEnvUIChanger;
-	private OnSeekBarChangeListener mDelegateOnSeekBarChangeListener;
 
 	public CompatSeekBar(Context context) {
 		this(context, null);
@@ -27,10 +26,8 @@ public class CompatSeekBar extends SeekBar implements EnvCallback {
 	public CompatSeekBar(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
-		mEnvUIChanger = new EnvCompatSeekBarChanger<CompatSeekBar>();
+		mEnvUIChanger = new EnvAbsSeekBarChanger<CompatSeekBar>();
 		mEnvUIChanger.applyStyle(context, attrs, defStyle, 0, false);
-
-		setOnSeekBarChangeListener(mOnSeekBarChangeListener);
 	}
 
 	@Override
@@ -48,50 +45,5 @@ public class CompatSeekBar extends SeekBar implements EnvCallback {
 		super.onAttachedToWindow();
 		mEnvUIChanger.scheduleSkin(this);
 		mEnvUIChanger.scheduleFont(this);
-	}
-
-	class EnvCompatSeekBarChanger<CSB extends CompatSeekBar> extends EnvAbsSeekBarChanger<CSB> {
-
-		public EnvCompatSeekBarChanger() {
-			super();
-		}
-
-		@Override
-		public void applyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, boolean allowSysRes) {
-			super.applyStyle(context, attrs, defStyleAttr, defStyleRes, allowSysRes);
-		}
-	}
-
-	private OnSeekBarChangeListener mOnSeekBarChangeListener = new OnSeekBarChangeListener() {
-
-		@Override
-		public void onStartTrackingTouch(SeekBar seekBar) {
-			if (mDelegateOnSeekBarChangeListener != null) {
-				mDelegateOnSeekBarChangeListener.onStartTrackingTouch(seekBar);
-			}
-		}
-
-		@Override
-		public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-			if (mDelegateOnSeekBarChangeListener != null) {
-				mDelegateOnSeekBarChangeListener.onProgressChanged(seekBar, progress, fromUser);
-			}
-		}
-
-		@Override
-		public void onStopTrackingTouch(SeekBar seekBar) {
-			if (mDelegateOnSeekBarChangeListener != null) {
-				mDelegateOnSeekBarChangeListener.onStopTrackingTouch(seekBar);
-			}
-		}
-	};
-
-	@Override
-	public void setOnSeekBarChangeListener(OnSeekBarChangeListener l) {
-		if (l == mOnSeekBarChangeListener) {
-			super.setOnSeekBarChangeListener(l);
-		} else {
-			mDelegateOnSeekBarChangeListener = l;
-		}
 	}
 }

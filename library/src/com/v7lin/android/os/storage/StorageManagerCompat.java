@@ -1,6 +1,5 @@
 package com.v7lin.android.os.storage;
 
-import android.Manifest;
 import android.content.Context;
 import android.os.Build;
 

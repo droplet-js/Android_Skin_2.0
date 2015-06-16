@@ -100,10 +100,10 @@ public class EnvViewChanger<V extends View> extends EnvUIChanger<V> {
 			final int padding = res.getDimensionPixelSize(mPaddingEnvRes.getResid());
 			view.setPadding(padding, padding, padding, padding);
 		} else if (mPaddingLeftEnvRes != null || mPaddingTopEnvRes != null || mPaddingRightEnvRes != null || mPaddingBottomEnvRes != null) {
-			final int leftPadding = mPaddingLeftEnvRes != null ? res.getDimensionPixelSize(mPaddingLeftEnvRes.getResid()) : 0;
-			final int topPadding = mPaddingTopEnvRes != null ? res.getDimensionPixelSize(mPaddingTopEnvRes.getResid()) : 0;
-			final int rightPadding = mPaddingRightEnvRes != null ? res.getDimensionPixelSize(mPaddingRightEnvRes.getResid()) : 0;
-			final int bottomPadding = mPaddingBottomEnvRes != null ? res.getDimensionPixelSize(mPaddingBottomEnvRes.getResid()) : 0;
+			final int leftPadding = mPaddingLeftEnvRes != null ? res.getDimensionPixelSize(mPaddingLeftEnvRes.getResid()) : view.getPaddingLeft();
+			final int topPadding = mPaddingTopEnvRes != null ? res.getDimensionPixelSize(mPaddingTopEnvRes.getResid()) : view.getPaddingTop();
+			final int rightPadding = mPaddingRightEnvRes != null ? res.getDimensionPixelSize(mPaddingRightEnvRes.getResid()) : view.getPaddingRight();
+			final int bottomPadding = mPaddingBottomEnvRes != null ? res.getDimensionPixelSize(mPaddingBottomEnvRes.getResid()) : view.getPaddingBottom();
 			view.setPadding(leftPadding, topPadding, rightPadding, bottomPadding);
 		}
 	}

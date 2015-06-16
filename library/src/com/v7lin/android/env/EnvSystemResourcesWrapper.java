@@ -27,7 +27,8 @@ public class EnvSystemResourcesWrapper extends EnvResourcesWrapper {
 		final String resourceTypeName = super.getResourceTypeName(resid);
 		final String resourceEntryName = super.getResourceEntryName(resid);
 		final int mappingid = mSystemResMap.mapping(mContext, resid, resourcePackageName, resourceTypeName, resourceEntryName);
-		return new EnvRes(mappingid);
+		EnvRes res = new EnvRes(mappingid);
+		return res.isValid() ? res : null;
 	}
 
 	@Override

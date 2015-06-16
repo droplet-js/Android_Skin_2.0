@@ -15,7 +15,7 @@ public class NormalSystemResMap implements SystemResMap {
 
 	@Override
 	public int mapping(Context context, int resid, String resourcePackageName, String resourceTypeName, String resourceEntryName) {
-		return resid;
+		return 0;
 	}
 
 	private static class NormalSystemResMapHolder {
