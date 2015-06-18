@@ -12,8 +12,6 @@ import android.content.res.AssetFileDescriptor;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.content.res.Resources.NotFoundException;
-import android.content.res.Resources.Theme;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.graphics.Movie;
