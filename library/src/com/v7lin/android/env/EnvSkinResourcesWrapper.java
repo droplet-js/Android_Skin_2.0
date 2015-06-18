@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.content.res.Resources.NotFoundException;
+import android.content.res.Resources.Theme;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.graphics.drawable.Drawable;
@@ -36,6 +38,8 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 		mContext = context;
 		mPackageName = context.getPackageName();
 		mResourcesManager = manager;
+		
+		ensureSkinRes(mContext);
 	}
 
 	private synchronized void ensureSkinRes(Context context) {
@@ -180,7 +184,67 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 		}
 		return super.getDrawableForDensity(id, density);
 	}
-	
+
+	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+	@Override
+	public Drawable getDrawable(int id, Theme theme) throws NotFoundException {
+		ensureSkinRes(mContext);
+		EnvRes mapping = mappingSystemRes(id);// 系统资源->APP资源
+		if (mapping != null && mapping.isValid()) {
+			EnvRes mappingEnvRes = mappingEnvRes(mapping.getResid());// APP资源->Skin资源
+			if (mappingEnvRes != null && mappingEnvRes.isValid()) {
+				mapping = mappingEnvRes;
+			}
+		} else {
+			mapping = mappingEnvRes(id);
+		}
+		if (mapping != null && mapping.isValid()) {
+			try {
+				if (mSkinRes != null) {
+					try {
+						return mSkinRes.getDrawable(mapping.getResid(), theme);
+					} catch (NotFoundException e) {
+						return super.getDrawable(mapping.getResid(), theme);
+					}
+				} else {
+					return super.getDrawable(mapping.getResid(), theme);
+				}
+			} catch (NotFoundException e) {
+			}
+		}
+		return super.getDrawable(id, theme);
+	}
+
+	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+	@Override
+	public Drawable getDrawableForDensity(int id, int density, Theme theme) {
+		ensureSkinRes(mContext);
+		EnvRes mapping = mappingSystemRes(id);// 系统资源->APP资源
+		if (mapping != null && mapping.isValid()) {
+			EnvRes mappingEnvRes = mappingEnvRes(mapping.getResid());// APP资源->Skin资源
+			if (mappingEnvRes != null && mappingEnvRes.isValid()) {
+				mapping = mappingEnvRes;
+			}
+		} else {
+			mapping = mappingEnvRes(id);
+		}
+		if (mapping != null && mapping.isValid()) {
+			try {
+				if (mSkinRes != null) {
+					try {
+						return mSkinRes.getDrawableForDensity(mapping.getResid(), density, theme);
+					} catch (Exception e) {
+						return super.getDrawableForDensity(mapping.getResid(), density, theme);
+					}
+				} else {
+					return super.getDrawableForDensity(mapping.getResid(), density, theme);
+				}
+			} catch (NotFoundException e) {
+			}
+		}
+		return super.getDrawableForDensity(id, density, theme);
+	}
+
 	@Override
 	public String getString(int id) throws NotFoundException {
 		ensureSkinRes(mContext);

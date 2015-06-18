@@ -11,7 +11,6 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ProgressBar;
 
-import com.android.internal.R;
 import com.v7lin.android.env.EnvRes;
 import com.v7lin.android.env.EnvTypedArray;
 

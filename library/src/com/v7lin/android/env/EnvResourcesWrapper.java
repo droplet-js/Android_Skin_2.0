@@ -12,6 +12,8 @@ import android.content.res.AssetFileDescriptor;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.content.res.Resources.NotFoundException;
+import android.content.res.Resources.Theme;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.graphics.Movie;
@@ -163,6 +165,18 @@ public abstract class EnvResourcesWrapper extends Resources {
 	@Override
 	public Drawable getDrawableForDensity(int id, int density) throws NotFoundException {
 		return mWrapped != null ? mWrapped.getDrawableForDensity(id, density) : super.getDrawableForDensity(id, density);
+	}
+
+	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+	@Override
+	public Drawable getDrawable(int id, Theme theme) throws NotFoundException {
+		return mWrapped != null ? mWrapped.getDrawable(id, theme) : super.getDrawable(id, theme);
+	}
+
+	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+	@Override
+	public Drawable getDrawableForDensity(int id, int density, Theme theme) {
+		return mWrapped != null ? mWrapped.getDrawableForDensity(id, density, theme) : super.getDrawableForDensity(id, density, theme);
 	}
 
 	@Override

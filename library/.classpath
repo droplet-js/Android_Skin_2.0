@@ -3,7 +3,7 @@
 	<classpathentry excluding="com/v7lin/android/env/Coder.java" kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/layoutlib 4.4.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/layoutlib 5.0.1"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="output" path="bin/classes"/>
