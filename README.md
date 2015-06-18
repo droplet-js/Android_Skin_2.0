@@ -6,7 +6,8 @@ Android_Skin 2.0 所有代码均已上传 ... 效果见 art/ptlive.mp4，不要�
 特别申明：使用该代码用于生产时，请勿变更其类包名。
 
 # BUG 修复
-6.10 - 6.16：修正“麦潮”App的Android研发负责人反馈的若干BUG
+6.10 - 6.16：修正若干BUG（“麦潮”App的Android研发负责人反馈）
+6.18：兼容Android5.1（“麦潮”App的Android研发负责人反馈）
 
 # License
 
