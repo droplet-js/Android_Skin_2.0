@@ -1,5 +1,7 @@
 package com.v7lin.android.env.widget;
 
+import java.util.Arrays;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -15,7 +17,16 @@ import com.v7lin.android.env.EnvTypedArray;
  * @author v7lin E-mail:v7lin@qq.com
  */
 class EnvFrameLayoutChanger<FL extends FrameLayout> extends EnvViewGroupChanger<FL> {
-	
+
+	private static final int[] ATTRS = {
+			//
+			android.R.attr.foreground
+	};
+
+	static {
+		Arrays.sort(ATTRS);
+	}
+
 	private EnvRes mForegroundEnvRes;
 
 	public EnvFrameLayoutChanger() {
@@ -25,8 +36,8 @@ class EnvFrameLayoutChanger<FL extends FrameLayout> extends EnvViewGroupChanger<
 	@Override
 	public void applyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, boolean allowSysRes) {
 		super.applyStyle(context, attrs, defStyleAttr, defStyleRes, allowSysRes);
-		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, attrs, com.android.internal.R.styleable.FrameLayout, defStyleAttr, defStyleRes);
-		mForegroundEnvRes = array.getEnvRes(com.android.internal.R.styleable.FrameLayout_foreground, allowSysRes);
+		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, attrs, ATTRS, defStyleAttr, defStyleRes);
+		mForegroundEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.foreground), allowSysRes);
 		array.recycle();
 	}
 

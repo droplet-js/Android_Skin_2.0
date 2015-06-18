@@ -1,5 +1,7 @@
 package com.v7lin.android.env.widget;
 
+import java.util.Arrays;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -16,6 +18,17 @@ import com.v7lin.android.env.EnvTypedArray;
  */
 public class EnvListViewChanger<LV extends ListView> extends EnvAbsListViewChanger<LV> {
 
+	private static final int[] ATTRS = {
+		//
+		android.R.attr.divider,
+		//
+		android.R.attr.dividerHeight
+	};
+
+	static {
+		Arrays.sort(ATTRS);
+	}
+
 	private EnvRes mDividerEnvRes;
 	private EnvRes mDividerHeightEnvRes;
 
@@ -26,9 +39,9 @@ public class EnvListViewChanger<LV extends ListView> extends EnvAbsListViewChang
 	@Override
 	public void applyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, boolean allowSysRes) {
 		super.applyStyle(context, attrs, defStyleAttr, defStyleRes, allowSysRes);
-		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, attrs, com.android.internal.R.styleable.ListView, defStyleAttr, defStyleRes);
-		mDividerEnvRes = array.getEnvRes(com.android.internal.R.styleable.ListView_divider, allowSysRes);
-		mDividerHeightEnvRes = array.getEnvRes(com.android.internal.R.styleable.ListView_dividerHeight, allowSysRes);
+		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, attrs, ATTRS, defStyleAttr, defStyleRes);
+		mDividerEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.divider), allowSysRes);
+		mDividerHeightEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.dividerHeight), allowSysRes);
 		array.recycle();
 	}
 

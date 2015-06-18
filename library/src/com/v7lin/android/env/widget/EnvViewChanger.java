@@ -3,6 +3,7 @@ package com.v7lin.android.env.widget;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -21,6 +22,37 @@ import com.v7lin.android.env.EnvTypedArray;
  */
 @SuppressWarnings("deprecation")
 public class EnvViewChanger<V extends View> extends EnvUIChanger<V> {
+	
+	private static final int[] ATTRS = {
+			//
+			android.R.attr.scrollbarTrackHorizontal,
+			//
+			android.R.attr.scrollbarThumbHorizontal,
+			//
+			android.R.attr.scrollbarTrackVertical,
+			//
+			android.R.attr.scrollbarThumbVertical,
+			//
+			android.R.attr.background,
+			//
+			android.R.attr.padding,
+			//
+			android.R.attr.paddingLeft,
+			//
+			android.R.attr.paddingTop,
+			//
+			android.R.attr.paddingRight,
+			//
+			android.R.attr.paddingBottom,
+			//
+			android.R.attr.minWidth,
+			//
+			android.R.attr.minHeight
+	};
+
+	static {
+		Arrays.sort(ATTRS);
+	}
 
 	private EnvRes mBackgroundEnvRes;
 	private EnvRes mPaddingEnvRes;
@@ -43,22 +75,21 @@ public class EnvViewChanger<V extends View> extends EnvUIChanger<V> {
 
 	@Override
 	public void applyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, boolean allowSysRes) {
-		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, attrs, com.android.internal.R.styleable.View, defStyleAttr, defStyleRes);
-		mBackgroundEnvRes = array.getEnvRes(com.android.internal.R.styleable.View_background, allowSysRes);
+		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, attrs, ATTRS, defStyleAttr, defStyleRes);
+		mBackgroundEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.background), allowSysRes);
+		mPaddingEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.padding), allowSysRes);
+		mPaddingLeftEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.paddingLeft), allowSysRes);
+		mPaddingTopEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.paddingTop), allowSysRes);
+		mPaddingRightEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.paddingRight), allowSysRes);
+		mPaddingBottomEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.paddingBottom), allowSysRes);
 
-		mPaddingEnvRes = array.getEnvRes(com.android.internal.R.styleable.View_padding, allowSysRes);
-		mPaddingLeftEnvRes = array.getEnvRes(com.android.internal.R.styleable.View_paddingLeft, allowSysRes);
-		mPaddingTopEnvRes = array.getEnvRes(com.android.internal.R.styleable.View_paddingTop, allowSysRes);
-		mPaddingRightEnvRes = array.getEnvRes(com.android.internal.R.styleable.View_paddingRight, allowSysRes);
-		mPaddingBottomEnvRes = array.getEnvRes(com.android.internal.R.styleable.View_paddingBottom, allowSysRes);
+		mMinWidthEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.minWidth), allowSysRes);
+		mMinHeightEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.minHeight), allowSysRes);
 
-		mMinWidthEnvRes = array.getEnvRes(com.android.internal.R.styleable.View_minWidth, allowSysRes);
-		mMinHeightEnvRes = array.getEnvRes(com.android.internal.R.styleable.View_minHeight, allowSysRes);
-
-		mScrollbarTrackHorizontalEnvRes = array.getEnvRes(com.android.internal.R.styleable.View_scrollbarTrackHorizontal, allowSysRes);
-		mScrollbarThumbHorizontalEnvRes = array.getEnvRes(com.android.internal.R.styleable.View_scrollbarThumbHorizontal, allowSysRes);
-		mScrollbarTrackVerticalEnvRes = array.getEnvRes(com.android.internal.R.styleable.View_scrollbarTrackVertical, allowSysRes);
-		mScrollbarThumbVerticalEnvRes = array.getEnvRes(com.android.internal.R.styleable.View_scrollbarThumbVertical, allowSysRes);
+		mScrollbarTrackHorizontalEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.scrollbarTrackHorizontal), allowSysRes);
+		mScrollbarThumbHorizontalEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.scrollbarThumbHorizontal), allowSysRes);
+		mScrollbarTrackVerticalEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.scrollbarTrackVertical), allowSysRes);
+		mScrollbarThumbVerticalEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.scrollbarThumbVertical), allowSysRes);
 		array.recycle();
 	}
 

@@ -1,5 +1,7 @@
 package com.v7lin.android.env.widget;
 
+import java.util.Arrays;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -15,6 +17,17 @@ import com.v7lin.android.env.EnvTypedArray;
  * @author v7lin Email:v7lin@qq.com
  */
 class EnvAbsListViewChanger<AbsLV extends AbsListView> extends EnvViewGroupChanger<AbsLV> {
+	
+	private static final int[] ATTRS = {
+			//
+			android.R.attr.listSelector,
+			//
+			android.R.attr.cacheColorHint
+	};
+
+	static {
+		Arrays.sort(ATTRS);
+	}
 
 	private EnvRes mListSelectorEnvRes;
 	private EnvRes mCacheColorHint;
@@ -26,9 +39,9 @@ class EnvAbsListViewChanger<AbsLV extends AbsListView> extends EnvViewGroupChang
 	@Override
 	public void applyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, boolean allowSysRes) {
 		super.applyStyle(context, attrs, defStyleAttr, defStyleRes, allowSysRes);
-		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, attrs, com.android.internal.R.styleable.AbsListView, defStyleAttr, defStyleRes);
-		mListSelectorEnvRes = array.getEnvRes(com.android.internal.R.styleable.AbsListView_listSelector, allowSysRes);
-		mCacheColorHint = array.getEnvRes(com.android.internal.R.styleable.AbsListView_cacheColorHint, allowSysRes);
+		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, attrs, ATTRS, defStyleAttr, defStyleRes);
+		mListSelectorEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.listSelector), allowSysRes);
+		mCacheColorHint = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.cacheColorHint), allowSysRes);
 		array.recycle();
 	}
 

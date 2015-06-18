@@ -1,5 +1,7 @@
 package com.v7lin.android.env.widget;
 
+import java.util.Arrays;
+
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
@@ -18,6 +20,45 @@ import com.v7lin.android.env.EnvTypedArray;
  * @author v7lin E-mail:v7lin@qq.com
  */
 class EnvTextViewChanger<TV extends TextView> extends EnvViewChanger<TV> {
+	
+	private static final int[] ATTRS = {
+			//
+			android.R.attr.drawableLeft,
+			//
+			android.R.attr.drawableTop,
+			//
+			android.R.attr.drawableRight,
+			//
+			android.R.attr.drawableBottom,
+			//
+			android.R.attr.drawablePadding,
+			//
+			android.R.attr.textAppearance,
+			//
+			android.R.attr.textColorHighlight,
+			//
+			android.R.attr.textColor,
+			//
+			android.R.attr.textColorHint,
+			//
+			android.R.attr.textColorLink
+	};
+
+	private static final int[] ATTRS_TEXT = {
+			//
+			android.R.attr.textColorHighlight,
+			//
+			android.R.attr.textColor,
+			//
+			android.R.attr.textColorHint,
+			//
+			android.R.attr.textColorLink
+	};
+
+	static {
+		Arrays.sort(ATTRS);
+		Arrays.sort(ATTRS_TEXT);
+	}
 
 	private EnvRes mDrawableLeftEnvRes;
 	private EnvRes mDrawableTopEnvRes;
@@ -37,29 +78,29 @@ class EnvTextViewChanger<TV extends TextView> extends EnvViewChanger<TV> {
 	@Override
 	public void applyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, boolean allowSysRes) {
 		super.applyStyle(context, attrs, defStyleAttr, defStyleRes, allowSysRes);
-		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, attrs, com.android.internal.R.styleable.TextView, defStyleAttr, defStyleRes);
-		mDrawableLeftEnvRes = array.getEnvRes(com.android.internal.R.styleable.TextView_drawableLeft, allowSysRes);
-		mDrawableTopEnvRes = array.getEnvRes(com.android.internal.R.styleable.TextView_drawableTop, allowSysRes);
-		mDrawableRightEnvRes = array.getEnvRes(com.android.internal.R.styleable.TextView_drawableRight, allowSysRes);
-		mDrawableBottomEnvRes = array.getEnvRes(com.android.internal.R.styleable.TextView_drawableBottom, allowSysRes);
-		mDrawablePaddingEnvRes = array.getEnvRes(com.android.internal.R.styleable.TextView_drawablePadding, allowSysRes);
+		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, attrs, ATTRS, defStyleAttr, defStyleRes);
+		mDrawableLeftEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.drawableLeft), allowSysRes);
+		mDrawableTopEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.drawableTop), allowSysRes);
+		mDrawableRightEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.drawableRight), allowSysRes);
+		mDrawableBottomEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.drawableBottom), allowSysRes);
+		mDrawablePaddingEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.drawablePadding), allowSysRes);
 
-		EnvRes textAppearanceEnvRes = array.getEnvRes(com.android.internal.R.styleable.TextView_textAppearance, allowSysRes);
+		EnvRes textAppearanceEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.textAppearance), allowSysRes);
 		if (textAppearanceEnvRes != null) {
-			EnvTypedArray textAppearanceArray = EnvTypedArray.obtainStyledAttributes(context, textAppearanceEnvRes.getResid(), com.android.internal.R.styleable.TextAppearance);
+			EnvTypedArray textAppearanceArray = EnvTypedArray.obtainStyledAttributes(context, textAppearanceEnvRes.getResid(), ATTRS_TEXT);
 
-			mTextColorHighlightEnvRes = textAppearanceArray.getEnvRes(com.android.internal.R.styleable.TextAppearance_textColorHighlight, allowSysRes);
-			mTextColorEnvRes = textAppearanceArray.getEnvRes(com.android.internal.R.styleable.TextAppearance_textColor, allowSysRes);
-			mTextColorHintEnvRes = textAppearanceArray.getEnvRes(com.android.internal.R.styleable.TextAppearance_textColorHint, allowSysRes);
-			mTextColorLinkEnvRes = textAppearanceArray.getEnvRes(com.android.internal.R.styleable.TextAppearance_textColorLink, allowSysRes);
+			mTextColorHighlightEnvRes = textAppearanceArray.getEnvRes(Arrays.binarySearch(ATTRS_TEXT, android.R.attr.textColorHighlight), allowSysRes);
+			mTextColorEnvRes = textAppearanceArray.getEnvRes(Arrays.binarySearch(ATTRS_TEXT, android.R.attr.textColor), allowSysRes);
+			mTextColorHintEnvRes = textAppearanceArray.getEnvRes(Arrays.binarySearch(ATTRS_TEXT, android.R.attr.textColorHint), allowSysRes);
+			mTextColorLinkEnvRes = textAppearanceArray.getEnvRes(Arrays.binarySearch(ATTRS_TEXT, android.R.attr.textColorLink), allowSysRes);
 
 			textAppearanceArray.recycle();
 		}
 
-		mTextColorHighlightEnvRes = array.getEnvRes(com.android.internal.R.styleable.TextView_textColorHighlight, mTextColorHighlightEnvRes, allowSysRes);
-		mTextColorEnvRes = array.getEnvRes(com.android.internal.R.styleable.TextView_textColor, mTextColorEnvRes, allowSysRes);
-		mTextColorHintEnvRes = array.getEnvRes(com.android.internal.R.styleable.TextView_textColorHint, mTextColorHintEnvRes, allowSysRes);
-		mTextColorLinkEnvRes = array.getEnvRes(com.android.internal.R.styleable.TextView_textColorLink, mTextColorLinkEnvRes, allowSysRes);
+		mTextColorHighlightEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.textColorHighlight), mTextColorHighlightEnvRes, allowSysRes);
+		mTextColorEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.textColor), mTextColorEnvRes, allowSysRes);
+		mTextColorHintEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.textColorHint), mTextColorHintEnvRes, allowSysRes);
+		mTextColorLinkEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.textColorLink), mTextColorLinkEnvRes, allowSysRes);
 		array.recycle();
 	}
 

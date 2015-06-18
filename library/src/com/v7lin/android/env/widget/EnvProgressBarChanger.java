@@ -3,6 +3,7 @@ package com.v7lin.android.env.widget;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -20,6 +21,25 @@ import com.v7lin.android.env.EnvTypedArray;
  * @author v7lin Email:v7lin@qq.com
  */
 public class EnvProgressBarChanger<PB extends ProgressBar> extends EnvViewChanger<PB> {
+	
+	private static final int[] ATTRS = {
+			//
+			android.R.attr.indeterminateDrawable,
+			//
+			android.R.attr.progressDrawable,
+			//
+			android.R.attr.minWidth,
+			//
+			android.R.attr.maxWidth,
+			//
+			android.R.attr.minHeight,
+			//
+			android.R.attr.maxHeight
+	};
+
+	static {
+		Arrays.sort(ATTRS);
+	}
 
 	private EnvRes mProgressDrawableEnvRes;
 	private EnvRes mMinWidthEnvRes;
@@ -35,13 +55,13 @@ public class EnvProgressBarChanger<PB extends ProgressBar> extends EnvViewChange
 	@Override
 	public void applyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, boolean allowSysRes) {
 		super.applyStyle(context, attrs, defStyleAttr, defStyleRes, allowSysRes);
-		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, attrs, R.styleable.ProgressBar, defStyleAttr, defStyleRes);
-		mIndeterminateDrawable = array.getEnvRes(com.android.internal.R.styleable.ProgressBar_indeterminateDrawable, allowSysRes);
-		mProgressDrawableEnvRes = array.getEnvRes(com.android.internal.R.styleable.ProgressBar_progressDrawable, allowSysRes);
-		mMinWidthEnvRes = array.getEnvRes(com.android.internal.R.styleable.ProgressBar_minWidth, allowSysRes);
-		mMaxWidthEnvRes = array.getEnvRes(com.android.internal.R.styleable.ProgressBar_maxWidth, allowSysRes);
-		mMinHeightEnvRes = array.getEnvRes(com.android.internal.R.styleable.ProgressBar_minHeight, allowSysRes);
-		mMaxHeightEnvRes = array.getEnvRes(com.android.internal.R.styleable.ProgressBar_maxHeight, allowSysRes);
+		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, attrs, ATTRS, defStyleAttr, defStyleRes);
+		mIndeterminateDrawable = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.indeterminateDrawable), allowSysRes);
+		mProgressDrawableEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.progressDrawable), allowSysRes);
+		mMinWidthEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.minWidth), allowSysRes);
+		mMaxWidthEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.maxWidth), allowSysRes);
+		mMinHeightEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.minHeight), allowSysRes);
+		mMaxHeightEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.maxHeight), allowSysRes);
 		array.recycle();
 	}
 

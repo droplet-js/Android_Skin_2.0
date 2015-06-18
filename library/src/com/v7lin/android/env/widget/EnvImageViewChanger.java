@@ -1,5 +1,7 @@
 package com.v7lin.android.env.widget;
 
+import java.util.Arrays;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -15,6 +17,15 @@ import com.v7lin.android.env.EnvTypedArray;
  * @author v7lin Email:v7lin@qq.com
  */
 class EnvImageViewChanger<IV extends ImageView> extends EnvViewChanger<IV> {
+	
+	private static final int[] ATTRS = {
+			//
+			android.R.attr.src
+	};
+
+	static {
+		Arrays.sort(ATTRS);
+	}
 
 	private EnvRes mSrcEnvRes;
 
@@ -25,8 +36,8 @@ class EnvImageViewChanger<IV extends ImageView> extends EnvViewChanger<IV> {
 	@Override
 	public void applyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, boolean allowSysRes) {
 		super.applyStyle(context, attrs, defStyleAttr, defStyleRes, allowSysRes);
-		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, attrs, com.android.internal.R.styleable.ImageView, defStyleAttr, defStyleRes);
-		mSrcEnvRes = array.getEnvRes(com.android.internal.R.styleable.ImageView_src, allowSysRes);
+		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, attrs, ATTRS, defStyleAttr, defStyleRes);
+		mSrcEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.src), allowSysRes);
 		array.recycle();
 	}
 
