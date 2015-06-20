@@ -10,6 +10,9 @@ Android_Skin 2.0 所有代码均已上传 ... 效果见 art/ptlive.mp4，不要�
 
 6.18：兼容Android5.1（“麦潮”App的Android研发负责人反馈）
 
+# SDK 应用
+麦潮(ver 1.9.5)：http://www.varicom.im/
+
 # License
 
    Copyright Henglong Lin
