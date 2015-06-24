@@ -1,13 +1,15 @@
 package com.v7lin.android.env.widget;
 
+import java.util.Arrays;
+
+import com.v7lin.android.env.EnvRes;
+import com.v7lin.android.env.EnvTypedArray;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-
-import com.v7lin.android.env.EnvRes;
-import com.v7lin.android.env.EnvTypedArray;
 
 /**
  * 
@@ -15,6 +17,15 @@ import com.v7lin.android.env.EnvTypedArray;
  * @author v7lin Email:v7lin@qq.com
  */
 public class EnvActivityChanger extends EnvUIChanger<Activity> {
+
+	private static final int[] ATTRS = {
+			//
+			android.R.attr.windowBackground
+	};
+
+	static {
+		Arrays.sort(ATTRS);
+	}
 
 	private EnvRes mWindowBackgroundEnvRes;
 
@@ -24,8 +35,8 @@ public class EnvActivityChanger extends EnvUIChanger<Activity> {
 
 	@Override
 	public void applyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, boolean allowSysRes) {
-		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, new int[] { android.R.attr.windowBackground });
-		mWindowBackgroundEnvRes = array.getEnvRes(0, allowSysRes);
+		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, ATTRS);
+		mWindowBackgroundEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.windowBackground), allowSysRes);
 		array.recycle();
 	}
 

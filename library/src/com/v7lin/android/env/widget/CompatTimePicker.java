@@ -2,33 +2,32 @@ package com.v7lin.android.env.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.ProgressBar;
+import android.widget.TimePicker;
 
+import com.android.internal.R;
 import com.v7lin.android.env.EnvCallback;
 
 /**
- * 采用 Region.Op.XOR 方案会有 BUG，故而变更方案
  * 
- * ProgressDrawable 中使用 ScaleDrawable，在小米 1 上显示不正常
  * 
  * @author v7lin Email:v7lin@qq.com
  */
-public class CompatProgressBar extends ProgressBar implements EnvCallback {
+public class CompatTimePicker extends TimePicker implements EnvCallback {
 
-	private EnvUIChanger<ProgressBar> mEnvUIChanger;
+	private EnvUIChanger<TimePicker> mEnvUIChanger;
 
-	public CompatProgressBar(Context context) {
+	public CompatTimePicker(Context context) {
 		this(context, null);
 	}
 
-	public CompatProgressBar(Context context, AttributeSet attrs) {
-		this(context, attrs, com.android.internal.R.attr.progressBarStyle);
+	public CompatTimePicker(Context context, AttributeSet attrs) {
+		this(context, attrs, R.attr.timePickerStyle);
 	}
 
-	public CompatProgressBar(Context context, AttributeSet attrs, int defStyle) {
+	public CompatTimePicker(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
-		mEnvUIChanger = new EnvProgressBarChanger<ProgressBar>();
+		mEnvUIChanger = new EnvFrameLayoutChanger<TimePicker>();
 		mEnvUIChanger.applyStyle(context, attrs, defStyle, 0, false);
 	}
 
