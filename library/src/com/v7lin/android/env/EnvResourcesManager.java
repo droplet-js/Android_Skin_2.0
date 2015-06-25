@@ -66,7 +66,7 @@ public class EnvResourcesManager {
 	public String getSkinPath(Context context) {
 		String skinPath = getRealSkinPath(context);
 		if (!isSkinValid(context, skinPath)) {
-			skinPath = null;
+			skinPath = "";
 		}
 		return skinPath;
 	}
@@ -128,7 +128,7 @@ public class EnvResourcesManager {
 	public String getFontPath(Context context) {
 		String fontPath = getRealFontPath(context);
 		if (!isFontValid(context, fontPath)) {
-			fontPath = null;
+			fontPath = "";
 		}
 		return fontPath;
 	}
