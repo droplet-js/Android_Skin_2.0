@@ -2,7 +2,6 @@
 Android_Skin 2.0 非安装式皮肤插件
 
 android:minSdkVersion="8"
-android:targetSdkVersion="14"
 
 特别申明：使用该代码用于生产时，请勿变更其类包名。
 
@@ -23,7 +22,7 @@ Library相关使用注意事项，请认真阅读《换肤换字体注意事项.
 
 # License
 
-   Copyright Henglong Lin
+   Copyright LinHenglong
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
