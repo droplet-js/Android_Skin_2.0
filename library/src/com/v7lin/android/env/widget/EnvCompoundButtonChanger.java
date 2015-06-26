@@ -16,12 +16,11 @@ import com.v7lin.android.env.EnvTypedArray;
  * 
  * @author v7lin Email:v7lin@qq.com
  */
-class EnvCompoundButtonChanger<CB extends CompoundButton> extends EnvTextViewChanger<CB> {
+class EnvCompoundButtonChanger<CB extends CompoundButton, CBC extends XCompoundButtonCall> extends EnvTextViewChanger<CB, CBC> {
 
 	private static final int[] ATTRS = {
-			//
-			android.R.attr.button
-	};
+	//
+	android.R.attr.button };
 
 	static {
 		Arrays.sort(ATTRS);
@@ -42,17 +41,33 @@ class EnvCompoundButtonChanger<CB extends CompoundButton> extends EnvTextViewCha
 	}
 
 	@Override
-	protected void onScheduleSkin(CB view) {
-		super.onScheduleSkin(view);
-		scheduleButton(view);
+	public void applyAttr(Context context, int attr, int resid, boolean allowSysRes) {
+		super.applyAttr(context, attr, resid, allowSysRes);
+
+		switch (attr) {
+		case android.R.attr.button: {
+			EnvRes res = new EnvRes(resid);
+			mButtonEnvRes = res.isValid(context, allowSysRes) ? res : null;
+			break;
+		}
+		default: {
+			break;
+		}
+		}
 	}
 
-	private void scheduleButton(CB view) {
+	@Override
+	protected void onScheduleSkin(CB view, CBC call) {
+		super.onScheduleSkin(view, call);
+		scheduleButtonDrawable(view, call);
+	}
+
+	private void scheduleButtonDrawable(CB view, CBC call) {
 		Resources res = view.getResources();
 		if (mButtonEnvRes != null) {
 			Drawable drawable = res.getDrawable(mButtonEnvRes.getResid());
 			if (drawable != null) {
-				view.setButtonDrawable(drawable);
+				call.scheduleButtonDrawable(drawable);
 			}
 		}
 	}

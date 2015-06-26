@@ -16,13 +16,11 @@ import com.v7lin.android.env.EnvTypedArray;
  * 
  * @author v7lin E-mail:v7lin@qq.com
  */
-public class EnvListViewChanger<LV extends ListView> extends EnvAbsListViewChanger<LV> {
+public class EnvListViewChanger<LV extends ListView, LVC extends XListViewCall> extends EnvAbsListViewChanger<LV, LVC> {
 
 	private static final int[] ATTRS = {
 		//
-		android.R.attr.divider,
-		//
-		android.R.attr.dividerHeight
+		android.R.attr.divider
 	};
 
 	static {
@@ -30,7 +28,6 @@ public class EnvListViewChanger<LV extends ListView> extends EnvAbsListViewChang
 	}
 
 	private EnvRes mDividerEnvRes;
-	private EnvRes mDividerHeightEnvRes;
 
 	public EnvListViewChanger() {
 		super();
@@ -41,27 +38,38 @@ public class EnvListViewChanger<LV extends ListView> extends EnvAbsListViewChang
 		super.applyStyle(context, attrs, defStyleAttr, defStyleRes, allowSysRes);
 		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, attrs, ATTRS, defStyleAttr, defStyleRes);
 		mDividerEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.divider), allowSysRes);
-		mDividerHeightEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.dividerHeight), allowSysRes);
 		array.recycle();
 	}
 
 	@Override
-	protected void onScheduleSkin(LV view) {
-		super.onScheduleSkin(view);
-		scheduleDivider(view);
+	public void applyAttr(Context context, int attr, int resid, boolean allowSysRes) {
+		super.applyAttr(context, attr, resid, allowSysRes);
+		
+		switch (attr) {
+		case android.R.attr.divider: {
+			EnvRes res = new EnvRes(resid);
+			mDividerEnvRes = res.isValid(context, allowSysRes) ? res : null;
+			break;
+		}
+		default: {
+			break;
+		}
+		}
 	}
 
-	private void scheduleDivider(LV view) {
+	@Override
+	protected void onScheduleSkin(LV view, LVC call) {
+		super.onScheduleSkin(view, call);
+		scheduleDivider(view, call);
+	}
+
+	private void scheduleDivider(LV view, LVC call) {
 		Resources res = view.getResources();
 		if (mDividerEnvRes != null) {
 			Drawable drawable = res.getDrawable(mDividerEnvRes.getResid());
 			if (drawable != null) {
-				view.setDivider(drawable);
+				call.scheduleDivider(drawable);
 			}
-		}
-		if (mDividerHeightEnvRes != null) {
-			final int dividerHeight = res.getDimensionPixelSize(mDividerHeightEnvRes.getResid());
-			view.setDividerHeight(dividerHeight);
 		}
 	}
 }

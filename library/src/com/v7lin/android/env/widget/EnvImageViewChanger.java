@@ -16,7 +16,7 @@ import com.v7lin.android.env.EnvTypedArray;
  * 
  * @author v7lin Email:v7lin@qq.com
  */
-class EnvImageViewChanger<IV extends ImageView> extends EnvViewChanger<IV> {
+class EnvImageViewChanger<IV extends ImageView, IVC extends XImageViewCall> extends EnvViewChanger<IV, IVC> {
 	
 	private static final int[] ATTRS = {
 			//
@@ -42,20 +42,36 @@ class EnvImageViewChanger<IV extends ImageView> extends EnvViewChanger<IV> {
 	}
 
 	@Override
-	protected void onScheduleSkin(IV view) {
-		super.onScheduleSkin(view);
-		scheduleSrc(view);
+	public void applyAttr(Context context, int attr, int resid, boolean allowSysRes) {
+		super.applyAttr(context, attr, resid, allowSysRes);
+		
+		switch (attr) {
+		case android.R.attr.src: {
+			EnvRes res = new EnvRes(resid);
+			mSrcEnvRes = res.isValid(context, allowSysRes) ? res : null;
+			break;
+		}
+		default: {
+			break;
+		}
+		}
+	}
+
+	@Override
+	protected void onScheduleSkin(IV view, IVC call) {
+		super.onScheduleSkin(view, call);
+		scheduleSrc(view, call);
 	}
 
 	/**
 	 * @see ImageView#setImageResource(int)
 	 */
-	private void scheduleSrc(IV view) {
+	private void scheduleSrc(IV view, IVC call) {
 		Resources res = view.getResources();
 		if (mSrcEnvRes != null) {
 			Drawable drawable = res.getDrawable(mSrcEnvRes.getResid());
 			if (drawable != null) {
-				view.setImageDrawable(drawable);
+				call.scheduleImageDrawable(drawable);
 			}
 		}
 	}

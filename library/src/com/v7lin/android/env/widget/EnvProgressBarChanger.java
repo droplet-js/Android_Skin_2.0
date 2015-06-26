@@ -1,6 +1,5 @@
 package com.v7lin.android.env.widget;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -19,33 +18,21 @@ import com.v7lin.android.env.EnvTypedArray;
  * 
  * @author v7lin Email:v7lin@qq.com
  */
-public class EnvProgressBarChanger<PB extends ProgressBar> extends EnvViewChanger<PB> {
+public class EnvProgressBarChanger<PB extends ProgressBar, PBC extends XProgressBarCall> extends EnvViewChanger<PB, PBC> {
 	
 	private static final int[] ATTRS = {
 			//
 			android.R.attr.indeterminateDrawable,
 			//
-			android.R.attr.progressDrawable,
-			//
-			android.R.attr.minWidth,
-			//
-			android.R.attr.maxWidth,
-			//
-			android.R.attr.minHeight,
-			//
-			android.R.attr.maxHeight
+			android.R.attr.progressDrawable
 	};
 
 	static {
 		Arrays.sort(ATTRS);
 	}
 
+	private EnvRes mIndeterminateDrawableEnvRes;
 	private EnvRes mProgressDrawableEnvRes;
-	private EnvRes mMinWidthEnvRes;
-	private EnvRes mMaxWidthEnvRes;
-	private EnvRes mMinHeightEnvRes;
-	private EnvRes mMaxHeightEnvRes;
-	private EnvRes mIndeterminateDrawable;
 
 	public EnvProgressBarChanger() {
 		super();
@@ -55,50 +42,66 @@ public class EnvProgressBarChanger<PB extends ProgressBar> extends EnvViewChange
 	public void applyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, boolean allowSysRes) {
 		super.applyStyle(context, attrs, defStyleAttr, defStyleRes, allowSysRes);
 		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, attrs, ATTRS, defStyleAttr, defStyleRes);
-		mIndeterminateDrawable = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.indeterminateDrawable), allowSysRes);
+		mIndeterminateDrawableEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.indeterminateDrawable), allowSysRes);
 		mProgressDrawableEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.progressDrawable), allowSysRes);
-		mMinWidthEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.minWidth), allowSysRes);
-		mMaxWidthEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.maxWidth), allowSysRes);
-		mMinHeightEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.minHeight), allowSysRes);
-		mMaxHeightEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.maxHeight), allowSysRes);
 		array.recycle();
 	}
 
 	@Override
-	protected void onScheduleSkin(PB view) {
-		super.onScheduleSkin(view);
-		scheduleIndeterminateDrawable(view);
-		scheduleProgressDrawable(view);
-		scheduleLayout(view);
+	public void applyAttr(Context context, int attr, int resid, boolean allowSysRes) {
+		super.applyAttr(context, attr, resid, allowSysRes);
+		
+		switch (attr) {
+		case android.R.attr.indeterminateDrawable: {
+			EnvRes res = new EnvRes(resid);
+			mIndeterminateDrawableEnvRes = res.isValid(context, allowSysRes) ? res : null;
+			break;
+		}
+		case android.R.attr.progressDrawable: {
+			EnvRes res = new EnvRes(resid);
+			mProgressDrawableEnvRes = res.isValid(context, allowSysRes) ? res : null;
+			break;
+		}
+		default: {
+			break;
+		}
+		}
 	}
 
-	private void scheduleIndeterminateDrawable(PB view) {
+	@Override
+	protected void onScheduleSkin(PB view, PBC call) {
+		super.onScheduleSkin(view, call);
+		scheduleIndeterminateDrawable(view, call);
+		scheduleProgressDrawable(view, call);
+	}
+
+	private void scheduleIndeterminateDrawable(PB view, PBC call) {
 		Resources res = view.getResources();
-		if (mIndeterminateDrawable != null) {
-			Drawable drawable = res.getDrawable(mIndeterminateDrawable.getResid());
+		if (mIndeterminateDrawableEnvRes != null) {
+			Drawable drawable = res.getDrawable(mIndeterminateDrawableEnvRes.getResid());
 			if (drawable != null) {
 				final int left = 0;
 				final int top = 0;
 				final int right = drawable.getIntrinsicWidth();
 				final int bottom = drawable.getIntrinsicHeight();
 				drawable.setBounds(left, top, right, bottom);
-				view.setIndeterminateDrawable(drawable);
+				call.scheduleIndeterminateDrawable(drawable);
 			}
 		}
 	}
 
-	private void scheduleProgressDrawable(PB view) {
+	private void scheduleProgressDrawable(PB view, PBC call) {
 		Resources res = view.getResources();
 		if (mProgressDrawableEnvRes != null) {
 			Drawable drawable = res.getDrawable(mProgressDrawableEnvRes.getResid());
 			if (drawable != null) {
-				view.setProgressDrawable(drawable);
-				forceRefreshProgress(view);
+				call.scheduleProgressDrawable(drawable);
+				forceRefreshProgress(view, call);
 			}
 		}
 	}
 
-	private void forceRefreshProgress(PB view) {
+	private void forceRefreshProgress(PB view, PBC call) {
 		try {
 			int progress = view.getProgress();
 			Method mRefreshProgressMethod = ProgressBar.class.getDeclaredMethod("refreshProgress", new Class[] { int.class, int.class, Boolean.TYPE });
@@ -111,43 +114,6 @@ public class EnvProgressBarChanger<PB extends ProgressBar> extends EnvViewChange
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void scheduleLayout(PB view) {
-		Resources res = view.getResources();
-		if (mMinWidthEnvRes != null || mMaxWidthEnvRes != null || mMinHeightEnvRes != null || mMaxHeightEnvRes != null) {
-			if (mMinWidthEnvRes != null) {
-				final int mMinWidth = res.getDimensionPixelSize(mMinWidthEnvRes.getResid());
-				invokeIntValue(view, "mMinWidth", mMinWidth);
-			}
-			if (mMaxWidthEnvRes != null) {
-				final int mMaxWidth = res.getDimensionPixelSize(mMaxWidthEnvRes.getResid());
-				invokeIntValue(view, "mMaxWidth", mMaxWidth);
-			}
-			if (mMinHeightEnvRes != null) {
-				final int mMinHeight = res.getDimensionPixelSize(mMinHeightEnvRes.getResid());
-				invokeIntValue(view, "mMinHeight", mMinHeight);
-			}
-			if (mMaxHeightEnvRes != null) {
-				final int mMaxHeight = res.getDimensionPixelSize(mMaxHeightEnvRes.getResid());
-				invokeIntValue(view, "mMaxHeight", mMaxHeight);
-			}
-			view.requestLayout();
-		}
-	}
-
-	private void invokeIntValue(PB view, String fieldName, int value) {
-		try {
-			Field field = ProgressBar.class.getDeclaredField(fieldName);
-			field.setAccessible(true);
-			field.setInt(view, value);
-		} catch (NoSuchFieldException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		}
 	}

@@ -1,7 +1,9 @@
 package com.v7lin.android.env.widget;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.widget.FrameLayout;
 import android.widget.ImageSwitcher;
 
 import com.v7lin.android.env.EnvCallback;
@@ -11,9 +13,12 @@ import com.v7lin.android.env.EnvCallback;
  * 
  * @author v7lin Email:v7lin@qq.com
  */
-public class CompatImageSwitcher extends ImageSwitcher implements EnvCallback {
+@SuppressWarnings("deprecation")
+public class CompatImageSwitcher extends ImageSwitcher implements XFrameLayoutCall, EnvCallback {
 
-	private EnvUIChanger<ImageSwitcher> mEnvUIChanger;
+	private static final boolean ALLOW_SYSRES = false;
+
+	private EnvUIChanger<FrameLayout, XFrameLayoutCall> mEnvUIChanger;
 
 	public CompatImageSwitcher(Context context) {
 		this(context, null);
@@ -22,24 +27,89 @@ public class CompatImageSwitcher extends ImageSwitcher implements EnvCallback {
 	public CompatImageSwitcher(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
-		mEnvUIChanger = new EnvFrameLayoutChanger<ImageSwitcher>();
-		mEnvUIChanger.applyStyle(context, attrs, 0, 0, false);
+		mEnvUIChanger = new EnvFrameLayoutChanger<FrameLayout, XFrameLayoutCall>();
+		mEnvUIChanger.applyStyle(context, attrs, 0, 0, ALLOW_SYSRES);
+	}
+
+	@Override
+	public void setForeground(Drawable d) {
+		super.setForeground(d);
+
+		applyAttrForeground(0);
+	}
+
+	private void applyAttrForeground(int resid) {
+		applyAttr(getContext(), android.R.attr.foreground, resid);
+	}
+
+	@Override
+	public void setBackgroundColor(int color) {
+		super.setBackgroundColor(color);
+
+		applyAttrBackground(0);
+	}
+
+	@Override
+	public void setBackgroundResource(int resid) {
+		super.setBackgroundResource(resid);
+
+		applyAttrBackground(resid);
+	}
+
+	@Override
+	public void setBackground(Drawable background) {
+		super.setBackground(background);
+
+		applyAttrBackground(0);
+	}
+
+	@Override
+	public void setBackgroundDrawable(Drawable background) {
+		super.setBackgroundDrawable(background);
+
+		applyAttrBackground(0);
+	}
+
+	private void applyAttrBackground(int resid) {
+		applyAttr(getContext(), android.R.attr.background, resid);
+	}
+
+	private void applyAttr(Context context, int attr, int resid) {
+		if (mEnvUIChanger != null) {
+			mEnvUIChanger.applyAttr(context, attr, resid, ALLOW_SYSRES);
+		}
+	}
+
+	@Override
+	public void scheduleForeground(Drawable d) {
+		super.setForeground(d);
+	}
+
+	@Override
+	public void scheduleBackgroundDrawable(Drawable background) {
+		super.setBackgroundDrawable(background);
 	}
 
 	@Override
 	public void scheduleSkin() {
-		mEnvUIChanger.scheduleSkin(this);
+		if (mEnvUIChanger != null) {
+			mEnvUIChanger.scheduleSkin(this, this);
+		}
 	}
 
 	@Override
 	public void scheduleFont() {
-		mEnvUIChanger.scheduleFont(this);
+		if (mEnvUIChanger != null) {
+			mEnvUIChanger.scheduleFont(this, this);
+		}
 	}
 
 	@Override
 	protected void onAttachedToWindow() {
 		super.onAttachedToWindow();
-		mEnvUIChanger.scheduleSkin(this);
-		mEnvUIChanger.scheduleFont(this);
+		if (mEnvUIChanger != null) {
+			mEnvUIChanger.scheduleSkin(this, this);
+			mEnvUIChanger.scheduleFont(this, this);
+		}
 	}
 }

@@ -16,7 +16,7 @@ import android.util.AttributeSet;
  * 
  * @author v7lin Email:v7lin@qq.com
  */
-public class EnvActivityChanger extends EnvUIChanger<Activity> {
+public class EnvActivityChanger extends EnvUIChanger<Activity, XActivityCall> {
 
 	private static final int[] ATTRS = {
 			//
@@ -41,7 +41,12 @@ public class EnvActivityChanger extends EnvUIChanger<Activity> {
 	}
 
 	@Override
-	public void scheduleSkin(Activity activity) {
+	public void applyAttr(Context context, int attr, int resid, boolean allowSysRes) {
+		
+	}
+
+	@Override
+	public void scheduleSkin(Activity activity, XActivityCall call) {
 		onScheduleSkin(activity);
 	}
 
@@ -50,7 +55,7 @@ public class EnvActivityChanger extends EnvUIChanger<Activity> {
 	}
 
 	private void scheduleWindowBackground(Activity activity) {
-		if (mWindowBackgroundEnvRes != null && mWindowBackgroundEnvRes.isValid()) {
+		if (mWindowBackgroundEnvRes != null) {
 			String typeName = activity.getResources().getResourceTypeName(mWindowBackgroundEnvRes.getResid());
 			if (TextUtils.equals(typeName, "color")) {
 				int backgroundColor = activity.getResources().getColor(mWindowBackgroundEnvRes.getResid());
@@ -62,7 +67,7 @@ public class EnvActivityChanger extends EnvUIChanger<Activity> {
 	}
 
 	@Override
-	public void scheduleFont(Activity activity) {
+	public void scheduleFont(Activity activity, XActivityCall call) {
 
 	}
 

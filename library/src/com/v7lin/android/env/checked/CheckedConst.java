@@ -1,7 +1,5 @@
 package com.v7lin.android.env.checked;
 
-import com.android.internal.R;
-
 /**
  * 
  * 
@@ -11,7 +9,7 @@ public interface CheckedConst {
 	
 	public static final int[] CHECKED_STATE_SET = {
 		/** 为 ListView 选中定制 */
-		R.attr.state_checked
+		com.android.internal.R.attr.state_checked
 	};
 
 }

@@ -1,5 +1,7 @@
 package com.v7lin.android.env.widget;
 
+import android.graphics.drawable.Drawable;
+
 /**
  * 
  * 
@@ -7,4 +9,7 @@ package com.v7lin.android.env.widget;
  */
 public interface XProgressBarCall extends XViewCall {
 
+	public void scheduleIndeterminateDrawable(Drawable d);
+
+	public void scheduleProgressDrawable(Drawable d);
 }

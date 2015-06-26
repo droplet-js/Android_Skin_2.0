@@ -16,8 +16,8 @@ import com.v7lin.android.env.EnvTypedArray;
  * 
  * @author v7lin Email:v7lin@qq.com
  */
-class EnvAbsListViewChanger<AbsLV extends AbsListView> extends EnvViewGroupChanger<AbsLV> {
-	
+class EnvAbsListViewChanger<ALV extends AbsListView, ALVC extends XAbsListViewCall> extends EnvViewGroupChanger<ALV, ALVC> {
+
 	private static final int[] ATTRS = {
 			//
 			android.R.attr.listSelector,
@@ -46,28 +46,49 @@ class EnvAbsListViewChanger<AbsLV extends AbsListView> extends EnvViewGroupChang
 	}
 
 	@Override
-	protected void onScheduleSkin(AbsLV view) {
-		super.onScheduleSkin(view);
-		scheduleListSelector(view);
-		scheduleCacheColorHint(view);
+	public void applyAttr(Context context, int attr, int resid, boolean allowSysRes) {
+		super.applyAttr(context, attr, resid, allowSysRes);
+
+		switch (attr) {
+		case android.R.attr.listSelector: {
+			EnvRes res = new EnvRes(resid);
+			mListSelectorEnvRes = res.isValid(context, allowSysRes) ? res : null;
+			break;
+		}
+		case android.R.attr.cacheColorHint: {
+			EnvRes res = new EnvRes(resid);
+			mCacheColorHint = res.isValid(context, allowSysRes) ? res : null;
+			break;
+		}
+		default: {
+			break;
+		}
+		}
 	}
 
-	private void scheduleListSelector(AbsLV view) {
+	@Override
+	protected void onScheduleSkin(ALV view, ALVC call) {
+		super.onScheduleSkin(view, call);
+		scheduleSelector(view, call);
+		scheduleCacheColorHint(view, call);
+	}
+
+	private void scheduleSelector(ALV view, ALVC call) {
 		Resources res = view.getResources();
 		if (mListSelectorEnvRes != null) {
 			Drawable drawable = res.getDrawable(mListSelectorEnvRes.getResid());
 			if (drawable != null) {
-				view.setSelector(drawable);
+				call.scheduleSelector(drawable);
 			}
 		}
 	}
 
-	private void scheduleCacheColorHint(AbsLV view) {
+	private void scheduleCacheColorHint(ALV view, ALVC call) {
 		Resources res = view.getResources();
 		if (mCacheColorHint != null) {
 			int color = res.getColor(mCacheColorHint.getResid());
 			if (color != 0) {
-				view.setCacheColorHint(color);
+				call.scheduleCacheColorHint(color);
 			}
 		}
 	}

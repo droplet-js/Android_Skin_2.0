@@ -19,8 +19,8 @@ import com.v7lin.android.env.EnvTypedArray;
  * 
  * @author v7lin E-mail:v7lin@qq.com
  */
-class EnvTextViewChanger<TV extends TextView> extends EnvViewChanger<TV> {
-	
+class EnvTextViewChanger<TV extends TextView, TVC extends XTextViewCall> extends EnvViewChanger<TV, TVC> {
+
 	private static final int[] ATTRS = {
 			//
 			android.R.attr.drawableLeft,
@@ -30,8 +30,6 @@ class EnvTextViewChanger<TV extends TextView> extends EnvViewChanger<TV> {
 			android.R.attr.drawableRight,
 			//
 			android.R.attr.drawableBottom,
-			//
-			android.R.attr.drawablePadding,
 			//
 			android.R.attr.textAppearance,
 			//
@@ -64,7 +62,6 @@ class EnvTextViewChanger<TV extends TextView> extends EnvViewChanger<TV> {
 	private EnvRes mDrawableTopEnvRes;
 	private EnvRes mDrawableRightEnvRes;
 	private EnvRes mDrawableBottomEnvRes;
-	private EnvRes mDrawablePaddingEnvRes;
 
 	private EnvRes mTextColorHighlightEnvRes;
 	private EnvRes mTextColorEnvRes;
@@ -83,7 +80,6 @@ class EnvTextViewChanger<TV extends TextView> extends EnvViewChanger<TV> {
 		mDrawableTopEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.drawableTop), allowSysRes);
 		mDrawableRightEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.drawableRight), allowSysRes);
 		mDrawableBottomEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.drawableBottom), allowSysRes);
-		mDrawablePaddingEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.drawablePadding), allowSysRes);
 
 		EnvRes textAppearanceEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.textAppearance), allowSysRes);
 		if (textAppearanceEnvRes != null) {
@@ -105,20 +101,62 @@ class EnvTextViewChanger<TV extends TextView> extends EnvViewChanger<TV> {
 	}
 
 	@Override
-	protected void onScheduleSkin(TV view) {
-		super.onScheduleSkin(view);
-		scheduleCompoundDrawable(view);
-		scheduleTextColor(view);
+	public void applyAttr(Context context, int attr, int resid, boolean allowSysRes) {
+		super.applyAttr(context, attr, resid, allowSysRes);
+
+		switch (attr) {
+		case android.R.attr.textAppearance: {
+			EnvTypedArray textAppearanceArray = EnvTypedArray.obtainStyledAttributes(context, resid, ATTRS_TEXT);
+
+			mTextColorHighlightEnvRes = textAppearanceArray.getEnvRes(Arrays.binarySearch(ATTRS_TEXT, android.R.attr.textColorHighlight), mTextColorHighlightEnvRes, allowSysRes);
+			mTextColorEnvRes = textAppearanceArray.getEnvRes(Arrays.binarySearch(ATTRS_TEXT, android.R.attr.textColor), mTextColorEnvRes, allowSysRes);
+			mTextColorHintEnvRes = textAppearanceArray.getEnvRes(Arrays.binarySearch(ATTRS_TEXT, android.R.attr.textColorHint), mTextColorHintEnvRes, allowSysRes);
+			mTextColorLinkEnvRes = textAppearanceArray.getEnvRes(Arrays.binarySearch(ATTRS_TEXT, android.R.attr.textColorLink), mTextColorLinkEnvRes, allowSysRes);
+
+			textAppearanceArray.recycle();
+			break;
+		}
+		case android.R.attr.drawableLeft: {
+			EnvRes res = new EnvRes(resid);
+			mDrawableLeftEnvRes = res.isValid(context, allowSysRes) ? res : null;
+			break;
+		}
+		case android.R.attr.drawableTop: {
+			EnvRes res = new EnvRes(resid);
+			mDrawableTopEnvRes = res.isValid(context, allowSysRes) ? res : null;
+			break;
+		}
+		case android.R.attr.drawableRight: {
+			EnvRes res = new EnvRes(resid);
+			mDrawableRightEnvRes = res.isValid(context, allowSysRes) ? res : null;
+			break;
+		}
+		case android.R.attr.drawableBottom: {
+			EnvRes res = new EnvRes(resid);
+			mDrawableBottomEnvRes = res.isValid(context, allowSysRes) ? res : null;
+			break;
+		}
+		default: {
+			break;
+		}
+		}
 	}
 
 	@Override
-	protected void onScheduleFont(TV view) {
-		super.onScheduleFont(view);
+	protected void onScheduleSkin(TV view, TVC call) {
+		super.onScheduleSkin(view, call);
+		scheduleCompoundDrawable(view, call);
+		scheduleTextColor(view, call);
+	}
+
+	@Override
+	protected void onScheduleFont(TV view, TVC call) {
+		super.onScheduleFont(view, call);
 		Typeface tf = EnvResourcesHelper.getFontFamily(view.getContext()).getTypeface();
 		view.setTypeface(tf);
 	}
 
-	private void scheduleCompoundDrawable(TV view) {
+	private void scheduleCompoundDrawable(TV view, TVC call) {
 		Resources res = view.getResources();
 		if (mDrawableLeftEnvRes != null || mDrawableTopEnvRes != null || mDrawableRightEnvRes != null || mDrawableBottomEnvRes != null) {
 			Drawable drawableLeft = mDrawableLeftEnvRes != null ? res.getDrawable(mDrawableLeftEnvRes.getResid()) : null;
@@ -127,33 +165,29 @@ class EnvTextViewChanger<TV extends TextView> extends EnvViewChanger<TV> {
 			Drawable drawableBottom = mDrawableBottomEnvRes != null ? res.getDrawable(mDrawableBottomEnvRes.getResid()) : null;
 			if (drawableLeft != null || drawableTop != null || drawableRight != null || drawableBottom != null) {
 				final int drawablePadding = view.getCompoundDrawablePadding();
-				view.setCompoundDrawablesWithIntrinsicBounds(drawableLeft, drawableTop, drawableRight, drawableBottom);
+				call.scheduleCompoundDrawablesWithIntrinsicBounds(drawableLeft, drawableTop, drawableRight, drawableBottom);
 				view.setCompoundDrawablePadding(drawablePadding);
 			}
 		}
-		if (mDrawablePaddingEnvRes != null) {
-			final int drawablePadding = res.getDimensionPixelSize(mDrawablePaddingEnvRes.getResid());
-			view.setCompoundDrawablePadding(drawablePadding);
-		}
 	}
 
-	private void scheduleTextColor(TV view) {
+	private void scheduleTextColor(TV view, TVC call) {
 		Resources res = view.getResources();
 		if (mTextColorHighlightEnvRes != null) {
 			int textColorHighlight = res.getColor(mTextColorHighlightEnvRes.getResid());
-			view.setHighlightColor(textColorHighlight);
+			call.scheduleHighlightColor(textColorHighlight);
 		}
 		if (mTextColorEnvRes != null) {
 			ColorStateList textColor = res.getColorStateList(mTextColorEnvRes.getResid());
-			view.setTextColor(textColor);
+			call.scheduleTextColor(textColor);
 		}
 		if (mTextColorHintEnvRes != null) {
 			ColorStateList textColorHint = res.getColorStateList(mTextColorHintEnvRes.getResid());
-			view.setHintTextColor(textColorHint);
+			call.scheduleHintTextColor(textColorHint);
 		}
 		if (mTextColorLinkEnvRes != null) {
 			ColorStateList textColorLink = res.getColorStateList(mTextColorLinkEnvRes.getResid());
-			view.setLinkTextColor(textColorLink);
+			call.scheduleLinkTextColor(textColorLink);
 		}
 	}
 }

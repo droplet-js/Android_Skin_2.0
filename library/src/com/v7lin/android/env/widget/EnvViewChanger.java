@@ -20,10 +20,15 @@ import com.v7lin.android.env.EnvTypedArray;
  * 
  * @author v7lin E-mail:v7lin@qq.com
  */
-@SuppressWarnings("deprecation")
-public class EnvViewChanger<V extends View> extends EnvUIChanger<V> {
+public class EnvViewChanger<V extends View, VC extends XViewCall> extends EnvUIChanger<V, VC> {
 	
 	private static final int[] ATTRS = {
+			//
+			android.R.attr.background,
+			//
+			android.R.attr.minWidth,
+			//
+			android.R.attr.minHeight,
 			//
 			android.R.attr.scrollbarTrackHorizontal,
 			//
@@ -31,23 +36,7 @@ public class EnvViewChanger<V extends View> extends EnvUIChanger<V> {
 			//
 			android.R.attr.scrollbarTrackVertical,
 			//
-			android.R.attr.scrollbarThumbVertical,
-			//
-			android.R.attr.background,
-			//
-			android.R.attr.padding,
-			//
-			android.R.attr.paddingLeft,
-			//
-			android.R.attr.paddingTop,
-			//
-			android.R.attr.paddingRight,
-			//
-			android.R.attr.paddingBottom,
-			//
-			android.R.attr.minWidth,
-			//
-			android.R.attr.minHeight
+			android.R.attr.scrollbarThumbVertical
 	};
 
 	static {
@@ -55,11 +44,6 @@ public class EnvViewChanger<V extends View> extends EnvUIChanger<V> {
 	}
 
 	private EnvRes mBackgroundEnvRes;
-	private EnvRes mPaddingEnvRes;
-	private EnvRes mPaddingLeftEnvRes;
-	private EnvRes mPaddingTopEnvRes;
-	private EnvRes mPaddingRightEnvRes;
-	private EnvRes mPaddingBottomEnvRes;
 
 	private EnvRes mMinWidthEnvRes;
 	private EnvRes mMinHeightEnvRes;
@@ -77,11 +61,6 @@ public class EnvViewChanger<V extends View> extends EnvUIChanger<V> {
 	public void applyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, boolean allowSysRes) {
 		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, attrs, ATTRS, defStyleAttr, defStyleRes);
 		mBackgroundEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.background), allowSysRes);
-		mPaddingEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.padding), allowSysRes);
-		mPaddingLeftEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.paddingLeft), allowSysRes);
-		mPaddingTopEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.paddingTop), allowSysRes);
-		mPaddingRightEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.paddingRight), allowSysRes);
-		mPaddingBottomEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.paddingBottom), allowSysRes);
 
 		mMinWidthEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.minWidth), allowSysRes);
 		mMinHeightEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.minHeight), allowSysRes);
@@ -94,26 +73,40 @@ public class EnvViewChanger<V extends View> extends EnvUIChanger<V> {
 	}
 
 	@Override
-	public final void scheduleSkin(V view) {
-		onScheduleSkin(view);
-	}
-
-	protected void onScheduleSkin(V view) {
-		scheduleBackground(view);
-		scheduleMinParams(view);
-		scheduleScrollBar(view);
+	public void applyAttr(Context context, int attr, int resid, boolean allowSysRes) {
+		switch (attr) {
+		case android.R.attr.background: {
+			EnvRes res = new EnvRes(resid);
+			mBackgroundEnvRes = res.isValid(context, allowSysRes) ? res : null;
+			break;
+		}
+		default: {
+			break;
+		}
+		}
 	}
 
 	@Override
-	public final void scheduleFont(V view) {
-		onScheduleFont(view);
+	public final void scheduleSkin(V view, VC call) {
+		onScheduleSkin(view, call);
 	}
 
-	protected void onScheduleFont(V view) {
+	protected void onScheduleSkin(V view, VC call) {
+		scheduleBackground(view, call);
+		scheduleMinParams(view, call);
+		scheduleScrollBar(view, call);
+	}
+
+	@Override
+	public final void scheduleFont(V view, VC call) {
+		onScheduleFont(view, call);
+	}
+
+	protected void onScheduleFont(V view, VC call) {
 
 	}
 
-	private void scheduleBackground(V view) {
+	private void scheduleBackground(V view, VC call) {
 		Resources res = view.getResources();
 		if (mBackgroundEnvRes != null) {
 			Drawable drawable = res.getDrawable(mBackgroundEnvRes.getResid());
@@ -122,24 +115,13 @@ public class EnvViewChanger<V extends View> extends EnvUIChanger<V> {
 				final int topPadding = view.getPaddingTop();
 				final int rightPadding = view.getPaddingRight();
 				final int bottomPadding = view.getPaddingBottom();
-				view.setBackgroundDrawable(drawable);
+				call.scheduleBackgroundDrawable(drawable);
 				view.setPadding(leftPadding, topPadding, rightPadding, bottomPadding);
 			}
 		}
-
-		if (mPaddingEnvRes != null) {
-			final int padding = res.getDimensionPixelSize(mPaddingEnvRes.getResid());
-			view.setPadding(padding, padding, padding, padding);
-		} else if (mPaddingLeftEnvRes != null || mPaddingTopEnvRes != null || mPaddingRightEnvRes != null || mPaddingBottomEnvRes != null) {
-			final int leftPadding = mPaddingLeftEnvRes != null ? res.getDimensionPixelSize(mPaddingLeftEnvRes.getResid()) : view.getPaddingLeft();
-			final int topPadding = mPaddingTopEnvRes != null ? res.getDimensionPixelSize(mPaddingTopEnvRes.getResid()) : view.getPaddingTop();
-			final int rightPadding = mPaddingRightEnvRes != null ? res.getDimensionPixelSize(mPaddingRightEnvRes.getResid()) : view.getPaddingRight();
-			final int bottomPadding = mPaddingBottomEnvRes != null ? res.getDimensionPixelSize(mPaddingBottomEnvRes.getResid()) : view.getPaddingBottom();
-			view.setPadding(leftPadding, topPadding, rightPadding, bottomPadding);
-		}
 	}
 
-	private void scheduleMinParams(V view) {
+	private void scheduleMinParams(V view, VC call) {
 		Resources res = view.getResources();
 		if (mMinWidthEnvRes != null) {
 			final int minWidth = res.getDimensionPixelSize(mMinWidthEnvRes.getResid());
@@ -151,7 +133,7 @@ public class EnvViewChanger<V extends View> extends EnvUIChanger<V> {
 		}
 	}
 
-	private void scheduleScrollBar(V view) {
+	private void scheduleScrollBar(V view, VC call) {
 		try {
 			Resources res = view.getResources();
 			if (mScrollbarTrackHorizontalEnvRes != null || mScrollbarThumbHorizontalEnvRes != null || mScrollbarTrackVerticalEnvRes != null || mScrollbarThumbVerticalEnvRes != null) {

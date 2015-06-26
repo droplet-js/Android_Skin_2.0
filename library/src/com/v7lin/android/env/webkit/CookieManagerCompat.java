@@ -10,6 +10,7 @@ import android.webkit.CookieSyncManager;
  * 
  * @author v7lin Email:v7lin@qq.com
  */
+@SuppressWarnings("deprecation")
 class CookieManagerCompat {
 
 	interface CookieManagerCompatImpl {

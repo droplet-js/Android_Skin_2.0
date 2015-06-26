@@ -16,7 +16,7 @@ import com.v7lin.android.env.EnvTypedArray;
  * 
  * @author v7lin E-mail:v7lin@qq.com
  */
-class EnvFrameLayoutChanger<FL extends FrameLayout> extends EnvViewGroupChanger<FL> {
+class EnvFrameLayoutChanger<FL extends FrameLayout, FLC extends XFrameLayoutCall> extends EnvViewGroupChanger<FL, FLC> {
 
 	private static final int[] ATTRS = {
 			//
@@ -42,17 +42,33 @@ class EnvFrameLayoutChanger<FL extends FrameLayout> extends EnvViewGroupChanger<
 	}
 
 	@Override
-	protected void onScheduleSkin(FL view) {
-		super.onScheduleSkin(view);
-		scheduleForeground(view);
+	public void applyAttr(Context context, int attr, int resid, boolean allowSysRes) {
+		super.applyAttr(context, attr, resid, allowSysRes);
+
+		switch (attr) {
+		case android.R.attr.foreground: {
+			EnvRes res = new EnvRes(resid);
+			mForegroundEnvRes = res.isValid(context, allowSysRes) ? res : null;
+			break;
+		}
+		default: {
+			break;
+		}
+		}
+	}
+
+	@Override
+	protected void onScheduleSkin(FL view, FLC call) {
+		super.onScheduleSkin(view, call);
+		scheduleForeground(view, call);
 	}
 	
-	private void scheduleForeground(FL view) {
+	private void scheduleForeground(FL view, FLC call) {
 		Resources res = view.getResources();
 		if (mForegroundEnvRes != null) {
 			Drawable drawable = res.getDrawable(mForegroundEnvRes.getResid());
 			if (drawable != null) {
-				view.setForeground(drawable);
+				call.scheduleForeground(drawable);
 			}
 		}
 	}

@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable;
  * 
  * @author v7lin E-mail:v7lin@qq.com
  */
-public interface XViewCall extends XUICall {
+public interface XImageViewCall extends XViewCall {
 
-	public void scheduleBackgroundDrawable(Drawable background);
+	public void scheduleImageDrawable(Drawable drawable);
 }

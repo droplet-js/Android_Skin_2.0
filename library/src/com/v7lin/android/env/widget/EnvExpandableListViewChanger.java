@@ -16,7 +16,7 @@ import android.widget.ExpandableListView;
  * 
  * @author v7lin Email:v7lin@qq.com
  */
-public class EnvExpandableListViewChanger<ELV extends ExpandableListView> extends EnvListViewChanger<ELV> {
+public class EnvExpandableListViewChanger<ELV extends ExpandableListView, ELVC extends XExpandableListViewCall> extends EnvListViewChanger<ELV, ELVC> {
 
 	private static final int[] ATTRS = {
 			//
@@ -51,34 +51,60 @@ public class EnvExpandableListViewChanger<ELV extends ExpandableListView> extend
 	}
 
 	@Override
-	protected void onScheduleSkin(ELV view) {
-		super.onScheduleSkin(view);
-		scheduleGroup(view);
-		scheduleChild(view);
+	public void applyAttr(Context context, int attr, int resid, boolean allowSysRes) {
+		super.applyAttr(context, attr, resid, allowSysRes);
+
+		switch (attr) {
+		case android.R.attr.groupIndicator: {
+			EnvRes res = new EnvRes(resid);
+			mGroupIndicatorEnvRes = res.isValid(context, allowSysRes) ? res : null;
+			break;
+		}
+		case android.R.attr.childIndicator: {
+			EnvRes res = new EnvRes(resid);
+			mChildIndicatorEnvRes = res.isValid(context, allowSysRes) ? res : null;
+			break;
+		}
+		case android.R.attr.childDivider: {
+			EnvRes res = new EnvRes(resid);
+			mChildDividerEnvRes = res.isValid(context, allowSysRes) ? res : null;
+			break;
+		}
+		default: {
+			break;
+		}
+		}
 	}
 
-	private void scheduleGroup(ELV view) {
+	@Override
+	protected void onScheduleSkin(ELV view, ELVC call) {
+		super.onScheduleSkin(view, call);
+		scheduleGroup(view, call);
+		scheduleChild(view, call);
+	}
+
+	private void scheduleGroup(ELV view, ELVC call) {
 		Resources res = view.getResources();
 		if (mGroupIndicatorEnvRes != null) {
 			Drawable drawable = res.getDrawable(mGroupIndicatorEnvRes.getResid());
 			if (drawable != null) {
-				view.setGroupIndicator(drawable);
+				call.scheduleGroupIndicator(drawable);
 			}
 		}
 	}
 
-	private void scheduleChild(ELV view) {
+	private void scheduleChild(ELV view, ELVC call) {
 		Resources res = view.getResources();
 		if (mChildIndicatorEnvRes != null) {
 			Drawable drawable = res.getDrawable(mChildIndicatorEnvRes.getResid());
 			if (drawable != null) {
-				view.setChildIndicator(drawable);
+				call.scheduleChildIndicator(drawable);
 			}
 		}
 		if (mChildDividerEnvRes != null) {
 			Drawable drawable = res.getDrawable(mChildDividerEnvRes.getResid());
 			if (drawable != null) {
-				view.setChildDivider(drawable);
+				call.scheduleChildDivider(drawable);
 			}
 		}
 	}

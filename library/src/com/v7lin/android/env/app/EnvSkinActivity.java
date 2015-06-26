@@ -18,19 +18,20 @@ import com.v7lin.android.env.LayoutInflaterWrapper;
 import com.v7lin.android.env.SystemResMap;
 import com.v7lin.android.env.widget.EnvActivityChanger;
 import com.v7lin.android.env.widget.EnvUIChanger;
+import com.v7lin.android.env.widget.XActivityCall;
 
 /**
  * 
  * 
  * @author v7lin E-mail:v7lin@qq.com
  */
-public class EnvSkinActivity extends SuperActivity {
+public class EnvSkinActivity extends SuperActivity implements XActivityCall {
 
 	private Context mAttachContext;
 	private LayoutInflater mLayoutInflater;
 	private View mContentView;
 
-	private EnvUIChanger<Activity> mEnvUIChanger;
+	private EnvUIChanger<Activity, XActivityCall> mEnvUIChanger;
 
 	private String mSkinPath;
 	private String mFontPath;
@@ -116,7 +117,7 @@ public class EnvSkinActivity extends SuperActivity {
 
 	public void scheduleSkin(String skinPath) {
 		mSkinPath = skinPath;
-		mEnvUIChanger.scheduleSkin(this);
+		mEnvUIChanger.scheduleSkin(this, this);
 		scheduleViewSkin(mContentView);
 	}
 
@@ -142,7 +143,7 @@ public class EnvSkinActivity extends SuperActivity {
 
 	public void scheduleFont(String fontPath) {
 		mFontPath = fontPath;
-		mEnvUIChanger.scheduleFont(this);
+		mEnvUIChanger.scheduleFont(this, this);
 		scheduleViewFont(mContentView);
 	}
 

@@ -16,7 +16,7 @@ import com.v7lin.android.env.EnvTypedArray;
  * 
  * @author v7lin E-mail:v7lin@qq.com
  */
-public class EnvCheckedTextViewChanger<CTV extends CheckedTextView> extends EnvTextViewChanger<CTV> {
+public class EnvCheckedTextViewChanger<CTV extends CheckedTextView, CTVC extends XCheckedTextViewCall> extends EnvTextViewChanger<CTV, CTVC> {
 
 	private static final int[] ATTRS = {
 			//
@@ -38,17 +38,33 @@ public class EnvCheckedTextViewChanger<CTV extends CheckedTextView> extends EnvT
 	}
 
 	@Override
-	protected void onScheduleSkin(CTV view) {
-		super.onScheduleSkin(view);
-		scheduleCheckMarkDrawable(view);
+	public void applyAttr(Context context, int attr, int resid, boolean allowSysRes) {
+		super.applyAttr(context, attr, resid, allowSysRes);
+		
+		switch (attr) {
+		case android.R.attr.checkMark: {
+			EnvRes res = new EnvRes(resid);
+			mCheckMarkEnvRes = res.isValid(context, allowSysRes) ? res : null;
+			break;
+		}
+		default: {
+			break;
+		}
+		}
 	}
 
-	private void scheduleCheckMarkDrawable(CTV view) {
+	@Override
+	protected void onScheduleSkin(CTV view, CTVC call) {
+		super.onScheduleSkin(view, call);
+		scheduleCheckMarkDrawable(view, call);
+	}
+
+	private void scheduleCheckMarkDrawable(CTV view, CTVC call) {
 		Resources res = view.getResources();
 		if (mCheckMarkEnvRes != null) {
 			Drawable drawable = res.getDrawable(mCheckMarkEnvRes.getResid());
 			if (drawable != null) {
-				view.setCheckMarkDrawable(drawable);
+				call.scheduleCheckMarkDrawable(drawable);
 			}
 		}
 	}

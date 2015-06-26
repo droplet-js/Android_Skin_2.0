@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 
@@ -17,13 +16,11 @@ public class EnvTypedArray {
 
 	private final Context mContext;
 	private final TypedArray mWrapped;
-	private final String mPackageName;
 
 	private EnvTypedArray(Context context, TypedArray wrapped) {
 		super();
 		mContext = context;
 		mWrapped = wrapped;
-		mPackageName = context.getPackageName();
 	}
 
 	public EnvRes getEnvRes(int index, boolean allowSysRes) {
@@ -33,12 +30,8 @@ public class EnvTypedArray {
 	public EnvRes getEnvRes(int index, EnvRes defEnvRes, boolean allowSysRes) {
 		if (mWrapped.hasValue(index)) {
 			EnvRes res = new EnvRes(mWrapped.getResourceId(index, 0));
-			if (res.isValid()) {
-				String packageName = mContext.getResources().getResourcePackageName(res.getResid());
-				// MIUI上替换EditText的菜单Drawable会出问题，故而这里将替换系统Drawable资源排除
-				if (allowSysRes || TextUtils.equals(packageName, mPackageName)) {
-					return res;
-				}
+			if (res.isValid(mContext, allowSysRes)) {
+				return res;
 			}
 		}
 		return defEnvRes;
