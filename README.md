@@ -1,7 +1,14 @@
 # Android_Skin_2.0
 Android_Skin 2.0 非安装式皮肤插件
 
-Android_Skin 2.0 所有代码均已上传 ... 效果见 art/ptlive.mp4，不要用 Window 系统自带的 MediaPlayer 播放器观看。
+<uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="14" />
+
+#效果
+1.见 art/ptlive.mp4，不要用 Window 系统自带的 MediaPlayer 播放器观看。
+
+2.下载体验《麦潮》。
 
 特别申明：使用该代码用于生产时，请勿变更其类包名。
 

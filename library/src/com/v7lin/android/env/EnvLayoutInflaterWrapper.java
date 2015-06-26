@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -32,7 +33,6 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
-import android.widget.TextClock;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -66,7 +66,6 @@ import com.v7lin.android.env.widget.CompatRelativeLayout;
 import com.v7lin.android.env.widget.CompatScrollView;
 import com.v7lin.android.env.widget.CompatSeekBar;
 import com.v7lin.android.env.widget.CompatSpinner;
-import com.v7lin.android.env.widget.CompatTextClock;
 import com.v7lin.android.env.widget.CompatTextSwitcher;
 import com.v7lin.android.env.widget.CompatTextView;
 import com.v7lin.android.env.widget.CompatTimePicker;
@@ -121,7 +120,6 @@ public class EnvLayoutInflaterWrapper extends LayoutInflaterWrapper {
 		VIEW_CLASS_MAP.put(ScrollView.class.getSimpleName(), CompatScrollView.class.getName());
 		VIEW_CLASS_MAP.put(SeekBar.class.getSimpleName(), CompatSeekBar.class.getName());
 		VIEW_CLASS_MAP.put(Spinner.class.getSimpleName(), CompatSpinner.class.getName());
-		VIEW_CLASS_MAP.put(TextClock.class.getSimpleName(), CompatTextClock.class.getName());
 		VIEW_CLASS_MAP.put(TextSwitcher.class.getSimpleName(), CompatTextSwitcher.class.getName());
 		VIEW_CLASS_MAP.put(TextView.class.getSimpleName(), CompatTextView.class.getName());
 		VIEW_CLASS_MAP.put(TimePicker.class.getSimpleName(), CompatTimePicker.class.getName());
@@ -130,6 +128,7 @@ public class EnvLayoutInflaterWrapper extends LayoutInflaterWrapper {
 		VIEW_CLASS_MAP.put(ViewAnimator.class.getSimpleName(), CompatViewAnimator.class.getName());
 		VIEW_CLASS_MAP.put(ViewFlipper.class.getSimpleName(), CompatViewFlipper.class.getName());
 		VIEW_CLASS_MAP.put(ViewSwitcher.class.getSimpleName(), CompatViewSwitcher.class.getName());
+		VIEW_CLASS_MAP.put(WebView.class.getSimpleName(), CompatWebView.class.getName());
 	}
 
 	public EnvLayoutInflaterWrapper(LayoutInflater original, Context newContext) {
