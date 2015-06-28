@@ -1,4 +1,4 @@
-# Android_Skin_2.0
+/# Android_Skin_2.0
 Android_Skin 2.0 非安装式皮肤插件
 
 android:minSdkVersion="8"
@@ -10,7 +10,7 @@ Library相关使用注意事项，请认真阅读《换肤换字体注意事项.
 #效果
 1.见 art/ptlive.mp4，不要用 Window 系统自带的 MediaPlayer 播放器观看。
 
-2.下载体验《麦潮》。
+2.下载体验麦潮1.98。
 
 # BUG 修复
 6.10 - 6.16：修正若干BUG（“麦潮”App的Android研发负责人反馈）
