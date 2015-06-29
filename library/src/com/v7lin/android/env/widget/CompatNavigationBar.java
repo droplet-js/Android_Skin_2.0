@@ -1,7 +1,9 @@
 package com.v7lin.android.env.widget;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -45,6 +47,7 @@ public class CompatNavigationBar extends LinearLayout implements XViewGroupCall,
 		applyAttrBackground(resid);
 	}
 
+	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	@Override
 	public void setBackground(Drawable background) {
 		super.setBackground(background);

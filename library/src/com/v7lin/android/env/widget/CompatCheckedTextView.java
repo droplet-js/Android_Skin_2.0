@@ -2,6 +2,7 @@ package com.v7lin.android.env.widget;
 
 import com.v7lin.android.env.EnvCallback;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
@@ -133,6 +134,7 @@ public class CompatCheckedTextView extends CheckedTextView implements XCheckedTe
 		applyAttrBackground(resid);
 	}
 
+	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	@Override
 	public void setBackground(Drawable background) {
 		super.setBackground(background);

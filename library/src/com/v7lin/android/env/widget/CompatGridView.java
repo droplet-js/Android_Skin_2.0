@@ -1,7 +1,9 @@
 package com.v7lin.android.env.widget;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.AbsListView;
 import android.widget.GridView;
@@ -78,6 +80,7 @@ public class CompatGridView extends GridView implements XAbsListViewCall, EnvCal
 		applyAttrBackground(resid);
 	}
 
+	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	@Override
 	public void setBackground(Drawable background) {
 		super.setBackground(background);

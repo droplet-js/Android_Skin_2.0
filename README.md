@@ -1,7 +1,7 @@
 /# Android_Skin_2.0
 Android_Skin 2.0 非安装式皮肤插件
 
-android:minSdkVersion="8"
+android:minSdkVersion="7"
 
 特别申明：使用该代码用于生产时，请勿变更其类包名。
 
