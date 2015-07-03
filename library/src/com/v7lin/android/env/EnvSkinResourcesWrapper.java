@@ -36,14 +36,12 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 		mContext = context;
 		mPackageName = context.getPackageName();
 		mResourcesManager = manager;
-		
-		ensureSkinRes(mContext);
 	}
 
 	private synchronized void ensureSkinRes(Context context) {
 		if (mInitSkinRes.compareAndSet(false, true) || mResourcesManager.isSkinChanged(context, mSkinPath)) {
 			mSkinPath = mResourcesManager.getSkinPath(context);
-			mSkinRes = mResourcesManager.getResources(context);
+			mSkinRes = mResourcesManager.getSkinRes(context);
 		}
 	}
 
@@ -52,7 +50,7 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 	 * 
 	 * 皮肤插件包中并不包含所有资源，这导致 R 文件上的资源 id 无法一一对应。 所以这里需要做一次资源映射
 	 */
-	private EnvRes mappingEnvRes(int resid) {
+	private EnvRes mappingSkinRes(int resid) {
 		EnvRes mapping = null;
 		if (mSkinRes != null) {
 			String packageName = getResourcePackageName(resid);
@@ -71,12 +69,12 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 		ensureSkinRes(mContext);
 		EnvRes mapping = mappingSystemRes(id);// 系统资源->APP资源
 		if (mapping != null && mapping.isValid()) {
-			EnvRes mappingEnvRes = mappingEnvRes(mapping.getResid());// APP资源->Skin资源
-			if (mappingEnvRes != null && mappingEnvRes.isValid()) {
-				mapping = mappingEnvRes;
+			EnvRes mappingSkinRes = mappingSkinRes(mapping.getResid());// APP资源->Skin资源
+			if (mappingSkinRes != null && mappingSkinRes.isValid()) {
+				mapping = mappingSkinRes;
 			}
 		} else {
-			mapping = mappingEnvRes(id);
+			mapping = mappingSkinRes(id);
 		}
 		if (mapping != null && mapping.isValid()) {
 			try {
@@ -100,12 +98,12 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 		ensureSkinRes(mContext);
 		EnvRes mapping = mappingSystemRes(id);// 系统资源->APP资源
 		if (mapping != null && mapping.isValid()) {
-			EnvRes mappingEnvRes = mappingEnvRes(mapping.getResid());// APP资源->Skin资源
-			if (mappingEnvRes != null && mappingEnvRes.isValid()) {
-				mapping = mappingEnvRes;
+			EnvRes mappingSkinRes = mappingSkinRes(mapping.getResid());// APP资源->Skin资源
+			if (mappingSkinRes != null && mappingSkinRes.isValid()) {
+				mapping = mappingSkinRes;
 			}
 		} else {
-			mapping = mappingEnvRes(id);
+			mapping = mappingSkinRes(id);
 		}
 		if (mapping != null && mapping.isValid()) {
 			try {
@@ -129,12 +127,12 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 		ensureSkinRes(mContext);
 		EnvRes mapping = mappingSystemRes(id);// 系统资源->APP资源
 		if (mapping != null && mapping.isValid()) {
-			EnvRes mappingEnvRes = mappingEnvRes(mapping.getResid());// APP资源->Skin资源
-			if (mappingEnvRes != null && mappingEnvRes.isValid()) {
-				mapping = mappingEnvRes;
+			EnvRes mappingSkinRes = mappingSkinRes(mapping.getResid());// APP资源->Skin资源
+			if (mappingSkinRes != null && mappingSkinRes.isValid()) {
+				mapping = mappingSkinRes;
 			}
 		} else {
-			mapping = mappingEnvRes(id);
+			mapping = mappingSkinRes(id);
 		}
 		if (mapping != null && mapping.isValid()) {
 			try {
@@ -159,12 +157,12 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 		ensureSkinRes(mContext);
 		EnvRes mapping = mappingSystemRes(id);// 系统资源->APP资源
 		if (mapping != null && mapping.isValid()) {
-			EnvRes mappingEnvRes = mappingEnvRes(mapping.getResid());// APP资源->Skin资源
-			if (mappingEnvRes != null && mappingEnvRes.isValid()) {
-				mapping = mappingEnvRes;
+			EnvRes mappingSkinRes = mappingSkinRes(mapping.getResid());// APP资源->Skin资源
+			if (mappingSkinRes != null && mappingSkinRes.isValid()) {
+				mapping = mappingSkinRes;
 			}
 		} else {
-			mapping = mappingEnvRes(id);
+			mapping = mappingSkinRes(id);
 		}
 		if (mapping != null && mapping.isValid()) {
 			try {
@@ -189,12 +187,12 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 		ensureSkinRes(mContext);
 		EnvRes mapping = mappingSystemRes(id);// 系统资源->APP资源
 		if (mapping != null && mapping.isValid()) {
-			EnvRes mappingEnvRes = mappingEnvRes(mapping.getResid());// APP资源->Skin资源
-			if (mappingEnvRes != null && mappingEnvRes.isValid()) {
-				mapping = mappingEnvRes;
+			EnvRes mappingSkinRes = mappingSkinRes(mapping.getResid());// APP资源->Skin资源
+			if (mappingSkinRes != null && mappingSkinRes.isValid()) {
+				mapping = mappingSkinRes;
 			}
 		} else {
-			mapping = mappingEnvRes(id);
+			mapping = mappingSkinRes(id);
 		}
 		if (mapping != null && mapping.isValid()) {
 			try {
@@ -219,12 +217,12 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 		ensureSkinRes(mContext);
 		EnvRes mapping = mappingSystemRes(id);// 系统资源->APP资源
 		if (mapping != null && mapping.isValid()) {
-			EnvRes mappingEnvRes = mappingEnvRes(mapping.getResid());// APP资源->Skin资源
-			if (mappingEnvRes != null && mappingEnvRes.isValid()) {
-				mapping = mappingEnvRes;
+			EnvRes mappingSkinRes = mappingSkinRes(mapping.getResid());// APP资源->Skin资源
+			if (mappingSkinRes != null && mappingSkinRes.isValid()) {
+				mapping = mappingSkinRes;
 			}
 		} else {
-			mapping = mappingEnvRes(id);
+			mapping = mappingSkinRes(id);
 		}
 		if (mapping != null && mapping.isValid()) {
 			try {
@@ -246,7 +244,7 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 	@Override
 	public String getString(int id) throws NotFoundException {
 		ensureSkinRes(mContext);
-		EnvRes mapping = mappingEnvRes(id);
+		EnvRes mapping = mappingSkinRes(id);
 		if (mapping != null && mapping.isValid() && mSkinRes != null) {
 			try {
 				return mSkinRes.getString(mapping.getResid());
@@ -259,7 +257,7 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 	@Override
 	public String getString(int id, Object... formatArgs) throws NotFoundException {
 		ensureSkinRes(mContext);
-		EnvRes mapping = mappingEnvRes(id);
+		EnvRes mapping = mappingSkinRes(id);
 		if (mapping != null && mapping.isValid() && mSkinRes != null) {
 			try {
 				return mSkinRes.getString(mapping.getResid(), formatArgs);
@@ -272,7 +270,7 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 	@Override
 	public CharSequence getText(int id) throws NotFoundException {
 		ensureSkinRes(mContext);
-		EnvRes mapping = mappingEnvRes(id);
+		EnvRes mapping = mappingSkinRes(id);
 		if (mapping != null && mapping.isValid() && mSkinRes != null) {
 			try {
 				return mSkinRes.getText(mapping.getResid());
@@ -285,7 +283,7 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 	@Override
 	public CharSequence getQuantityText(int id, int quantity) throws NotFoundException {
 		ensureSkinRes(mContext);
-		EnvRes mapping = mappingEnvRes(id);
+		EnvRes mapping = mappingSkinRes(id);
 		if (mapping != null && mapping.isValid() && mSkinRes != null) {
 			try {
 				return mSkinRes.getQuantityText(mapping.getResid(), quantity);
@@ -298,7 +296,7 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 	@Override
 	public CharSequence getText(int id, CharSequence def) {
 		ensureSkinRes(mContext);
-		EnvRes mapping = mappingEnvRes(id);
+		EnvRes mapping = mappingSkinRes(id);
 		if (mapping != null && mapping.isValid() && mSkinRes != null) {
 			try {
 				return mSkinRes.getText(mapping.getResid());
@@ -311,7 +309,7 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 	@Override
 	public CharSequence[] getTextArray(int id) throws NotFoundException {
 		ensureSkinRes(mContext);
-		EnvRes mapping = mappingEnvRes(id);
+		EnvRes mapping = mappingSkinRes(id);
 		if (mapping != null && mapping.isValid() && mSkinRes != null) {
 			try {
 				return mSkinRes.getTextArray(mapping.getResid());
@@ -324,7 +322,7 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 	@Override
 	public String[] getStringArray(int id) throws NotFoundException {
 		ensureSkinRes(mContext);
-		EnvRes mapping = mappingEnvRes(id);
+		EnvRes mapping = mappingSkinRes(id);
 		if (mapping != null && mapping.isValid() && mSkinRes != null) {
 			try {
 				return mSkinRes.getStringArray(mapping.getResid());
@@ -337,7 +335,7 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 	@Override
 	public int[] getIntArray(int id) throws NotFoundException {
 		ensureSkinRes(mContext);
-		EnvRes mapping = mappingEnvRes(id);
+		EnvRes mapping = mappingSkinRes(id);
 		if (mapping != null && mapping.isValid() && mSkinRes != null) {
 			try {
 				return mSkinRes.getIntArray(mapping.getResid());
@@ -352,12 +350,12 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 		ensureSkinRes(mContext);
 		EnvRes mapping = mappingSystemRes(id);// 系统资源->APP资源
 		if (mapping != null && mapping.isValid()) {
-			EnvRes mappingEnvRes = mappingEnvRes(mapping.getResid());// APP资源->Skin资源
-			if (mappingEnvRes != null && mappingEnvRes.isValid()) {
-				mapping = mappingEnvRes;
+			EnvRes mappingSkinRes = mappingSkinRes(mapping.getResid());// APP资源->Skin资源
+			if (mappingSkinRes != null && mappingSkinRes.isValid()) {
+				mapping = mappingSkinRes;
 			}
 		} else {
-			mapping = mappingEnvRes(id);
+			mapping = mappingSkinRes(id);
 		}
 		if (mapping != null && mapping.isValid()) {
 			try {
@@ -381,12 +379,12 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 		ensureSkinRes(mContext);
 		EnvRes mapping = mappingSystemRes(id);// 系统资源->APP资源
 		if (mapping != null && mapping.isValid()) {
-			EnvRes mappingEnvRes = mappingEnvRes(mapping.getResid());// APP资源->Skin资源
-			if (mappingEnvRes != null && mappingEnvRes.isValid()) {
-				mapping = mappingEnvRes;
+			EnvRes mappingSkinRes = mappingSkinRes(mapping.getResid());// APP资源->Skin资源
+			if (mappingSkinRes != null && mappingSkinRes.isValid()) {
+				mapping = mappingSkinRes;
 			}
 		} else {
-			mapping = mappingEnvRes(id);
+			mapping = mappingSkinRes(id);
 		}
 		if (mapping != null && mapping.isValid()) {
 			try {
@@ -410,15 +408,14 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 		ensureSkinRes(mContext);
 		EnvRes mapping = mappingSystemRes(id);// 系统资源->APP资源
 		if (mapping != null && mapping.isValid()) {
-			EnvRes mappingEnvRes = mappingEnvRes(mapping.getResid());// APP资源->Skin资源
-			if (mappingEnvRes != null && mappingEnvRes.isValid()) {
-				mapping = mappingEnvRes;
+			EnvRes mappingSkinRes = mappingSkinRes(mapping.getResid());// APP资源->Skin资源
+			if (mappingSkinRes != null && mappingSkinRes.isValid()) {
+				mapping = mappingSkinRes;
 			}
 		} else {
-			mapping = mappingEnvRes(id);
+			mapping = mappingSkinRes(id);
 		}
 		if (mapping != null && mapping.isValid()) {
-			
 			try {
 				if (mSkinRes != null) {
 					try {
@@ -438,7 +435,7 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 	@Override
 	public float getFraction(int id, int base, int pbase) {
 		ensureSkinRes(mContext);
-		EnvRes mapping = mappingEnvRes(id);
+		EnvRes mapping = mappingSkinRes(id);
 		if (mapping != null && mapping.isValid() && mSkinRes != null) {
 			try {
 				return mSkinRes.getFraction(mapping.getResid(), base, pbase);
@@ -451,7 +448,7 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 	@Override
 	public boolean getBoolean(int id) throws NotFoundException {
 		ensureSkinRes(mContext);
-		EnvRes mapping = mappingEnvRes(id);
+		EnvRes mapping = mappingSkinRes(id);
 		if (mapping != null && mapping.isValid() && mSkinRes != null) {
 			try {
 				return mSkinRes.getBoolean(mapping.getResid());
@@ -464,7 +461,7 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 	@Override
 	public int getInteger(int id) throws NotFoundException {
 		ensureSkinRes(mContext);
-		EnvRes mapping = mappingEnvRes(id);
+		EnvRes mapping = mappingSkinRes(id);
 		if (mapping != null && mapping.isValid() && mSkinRes != null) {
 			try {
 				return mSkinRes.getInteger(mapping.getResid());
@@ -477,7 +474,7 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 	@Override
 	public XmlResourceParser getAnimation(int id) throws NotFoundException {
 		ensureSkinRes(mContext);
-		EnvRes mapping = mappingEnvRes(id);
+		EnvRes mapping = mappingSkinRes(id);
 		if (mapping != null && mapping.isValid() && mSkinRes != null) {
 			try {
 				return mSkinRes.getAnimation(mapping.getResid());
@@ -490,7 +487,7 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 	@Override
 	public XmlResourceParser getXml(int id) throws NotFoundException {
 		ensureSkinRes(mContext);
-		EnvRes mapping = mappingEnvRes(id);
+		EnvRes mapping = mappingSkinRes(id);
 		if (mapping != null && mapping.isValid() && mSkinRes != null) {
 			try {
 				return mSkinRes.getXml(mapping.getResid());
@@ -503,7 +500,7 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 	@Override
 	public TypedArray obtainTypedArray(int id) throws NotFoundException {
 		ensureSkinRes(mContext);
-		EnvRes mapping = mappingEnvRes(id);
+		EnvRes mapping = mappingSkinRes(id);
 		if (mapping != null && mapping.isValid() && mSkinRes != null) {
 			try {
 				return mSkinRes.obtainTypedArray(mapping.getResid());
@@ -516,7 +513,7 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 	@Override
 	public InputStream openRawResource(int id, TypedValue value) throws NotFoundException {
 		ensureSkinRes(mContext);
-		EnvRes mapping = mappingEnvRes(id);
+		EnvRes mapping = mappingSkinRes(id);
 		if (mapping != null && mapping.isValid() && mSkinRes != null) {
 			try {
 				return mSkinRes.openRawResource(mapping.getResid(), value);
@@ -529,7 +526,7 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 	@Override
 	public AssetFileDescriptor openRawResourceFd(int id) throws NotFoundException {
 		ensureSkinRes(mContext);
-		EnvRes mapping = mappingEnvRes(id);
+		EnvRes mapping = mappingSkinRes(id);
 		if (mapping != null && mapping.isValid() && mSkinRes != null) {
 			try {
 				return mSkinRes.openRawResourceFd(mapping.getResid());

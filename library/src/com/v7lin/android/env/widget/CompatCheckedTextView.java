@@ -27,14 +27,14 @@ public class CompatCheckedTextView extends CheckedTextView implements XCheckedTe
 	}
 
 	public CompatCheckedTextView(Context context, AttributeSet attrs) {
-		this(context, attrs, Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? com.android.internal.R.attr.checkedTextViewStyle : 0);
+		this(context, attrs, Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 ? com.android.internal.R.attr.checkedTextViewStyle : 0);
 	}
 
 	public CompatCheckedTextView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
 		mEnvUIChanger = new EnvCheckedTextViewChanger<CheckedTextView, XCheckedTextViewCall>();
-		mEnvUIChanger.applyStyle(context, attrs, defStyle, 0, ALLOW_SYSRES);
+		mEnvUIChanger.applyStyle(context, attrs, defStyle, 0, ALLOW_SYSRES, isInEditMode());
 	}
 
 	@Override
@@ -155,7 +155,7 @@ public class CompatCheckedTextView extends CheckedTextView implements XCheckedTe
 
 	private void applyAttr(Context context, int attr, int resid) {
 		if (mEnvUIChanger != null) {
-			mEnvUIChanger.applyAttr(context, attr, resid, ALLOW_SYSRES);
+			mEnvUIChanger.applyAttr(context, attr, resid, ALLOW_SYSRES, isInEditMode());
 		}
 	}
 
@@ -199,14 +199,14 @@ public class CompatCheckedTextView extends CheckedTextView implements XCheckedTe
 	@Override
 	public void scheduleSkin() {
 		if (mEnvUIChanger != null) {
-			mEnvUIChanger.scheduleSkin(this, this);
+			mEnvUIChanger.scheduleSkin(this, this, isInEditMode());
 		}
 	}
 
 	@Override
 	public void scheduleFont() {
 		if (mEnvUIChanger != null) {
-			mEnvUIChanger.scheduleFont(this, this);
+			mEnvUIChanger.scheduleFont(this, this, isInEditMode());
 		}
 	}
 
@@ -214,8 +214,8 @@ public class CompatCheckedTextView extends CheckedTextView implements XCheckedTe
 	protected void onAttachedToWindow() {
 		super.onAttachedToWindow();
 		if (mEnvUIChanger != null) {
-			mEnvUIChanger.scheduleSkin(this, this);
-			mEnvUIChanger.scheduleFont(this, this);
+			mEnvUIChanger.scheduleSkin(this, this, isInEditMode());
+			mEnvUIChanger.scheduleFont(this, this, isInEditMode());
 		}
 	}
 }

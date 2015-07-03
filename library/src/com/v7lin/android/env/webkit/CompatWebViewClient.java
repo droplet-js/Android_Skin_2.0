@@ -44,10 +44,6 @@ public class CompatWebViewClient extends WebViewClient {
 		mClientManager = new ClientManager();
 	}
 
-	public void setReloadFlag(boolean shouldReload) {
-
-	}
-	
 	/**
 	 * 控制更新返回键
 	 */
@@ -181,9 +177,5 @@ public class CompatWebViewClient extends WebViewClient {
 		// super.onReceivedSslError(view, handler, error);
 		// 忽略证书的错误继续Load页面内容
 		handler.proceed();// 默认 handler.cancel();
-	}
-
-	public void destroy() {
-
 	}
 }

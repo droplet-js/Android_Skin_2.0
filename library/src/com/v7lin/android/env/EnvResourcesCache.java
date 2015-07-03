@@ -4,9 +4,8 @@ import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
-import android.content.res.Resources;
-
 import com.v7lin.android.env.font.FontFamily;
+import com.v7lin.android.env.skin.SkinFamily;
 
 /**
  * 
@@ -15,24 +14,24 @@ import com.v7lin.android.env.font.FontFamily;
  */
 class EnvResourcesCache {
 
-	private final Map<String, WeakReference<Resources>> mActiveResources = new HashMap<String, WeakReference<Resources>>();
+	private final Map<String, WeakReference<SkinFamily>> mActiveSkinFamily = new HashMap<String, WeakReference<SkinFamily>>();
 	private final Map<String, WeakReference<FontFamily>> mActiveFontFamily = new HashMap<String, WeakReference<FontFamily>>();
 
 	private EnvResourcesCache() {
 		super();
 	}
 
-	public Resources getActiveResources(String key) {
-		WeakReference<Resources> wr = mActiveResources.get(key);
+	public SkinFamily getActiveSkinFamily(String key) {
+		WeakReference<SkinFamily> wr = mActiveSkinFamily.get(key);
 		return wr != null ? wr.get() : null;
 	}
 
-	public void putActiveResources(String key, Resources res) {
-		mActiveResources.put(key, new WeakReference<Resources>(res));
+	public void putActiveSkinFamily(String key, SkinFamily family) {
+		mActiveSkinFamily.put(key, new WeakReference<SkinFamily>(family));
 	}
 
-	public void removeActiveResources(String key) {
-		mActiveResources.remove(key);
+	public void removeActiveSkinFamily(String key) {
+		mActiveSkinFamily.remove(key);
 	}
 
 	public FontFamily getActiveFontFamily(String key) {

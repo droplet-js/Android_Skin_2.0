@@ -1,15 +1,15 @@
 package com.v7lin.android.env;
 
 import java.io.File;
-import java.lang.reflect.Method;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.text.TextUtils;
 
 import com.v7lin.android.env.font.FontFactory;
 import com.v7lin.android.env.font.FontFamily;
+import com.v7lin.android.env.skin.SkinFactory;
+import com.v7lin.android.env.skin.SkinFamily;
 
 /**
  * 
@@ -65,21 +65,26 @@ public class EnvResourcesManager {
 
 	public String getSkinPath(Context context) {
 		String skinPath = getRealSkinPath(context);
-		if (!isSkinValid(context, skinPath)) {
+		if (!isSkinPathValid(context, skinPath)) {
 			skinPath = "";
 		}
 		return skinPath;
 	}
 
-	public Resources getResources(Context context) {
-		return getTopLevelResources(context, getRealSkinPath(context));
+	public Resources getSkinRes(Context context) {
+		SkinFamily skinFamily = getSkinFamily(context);
+		return skinFamily != null ? skinFamily.getResources() : null;
+	}
+
+	public SkinFamily getSkinFamily(Context context) {
+		return getTopLevelSkinFamily(context, getRealSkinPath(context));
 	}
 
 	private String getRealSkinPath(Context context) {
 		return mEnvSetup.getSkinPath(context);
 	}
 
-	private boolean isSkinValid(Context context, String skinPath) {
+	private boolean isSkinPathValid(Context context, String skinPath) {
 		return mSkinChecker.isSkinValid(context, skinPath);
 	}
 
@@ -88,46 +93,25 @@ public class EnvResourcesManager {
 		return !TextUtils.equals(compareSkinPath, skinPath);
 	}
 
-	public synchronized Resources getTopLevelResources(Context context, String skinPath) {
-		Resources res = null;
-		try {
-			if (!TextUtils.isEmpty(skinPath)) {
-				if (isSkinValid(context, skinPath)) {
-					res = EnvResourcesCache.getInstance().getActiveResources(skinPath);
-					boolean isValid = false;
-					if (res != null && res.getAssets() != null) {
-						AssetManager assets = res.getAssets();
-						Class<?> clazz = assets.getClass();
-						Method method = clazz.getDeclaredMethod("isUpToDate");
-						Object object = method.invoke(assets);
-						isValid = Boolean.valueOf(String.valueOf(object)).booleanValue();
-					}
-					if (!isValid) {
-						File skinFile = new File(skinPath);
-						if (skinFile.exists()) {
-							Class<?> clazz = AssetManager.class;
-							AssetManager skinAsset = (AssetManager) clazz.newInstance();
-							Method method = clazz.getDeclaredMethod("addAssetPath", String.class);
-							method.invoke(skinAsset, skinFile.getAbsolutePath());
-							res = EnvResourcesHelper.newThirdResources(skinAsset, context.getResources().getDisplayMetrics(), context.getResources().getConfiguration());
-							EnvResourcesCache.getInstance().putActiveResources(skinPath, res);
-						}
-					}
-				} else {
-					EnvResourcesCache.getInstance().removeActiveResources(skinPath);
+	public synchronized SkinFamily getTopLevelSkinFamily(Context context, String skinPath) {
+		SkinFamily skinFamily = null;
+		if (!TextUtils.isEmpty(skinPath)) {
+			if (isSkinPathValid(context, skinPath)) {
+				skinFamily = EnvResourcesCache.getInstance().getActiveSkinFamily(skinPath);
+				if (!SkinFactory.isValid(skinFamily)) {
+					skinFamily = SkinFactory.makeSkin(context, skinPath);
+					EnvResourcesCache.getInstance().putActiveSkinFamily(skinPath, skinFamily);
 				}
+			} else {
+				EnvResourcesCache.getInstance().removeActiveSkinFamily(skinPath);
 			}
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
-		return res;
+		return skinFamily;
 	}
 
 	public String getFontPath(Context context) {
 		String fontPath = getRealFontPath(context);
-		if (!isFontValid(context, fontPath)) {
+		if (!isFontPathValid(context, fontPath)) {
 			fontPath = "";
 		}
 		return fontPath;
@@ -145,7 +129,7 @@ public class EnvResourcesManager {
 		return mEnvSetup.getFontPath(context);
 	}
 
-	private boolean isFontValid(Context context, String fontPath) {
+	private boolean isFontPathValid(Context context, String fontPath) {
 		boolean exist = false;
 		if (!TextUtils.isEmpty(fontPath)) {
 			File fontFile = new File(fontPath);
@@ -162,10 +146,10 @@ public class EnvResourcesManager {
 	public synchronized FontFamily getTopLevelFontFamily(Context context, String fontPath) {
 		FontFamily fontFamily = null;
 		if (!TextUtils.isEmpty(fontPath)) {
-			if (isFontValid(context, fontPath)) {
+			if (isFontPathValid(context, fontPath)) {
 				fontFamily = EnvResourcesCache.getInstance().getActiveFontFamily(fontPath);
-				if (fontFamily == null) {
-					fontFamily = FontFactory.parse(fontPath);
+				if (!FontFactory.isValid(fontFamily)) {
+					fontFamily = FontFactory.makeFont(context, fontPath);
 					EnvResourcesCache.getInstance().putActiveFontFamily(fontPath, fontFamily);
 				}
 			} else {

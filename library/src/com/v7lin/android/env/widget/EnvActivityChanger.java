@@ -34,23 +34,19 @@ public class EnvActivityChanger extends EnvUIChanger<Activity, XActivityCall> {
 	}
 
 	@Override
-	public void applyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, boolean allowSysRes) {
+	protected void onApplyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, boolean allowSysRes) {
 		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, ATTRS);
 		mWindowBackgroundEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.windowBackground), allowSysRes);
 		array.recycle();
 	}
 
 	@Override
-	public void applyAttr(Context context, int attr, int resid, boolean allowSysRes) {
+	public void onApplyAttr(Context context, int attr, int resid, boolean allowSysRes) {
 		
 	}
 
 	@Override
-	public void scheduleSkin(Activity activity, XActivityCall call) {
-		onScheduleSkin(activity);
-	}
-
-	protected void onScheduleSkin(Activity activity) {
+	protected void onScheduleSkin(Activity activity, XActivityCall call) {
 		scheduleWindowBackground(activity);
 	}
 
@@ -67,7 +63,7 @@ public class EnvActivityChanger extends EnvUIChanger<Activity, XActivityCall> {
 	}
 
 	@Override
-	public void scheduleFont(Activity activity, XActivityCall call) {
+	protected void onScheduleFont(Activity activity, XActivityCall call) {
 
 	}
 

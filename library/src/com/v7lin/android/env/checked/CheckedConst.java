@@ -9,7 +9,7 @@ public interface CheckedConst {
 	
 	public static final int[] CHECKED_STATE_SET = {
 		/** 为 ListView 选中定制 */
-		com.android.internal.R.attr.state_checked
+		android.R.attr.state_checked
 	};
 
 }

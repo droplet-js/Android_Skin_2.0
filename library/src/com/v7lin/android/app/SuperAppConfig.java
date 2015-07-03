@@ -4,12 +4,13 @@ import android.app.Application;
 
 /**
  * Google Play
+ * 
  * https://play.google.com/apps/publish/
  * 
  * @author v7lin E-mail:v7lin@qq.com
  */
 public class SuperAppConfig extends Application {
-	
+
 	@Override
 	public void onCreate() {
 		super.onCreate();

@@ -14,11 +14,35 @@ public abstract class EnvUIChanger<UI, UIC> {
 		super();
 	}
 
-	public abstract void applyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, boolean allowSysRes);
+	public final void applyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, boolean allowSysRes, boolean isInEditMode) {
+		if (!isInEditMode) {
+			onApplyStyle(context, attrs, defStyleAttr, defStyleRes, allowSysRes);
+		}
+	}
+	
+	protected abstract void onApplyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, boolean allowSysRes);
 
-	public abstract void applyAttr(Context context, int attr, int resid, boolean allowSysRes);
+	public final void applyAttr(Context context, int attr, int resid, boolean allowSysRes, boolean isInEditMode) {
+		if (!isInEditMode) {
+			onApplyAttr(context, attr, resid, allowSysRes);
+		}
+	}
+	
+	protected abstract void onApplyAttr(Context context, int attr, int resid, boolean allowSysRes);
 
-	public abstract void scheduleSkin(UI ui, UIC call);
+	public final void scheduleSkin(UI ui, UIC call, boolean isInEditMode) {
+		if (!isInEditMode) {
+			onScheduleSkin(ui, call);
+		}
+	}
 
-	public abstract void scheduleFont(UI ui, UIC call);
+	protected abstract void onScheduleSkin(UI ui, UIC call);
+
+	public final void scheduleFont(UI ui, UIC call, boolean isInEditMode) {
+		if (!isInEditMode) {
+			onScheduleFont(ui, call);
+		}
+	}
+
+	protected abstract void onScheduleFont(UI ui, UIC call);
 }

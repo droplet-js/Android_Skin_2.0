@@ -21,7 +21,7 @@ import com.v7lin.android.env.EnvTypedArray;
  * @author v7lin E-mail:v7lin@qq.com
  */
 public class EnvViewChanger<V extends View, VC extends XViewCall> extends EnvUIChanger<V, VC> {
-	
+
 	private static final int[] ATTRS = {
 			//
 			android.R.attr.background,
@@ -58,7 +58,7 @@ public class EnvViewChanger<V extends View, VC extends XViewCall> extends EnvUIC
 	}
 
 	@Override
-	public void applyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, boolean allowSysRes) {
+	protected void onApplyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, boolean allowSysRes) {
 		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, attrs, ATTRS, defStyleAttr, defStyleRes);
 		mBackgroundEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.background), allowSysRes);
 
@@ -73,7 +73,7 @@ public class EnvViewChanger<V extends View, VC extends XViewCall> extends EnvUIC
 	}
 
 	@Override
-	public void applyAttr(Context context, int attr, int resid, boolean allowSysRes) {
+	protected void onApplyAttr(Context context, int attr, int resid, boolean allowSysRes) {
 		switch (attr) {
 		case android.R.attr.background: {
 			EnvRes res = new EnvRes(resid);
@@ -87,23 +87,10 @@ public class EnvViewChanger<V extends View, VC extends XViewCall> extends EnvUIC
 	}
 
 	@Override
-	public final void scheduleSkin(V view, VC call) {
-		onScheduleSkin(view, call);
-	}
-
 	protected void onScheduleSkin(V view, VC call) {
 		scheduleBackground(view, call);
 		scheduleMinParams(view, call);
 		scheduleScrollBar(view, call);
-	}
-
-	@Override
-	public final void scheduleFont(V view, VC call) {
-		onScheduleFont(view, call);
-	}
-
-	protected void onScheduleFont(V view, VC call) {
-
 	}
 
 	private void scheduleBackground(V view, VC call) {
@@ -194,5 +181,10 @@ public class EnvViewChanger<V extends View, VC extends XViewCall> extends EnvUIC
 		} catch (NotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	protected void onScheduleFont(V view, VC call) {
+
 	}
 }

@@ -21,14 +21,13 @@ import android.util.LongSparseArray;
 import android.util.TypedValue;
 
 /**
+ * 仅供测试使用
+ * 
  * 读取插件包资源
- * 
- * 不能再用系统的方法去读取了，再用系统的方法读取会导致资源紊乱
- * 
- * 还需要有自己的缓存功能
  * 
  * @author v7lin Email:v7lin@qq.com
  */
+@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 public class EnvThirdResources extends Resources {
 
 	private final LongSparseArray<WeakReference<Drawable.ConstantState>> mDrawableCache = new LongSparseArray<WeakReference<Drawable.ConstantState>>(0);

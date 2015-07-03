@@ -1,5 +1,7 @@
 package com.v7lin.android.env.font;
 
+import android.content.Context;
+
 /**
  * 
  * 
@@ -7,6 +9,6 @@ package com.v7lin.android.env.font;
  */
 interface FontParser {
 
-	public FontFamily parse(String fontPath);
+	public FontFamily parse(Context context, String fontPath);
 
 }

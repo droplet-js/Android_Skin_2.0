@@ -7,9 +7,9 @@ import android.content.Context;
  * 
  * @author v7lin Email:v7lin@qq.com
  */
-public class NormalSystemResMap implements SystemResMap {
+public class NormalResMap implements SystemResMap {
 
-	private NormalSystemResMap() {
+	private NormalResMap() {
 		super();
 	}
 
@@ -19,10 +19,10 @@ public class NormalSystemResMap implements SystemResMap {
 	}
 
 	private static class NormalSystemResMapHolder {
-		private static final NormalSystemResMap INSTANCE = new NormalSystemResMap();
+		private static final NormalResMap INSTANCE = new NormalResMap();
 	}
 
-	public static NormalSystemResMap getInstance() {
+	public static NormalResMap getInstance() {
 		return NormalSystemResMapHolder.INSTANCE;
 	}
 }

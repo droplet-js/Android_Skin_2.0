@@ -33,7 +33,7 @@ public class CompatListView extends ListView implements XListViewCall, EnvCallba
 		super(context, attrs, defStyle);
 
 		mEnvUIChanger = new EnvListViewChanger<ListView, XListViewCall>();
-		mEnvUIChanger.applyStyle(context, attrs, defStyle, 0, ALLOW_SYSRES);
+		mEnvUIChanger.applyStyle(context, attrs, defStyle, 0, ALLOW_SYSRES, isInEditMode());
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class CompatListView extends ListView implements XListViewCall, EnvCallba
 
 	private void applyAttr(Context context, int attr, int resid) {
 		if (mEnvUIChanger != null) {
-			mEnvUIChanger.applyAttr(context, attr, resid, ALLOW_SYSRES);
+			mEnvUIChanger.applyAttr(context, attr, resid, ALLOW_SYSRES, isInEditMode());
 		}
 	}
 
@@ -138,14 +138,14 @@ public class CompatListView extends ListView implements XListViewCall, EnvCallba
 	@Override
 	public void scheduleSkin() {
 		if (mEnvUIChanger != null) {
-			mEnvUIChanger.scheduleSkin(this, this);
+			mEnvUIChanger.scheduleSkin(this, this, isInEditMode());
 		}
 	}
 
 	@Override
 	public void scheduleFont() {
 		if (mEnvUIChanger != null) {
-			mEnvUIChanger.scheduleFont(this, this);
+			mEnvUIChanger.scheduleFont(this, this, isInEditMode());
 		}
 	}
 
@@ -153,8 +153,8 @@ public class CompatListView extends ListView implements XListViewCall, EnvCallba
 	protected void onAttachedToWindow() {
 		super.onAttachedToWindow();
 		if (mEnvUIChanger != null) {
-			mEnvUIChanger.scheduleSkin(this, this);
-			mEnvUIChanger.scheduleFont(this, this);
+			mEnvUIChanger.scheduleSkin(this, this, isInEditMode());
+			mEnvUIChanger.scheduleFont(this, this, isInEditMode());
 		}
 	}
 }

@@ -11,7 +11,7 @@ import android.content.res.Resources;
 public class EnvSystemResourcesWrapper extends EnvResourcesWrapper {
 
 	private final Context mContext;
-	private SystemResMap mSystemResMap = NormalSystemResMap.getInstance();
+	private SystemResMap mSystemResMap = NormalResMap.getInstance();
 
 	public EnvSystemResourcesWrapper(Context context, Resources res, EnvResourcesManager manager) {
 		super(context, res, manager);
@@ -19,7 +19,7 @@ public class EnvSystemResourcesWrapper extends EnvResourcesWrapper {
 	}
 
 	public void setSystemResMap(SystemResMap resMap) {
-		mSystemResMap = resMap != null ? resMap : NormalSystemResMap.getInstance();
+		mSystemResMap = resMap != null ? resMap : NormalResMap.getInstance();
 	}
 
 	protected final EnvRes mappingSystemRes(int resid) {

@@ -157,7 +157,7 @@ public class TTFParser {
 			long vpos = tableDirectory.offset + nameRecord.stringOffset + nameTableHeader.storageOffset;
 			randomAccessFile.seek(vpos);
 			randomAccessFile.read(bf);
-			String temp = new String(bf, "utf-16");// new String(bf, Charset.forName("utf-16"));
+			String temp = new String(bf, "utf-16");//new String(bf, Charset.forName("utf-16"));
 			fontProperties.put(nameRecord.nameID, temp);
 			randomAccessFile.seek(pos);
 		}

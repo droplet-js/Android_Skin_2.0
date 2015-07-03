@@ -3,7 +3,6 @@ package com.v7lin.android.env.app;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -12,9 +11,9 @@ import android.widget.FrameLayout;
 import com.v7lin.android.app.SuperActivity;
 import com.v7lin.android.env.EnvCallback;
 import com.v7lin.android.env.EnvContextWrapper;
-import com.v7lin.android.env.EnvLayoutInflaterWrapper;
 import com.v7lin.android.env.EnvResourcesManager;
 import com.v7lin.android.env.LayoutInflaterWrapper;
+import com.v7lin.android.env.NullViewMap;
 import com.v7lin.android.env.SystemResMap;
 import com.v7lin.android.env.widget.EnvActivityChanger;
 import com.v7lin.android.env.widget.EnvUIChanger;
@@ -28,7 +27,6 @@ import com.v7lin.android.env.widget.XActivityCall;
 public class EnvSkinActivity extends SuperActivity implements XActivityCall {
 
 	private Context mAttachContext;
-	private LayoutInflater mLayoutInflater;
 	private View mContentView;
 
 	private EnvUIChanger<Activity, XActivityCall> mEnvUIChanger;
@@ -38,7 +36,7 @@ public class EnvSkinActivity extends SuperActivity implements XActivityCall {
 
 	@Override
 	protected void attachBaseContext(Context newBase) {
-		mAttachContext = new EnvContextWrapper(newBase, EnvResourcesManager.getGlobal());
+		mAttachContext = new EnvContextWrapper(newBase, NullViewMap.getInstance(), EnvResourcesManager.getGlobal());
 		super.attachBaseContext(mAttachContext);
 	}
 
@@ -60,20 +58,6 @@ public class EnvSkinActivity extends SuperActivity implements XActivityCall {
 		if (mAttachContext instanceof EnvContextWrapper) {
 			((EnvContextWrapper) mAttachContext).setSystemResMap(resourcesMap);
 		}
-	}
-
-	/**
-	 * Api 21
-	 */
-	@Override
-	public Object getSystemService(String name) {
-		if (Context.LAYOUT_INFLATER_SERVICE.equals(name)) {
-			if (mLayoutInflater == null) {
-				mLayoutInflater = new EnvLayoutInflaterWrapper(LayoutInflater.from(getBaseContext()), this);
-			}
-			return mLayoutInflater;
-		}
-		return super.getSystemService(name);
 	}
 
 	@Override
@@ -109,7 +93,7 @@ public class EnvSkinActivity extends SuperActivity implements XActivityCall {
 		super.onCreate(savedInstanceState);
 
 		mEnvUIChanger = new EnvActivityChanger();
-		mEnvUIChanger.applyStyle(this, null, 0, 0, false);
+		mEnvUIChanger.applyStyle(this, null, 0, 0, false, false);
 
 		mSkinPath = EnvResourcesManager.getGlobal().getSkinPath(this);
 		mFontPath = EnvResourcesManager.getGlobal().getFontPath(this);
@@ -117,7 +101,7 @@ public class EnvSkinActivity extends SuperActivity implements XActivityCall {
 
 	public void scheduleSkin(String skinPath) {
 		mSkinPath = skinPath;
-		mEnvUIChanger.scheduleSkin(this, this);
+		mEnvUIChanger.scheduleSkin(this, this, false);
 		scheduleViewSkin(mContentView);
 	}
 
@@ -143,7 +127,7 @@ public class EnvSkinActivity extends SuperActivity implements XActivityCall {
 
 	public void scheduleFont(String fontPath) {
 		mFontPath = fontPath;
-		mEnvUIChanger.scheduleFont(this, this);
+		mEnvUIChanger.scheduleFont(this, this, false);
 		scheduleViewFont(mContentView);
 	}
 

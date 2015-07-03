@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.res.Resources;
 import android.content.res.Resources.Theme;
-import android.view.LayoutInflater;
 
 /**
  * 皮肤插件 APK 就嫑签名，防止用户错误安装皮肤插件 APK ...
@@ -22,14 +21,17 @@ import android.view.LayoutInflater;
  */
 public class EnvContextWrapper extends ContextWrapper {
 
+	private final EnvViewMap mViewMap;
 	private final EnvResourcesManager mResourcesManager;
+
+	private ClassLoader mClassLoader;
 
 	private EnvSystemResourcesWrapper mResources;
 	private Theme mTheme;
-	private LayoutInflater mLayoutInflater;
 
-	public EnvContextWrapper(Context base, EnvResourcesManager manager) {
+	public EnvContextWrapper(Context base, EnvViewMap viewMap, EnvResourcesManager manager) {
 		super(base);
+		mViewMap = viewMap;
 		mResourcesManager = manager;
 	}
 
@@ -47,6 +49,14 @@ public class EnvContextWrapper extends ContextWrapper {
 
 	public void setScheduleFont(boolean scheduleFont) {
 		mResourcesManager.setScheduleFont(scheduleFont);
+	}
+	
+	@Override
+	public ClassLoader getClassLoader() {
+		if (mClassLoader == null) {
+			mClassLoader = new EnvClassLoaderWrapper(super.getClassLoader(), mViewMap);
+		}
+		return mClassLoader;
 	}
 
 	@Override
@@ -67,16 +77,5 @@ public class EnvContextWrapper extends ContextWrapper {
 			}
 		}
 		return mTheme;
-	}
-
-	@Override
-	public Object getSystemService(String name) {
-		if (Context.LAYOUT_INFLATER_SERVICE.equals(name)) {
-			if (mLayoutInflater == null) {
-				mLayoutInflater = new EnvLayoutInflaterWrapper(LayoutInflater.from(getBaseContext()), this);
-			}
-			return mLayoutInflater;
-		}
-		return super.getSystemService(name);
 	}
 }

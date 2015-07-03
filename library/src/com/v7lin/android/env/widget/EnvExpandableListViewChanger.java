@@ -40,8 +40,8 @@ public class EnvExpandableListViewChanger<ELV extends ExpandableListView, ELVC e
 	}
 
 	@Override
-	public void applyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, boolean allowSysRes) {
-		super.applyStyle(context, attrs, defStyleAttr, defStyleRes, allowSysRes);
+	protected void onApplyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, boolean allowSysRes) {
+		super.onApplyStyle(context, attrs, defStyleAttr, defStyleRes, allowSysRes);
 
 		EnvTypedArray array = EnvTypedArray.obtainStyledAttributes(context, attrs, ATTRS, defStyleAttr, defStyleRes);
 		mGroupIndicatorEnvRes = array.getEnvRes(Arrays.binarySearch(ATTRS, android.R.attr.groupIndicator), allowSysRes);
@@ -51,8 +51,8 @@ public class EnvExpandableListViewChanger<ELV extends ExpandableListView, ELVC e
 	}
 
 	@Override
-	public void applyAttr(Context context, int attr, int resid, boolean allowSysRes) {
-		super.applyAttr(context, attr, resid, allowSysRes);
+	protected void onApplyAttr(Context context, int attr, int resid, boolean allowSysRes) {
+		super.onApplyAttr(context, attr, resid, allowSysRes);
 
 		switch (attr) {
 		case android.R.attr.groupIndicator: {

@@ -20,14 +20,8 @@ import com.v7lin.android.env.EnvCallback;
 @SuppressWarnings("deprecation")
 public class CompatLinearLayout extends LinearLayout implements XViewGroupCall, EnvCallback {
 
-	public static final int SHOW_DIVIDER_NONE_SUPPORT = LinearLayoutCompat.SHOW_DIVIDER_NONE_SUPPORT;
-	public static final int SHOW_DIVIDER_BEGINNING_SUPPORT = LinearLayoutCompat.SHOW_DIVIDER_BEGINNING_SUPPORT;
-	public static final int SHOW_DIVIDER_MIDDLE_SUPPORT = LinearLayoutCompat.SHOW_DIVIDER_MIDDLE_SUPPORT;
-	public static final int SHOW_DIVIDER_END_SUPPORT = LinearLayoutCompat.SHOW_DIVIDER_END_SUPPORT;
-
 	private static final boolean ALLOW_SYSRES = false;
 
-	private LinearLayoutCompat mLinearLayoutCompat;
 	private EnvUIChanger<ViewGroup, XViewGroupCall> mEnvUIChanger;
 
 	public CompatLinearLayout(Context context) {
@@ -37,10 +31,8 @@ public class CompatLinearLayout extends LinearLayout implements XViewGroupCall, 
 	public CompatLinearLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
-		mLinearLayoutCompat = LinearLayoutCompat.get(this);
-
 		mEnvUIChanger = new EnvViewGroupChanger<ViewGroup, XViewGroupCall>();
-		mEnvUIChanger.applyStyle(context, attrs, 0, 0, ALLOW_SYSRES);
+		mEnvUIChanger.applyStyle(context, attrs, 0, 0, ALLOW_SYSRES, isInEditMode());
 	}
 
 	@Override
@@ -78,7 +70,7 @@ public class CompatLinearLayout extends LinearLayout implements XViewGroupCall, 
 
 	private void applyAttr(Context context, int attr, int resid) {
 		if (mEnvUIChanger != null) {
-			mEnvUIChanger.applyAttr(context, attr, resid, ALLOW_SYSRES);
+			mEnvUIChanger.applyAttr(context, attr, resid, ALLOW_SYSRES, isInEditMode());
 		}
 	}
 
@@ -90,14 +82,14 @@ public class CompatLinearLayout extends LinearLayout implements XViewGroupCall, 
 	@Override
 	public void scheduleSkin() {
 		if (mEnvUIChanger != null) {
-			mEnvUIChanger.scheduleSkin(this, this);
+			mEnvUIChanger.scheduleSkin(this, this, isInEditMode());
 		}
 	}
 
 	@Override
 	public void scheduleFont() {
 		if (mEnvUIChanger != null) {
-			mEnvUIChanger.scheduleFont(this, this);
+			mEnvUIChanger.scheduleFont(this, this, isInEditMode());
 		}
 	}
 
@@ -105,33 +97,9 @@ public class CompatLinearLayout extends LinearLayout implements XViewGroupCall, 
 	protected void onAttachedToWindow() {
 		super.onAttachedToWindow();
 		if (mEnvUIChanger != null) {
-			mEnvUIChanger.scheduleSkin(this, this);
-			mEnvUIChanger.scheduleFont(this, this);
+			mEnvUIChanger.scheduleSkin(this, this, isInEditMode());
+			mEnvUIChanger.scheduleFont(this, this, isInEditMode());
 		}
-	}
-
-	public void setDividerDrawableSupport(Drawable divider) {
-		mLinearLayoutCompat.setDividerDrawableSupport(divider);
-	}
-
-	public void setShowDividersSupport(int showDividers) {
-		mLinearLayoutCompat.setShowDividersSupport(showDividers);
-	}
-
-	public void setDividerPaddingSupport(int padding) {
-		mLinearLayoutCompat.setDividerPaddingSupport(padding);
-	}
-
-	@Override
-	protected void measureChildWithMargins(View child, int parentWidthMeasureSpec, int widthUsed, int parentHeightMeasureSpec, int heightUsed) {
-		mLinearLayoutCompat.measureChildWithMarginsSupport(child, parentWidthMeasureSpec, widthUsed, parentHeightMeasureSpec, heightUsed);
-		super.measureChildWithMargins(child, parentWidthMeasureSpec, widthUsed, parentHeightMeasureSpec, heightUsed);
-	}
-
-	@Override
-	protected void onDraw(Canvas canvas) {
-		super.onDraw(canvas);
-		mLinearLayoutCompat.onDrawSupport(canvas);
 	}
 
 	@Override
