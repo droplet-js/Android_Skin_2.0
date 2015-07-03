@@ -7,7 +7,7 @@ android:minSdkVersion="7"
 
 Library相关使用注意事项，请认真阅读《换肤换字体注意事项.doc》
 
-#效果
+# 效果
 1.见 art/ptlive.mp4，不要用 Window 系统自带的 MediaPlayer 播放器观看。
 
 2.下载体验麦潮1.98。
@@ -16,6 +16,9 @@ Library相关使用注意事项，请认真阅读《换肤换字体注意事项.
 6.10 - 6.16：修正若干BUG（“麦潮”App的Android研发负责人反馈）
 
 6.18：兼容Android5.1（“麦潮”App的Android研发负责人反馈）
+
+7.3：替换换肤方案（将LayoutInflater方案，替换为ClassLoader方案），新增EnvViewMap。
+	 支持额外视图替换（appcompat的支持不在话下，具体实现请阅读《换肤换字体注意事项.doc》）。
 
 # SDK 应用
 麦潮：http://www.varicom.im/
