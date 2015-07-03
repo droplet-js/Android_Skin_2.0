@@ -73,7 +73,7 @@ import com.v7lin.android.env.widget.CompatViewSwitcher;
  * 
  * @author v7lin E-mail:v7lin@qq.com
  */
-public class InternalViewMap implements EnvViewMap {
+class InternalViewMap implements EnvViewMap {
 
 	private static final HashMap<String, String> VIEW_CLASS_MAP = new HashMap<String, String>();
 
