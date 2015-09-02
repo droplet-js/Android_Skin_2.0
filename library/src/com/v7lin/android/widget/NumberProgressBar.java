@@ -27,6 +27,7 @@ import android.view.Gravity;
 import android.widget.ProgressBar;
 
 import com.v7lin.android.env.widget.CompatProgressBar;
+import com.v7lin.android.env.widget.InternalTransfer;
 
 /**
  * 采用 Region.Op.XOR 方案会有 BUG，故而变更方案
@@ -62,7 +63,8 @@ public class NumberProgressBar extends CompatProgressBar {
 	}
 
 	public NumberProgressBar(Context context, AttributeSet attrs) {
-		this(context, attrs, com.android.internal.R.attr.progressBarStyle);
+//		this(context, attrs, com.android.internal.R.attr.progressBarStyle);
+		this(context, attrs, InternalTransfer.transferAttr(context, "progressBarStyle"));
 	}
 
 	public NumberProgressBar(Context context, AttributeSet attrs, int defStyle) {

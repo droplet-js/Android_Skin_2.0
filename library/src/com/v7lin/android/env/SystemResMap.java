@@ -11,7 +11,7 @@ import android.content.res.Resources;
 public interface SystemResMap {
 
 	/**
-	 * 改函数内不能执行以下函数，否则会陷入死循环，导致函数堆栈溢出
+	 * 该函数内不能执行以下函数，否则会陷入死循环，导致函数堆栈溢出
 	 * 
 	 * {@link Resources#getResourceName(int)}
 	 * {@link Resources#getResourcePackageName(int)}

@@ -27,7 +27,8 @@ public class CompatDatePicker extends DatePicker implements XFrameLayoutCall, En
 	}
 
 	public CompatDatePicker(Context context, AttributeSet attrs) {
-		this(context, attrs, Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ? com.android.internal.R.attr.datePickerStyle : 0);
+//		this(context, attrs, Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ? com.android.internal.R.attr.datePickerStyle : 0);
+		this(context, attrs, Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ? InternalTransfer.transferAttr(context, "datePickerStyle") : 0);
 	}
 
 	public CompatDatePicker(Context context, AttributeSet attrs, int defStyle) {

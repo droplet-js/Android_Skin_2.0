@@ -28,7 +28,8 @@ public class CompatRadioButton extends RadioButton implements XCompoundButtonCal
 	}
 
 	public CompatRadioButton(Context context, AttributeSet attrs) {
-		this(context, attrs, com.android.internal.R.attr.radioButtonStyle);
+//		this(context, attrs, com.android.internal.R.attr.radioButtonStyle);
+		this(context, attrs, InternalTransfer.transferAttr(context, "radioButtonStyle"));
 	}
 
 	public CompatRadioButton(Context context, AttributeSet attrs, int defStyle) {

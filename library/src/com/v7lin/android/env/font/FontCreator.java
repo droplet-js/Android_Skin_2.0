@@ -7,8 +7,8 @@ import android.content.Context;
  * 
  * @author v7lin E-mail:v7lin@qq.com
  */
-interface FontParser {
+interface FontCreator {
 
-	public FontFamily parse(Context context, String fontPath);
+	public FontFamily createFrom(Context context, String fontPath);
 
 }

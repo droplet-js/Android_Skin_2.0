@@ -27,7 +27,8 @@ public class CompatCheckedTextView extends CheckedTextView implements XCheckedTe
 	}
 
 	public CompatCheckedTextView(Context context, AttributeSet attrs) {
-		this(context, attrs, Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 ? com.android.internal.R.attr.checkedTextViewStyle : 0);
+//		this(context, attrs, Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 ? com.android.internal.R.attr.checkedTextViewStyle : 0);
+		this(context, attrs, Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 ? InternalTransfer.transferAttr(context, "checkedTextViewStyle") : 0);
 	}
 
 	public CompatCheckedTextView(Context context, AttributeSet attrs, int defStyle) {

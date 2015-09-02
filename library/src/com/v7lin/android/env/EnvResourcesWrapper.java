@@ -23,9 +23,13 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
 import com.v7lin.android.env.font.FontFamily;
+import com.v7lin.android.env.skin.SkinFamily;
 
 /**
+ * 特别的，要注意
  * 
+ * <color name="white_delegate">@color/white</color>
+ * 取到的 resid为 white，不会是white_delegate
  * 
  * @author v7lin E-mail:v7lin@qq.com
  */
@@ -77,6 +81,19 @@ public abstract class EnvResourcesWrapper extends Resources {
 			fontFamily = FontFamily.DEFAULT_FONT;
 		}
 		return fontFamily;
+	}
+	
+	public SkinFamily getSkinFamily() {
+		SkinFamily skinFamily = mResourcesManager.getSkinFamily(mContext);
+		if (skinFamily == null) {
+			if (mWrapped instanceof EnvResourcesWrapper) {
+				skinFamily = ((EnvResourcesWrapper) mWrapped).getSkinFamily();
+			}
+		}
+		if (skinFamily == null) {
+			skinFamily = new SkinFamily(null, mContext.getPackageName(), mWrapped);
+		}
+		return skinFamily;
 	}
 
 	@Override

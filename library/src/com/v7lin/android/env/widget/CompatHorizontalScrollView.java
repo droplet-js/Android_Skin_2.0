@@ -27,7 +27,8 @@ public class CompatHorizontalScrollView extends HorizontalScrollView implements 
 	}
 
 	public CompatHorizontalScrollView(Context context, AttributeSet attrs) {
-		this(context, attrs, com.android.internal.R.attr.horizontalScrollViewStyle);
+//		this(context, attrs, com.android.internal.R.attr.horizontalScrollViewStyle);
+		this(context, attrs, InternalTransfer.transferAttr(context, "horizontalScrollViewStyle"));
 	}
 
 	public CompatHorizontalScrollView(Context context, AttributeSet attrs, int defStyle) {

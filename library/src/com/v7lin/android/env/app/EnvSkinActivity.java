@@ -3,16 +3,15 @@ package com.v7lin.android.env.app;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.FrameLayout;
 
 import com.v7lin.android.app.SuperActivity;
 import com.v7lin.android.env.EnvCallback;
 import com.v7lin.android.env.EnvContextWrapper;
+import com.v7lin.android.env.EnvLayoutInflaterWrapper;
 import com.v7lin.android.env.EnvResourcesManager;
-import com.v7lin.android.env.LayoutInflaterWrapper;
 import com.v7lin.android.env.NullViewMap;
 import com.v7lin.android.env.SystemResMap;
 import com.v7lin.android.env.widget.EnvActivityChanger;
@@ -27,7 +26,7 @@ import com.v7lin.android.env.widget.XActivityCall;
 public class EnvSkinActivity extends SuperActivity implements XActivityCall {
 
 	private Context mAttachContext;
-	private View mContentView;
+	private LayoutInflater mLayoutInflater;
 
 	private EnvUIChanger<Activity, XActivityCall> mEnvUIChanger;
 
@@ -36,7 +35,7 @@ public class EnvSkinActivity extends SuperActivity implements XActivityCall {
 
 	@Override
 	protected void attachBaseContext(Context newBase) {
-		mAttachContext = new EnvContextWrapper(newBase, NullViewMap.getInstance(), EnvResourcesManager.getGlobal());
+		mAttachContext = new EnvContextWrapper(newBase, EnvResourcesManager.getGlobal());
 		super.attachBaseContext(mAttachContext);
 	}
 
@@ -61,31 +60,14 @@ public class EnvSkinActivity extends SuperActivity implements XActivityCall {
 	}
 
 	@Override
-	public void setContentView(int layoutResID) {
-		// 支持 <merge/> 标签
-		if (LayoutInflaterWrapper.startWithMergeTag(this, layoutResID)) {
-			FrameLayout wrapper = new FrameLayout(this);
-			View.inflate(this, layoutResID, wrapper);
-
-			mContentView = wrapper;
-			super.setContentView(wrapper);
-		} else {
-			View view = View.inflate(this, layoutResID, null);
-			mContentView = view;
-			super.setContentView(view);
+	public Object getSystemService(String name) {
+		if (Context.LAYOUT_INFLATER_SERVICE.equals(name)) {
+			if (mLayoutInflater == null) {
+				mLayoutInflater = new EnvLayoutInflaterWrapper(LayoutInflater.from(getBaseContext()), this, NullViewMap.getInstance());
+			}
+			return mLayoutInflater;
 		}
-	}
-
-	@Override
-	public void setContentView(View view) {
-		mContentView = view;
-		super.setContentView(view);
-	}
-
-	@Override
-	public void setContentView(View view, LayoutParams params) {
-		mContentView = view;
-		super.setContentView(view, params);
+		return super.getSystemService(name);
 	}
 
 	@Override
@@ -99,10 +81,17 @@ public class EnvSkinActivity extends SuperActivity implements XActivityCall {
 		mFontPath = EnvResourcesManager.getGlobal().getFontPath(this);
 	}
 
+	/**
+	 * 可继承 {@link EnvSkinActivity} 重写该函数
+	 * 
+	 * 设置视图资源，实现不支持换肤功能的视图，进行换肤
+	 * 
+	 * @param skinPath
+	 */
 	public void scheduleSkin(String skinPath) {
 		mSkinPath = skinPath;
 		mEnvUIChanger.scheduleSkin(this, this, false);
-		scheduleViewSkin(mContentView);
+		scheduleViewSkin(findViewById(android.R.id.content));
 	}
 
 	private void scheduleViewSkin(View view) {
@@ -125,10 +114,17 @@ public class EnvSkinActivity extends SuperActivity implements XActivityCall {
 		}
 	}
 
+	/**
+	 * 可继承 {@link EnvSkinActivity} 重写该函数
+	 * 
+	 * 设置视图字体，实现不支持换字体功能的视图，进行换字体
+	 * 
+	 * @param skinPath
+	 */
 	public void scheduleFont(String fontPath) {
 		mFontPath = fontPath;
 		mEnvUIChanger.scheduleFont(this, this, false);
-		scheduleViewFont(mContentView);
+		scheduleViewFont(findViewById(android.R.id.content));
 	}
 
 	private void scheduleViewFont(View view) {

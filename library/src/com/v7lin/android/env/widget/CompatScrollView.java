@@ -27,7 +27,8 @@ public class CompatScrollView extends ScrollView implements XFrameLayoutCall, En
 	}
 
 	public CompatScrollView(Context context, AttributeSet attrs) {
-		this(context, attrs, com.android.internal.R.attr.scrollViewStyle);
+//		this(context, attrs, com.android.internal.R.attr.scrollViewStyle);
+		this(context, attrs, InternalTransfer.transferAttr(context, "scrollViewStyle"));
 	}
 
 	public CompatScrollView(Context context, AttributeSet attrs, int defStyle) {

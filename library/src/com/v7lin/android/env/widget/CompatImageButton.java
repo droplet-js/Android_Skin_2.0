@@ -28,7 +28,8 @@ public class CompatImageButton extends ImageButton implements XImageViewCall, En
 	}
 
 	public CompatImageButton(Context context, AttributeSet attrs) {
-		this(context, attrs, com.android.internal.R.attr.imageButtonStyle);
+//		this(context, attrs, com.android.internal.R.attr.imageButtonStyle);
+		this(context, attrs, InternalTransfer.transferAttr(context, "imageButtonStyle"));
 	}
 
 	public CompatImageButton(Context context, AttributeSet attrs, int defStyle) {

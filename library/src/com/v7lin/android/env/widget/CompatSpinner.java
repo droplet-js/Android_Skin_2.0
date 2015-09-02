@@ -27,7 +27,8 @@ public class CompatSpinner extends Spinner implements XViewGroupCall, EnvCallbac
 	}
 
 	public CompatSpinner(Context context, AttributeSet attrs) {
-		this(context, attrs, com.android.internal.R.attr.spinnerStyle);
+//		this(context, attrs, com.android.internal.R.attr.spinnerStyle);
+		this(context, attrs, InternalTransfer.transferAttr(context, "spinnerStyle"));
 	}
 
 	public CompatSpinner(Context context, AttributeSet attrs, int defStyle) {

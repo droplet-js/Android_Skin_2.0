@@ -28,7 +28,8 @@ public class CompatAutoCompleteTextView extends AutoCompleteTextView implements 
 	}
 
 	public CompatAutoCompleteTextView(Context context, AttributeSet attrs) {
-		this(context, attrs, com.android.internal.R.attr.autoCompleteTextViewStyle);
+//		this(context, attrs, com.android.internal.R.attr.autoCompleteTextViewStyle);
+		this(context, attrs, InternalTransfer.transferAttr(context, "autoCompleteTextViewStyle"));
 	}
 
 	public CompatAutoCompleteTextView(Context context, AttributeSet attrs, int defStyle) {

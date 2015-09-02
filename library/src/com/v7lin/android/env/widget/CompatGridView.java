@@ -27,7 +27,8 @@ public class CompatGridView extends GridView implements XAbsListViewCall, EnvCal
 	}
 
 	public CompatGridView(Context context, AttributeSet attrs) {
-		this(context, attrs, com.android.internal.R.attr.gridViewStyle);
+//		this(context, attrs, com.android.internal.R.attr.gridViewStyle);
+		this(context, attrs, InternalTransfer.transferAttr(context, "gridViewStyle"));
 	}
 
 	public CompatGridView(Context context, AttributeSet attrs, int defStyle) {

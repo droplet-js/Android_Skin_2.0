@@ -13,9 +13,12 @@ import android.text.TextUtils;
  * @author v7lin E-mail:v7lin@qq.com
  */
 public class NormalSkinChecker implements SkinChecker {
+	
+	private final boolean mCheckPkg;
 
-	public NormalSkinChecker() {
+	private NormalSkinChecker(boolean checkPkg) {
 		super();
+		mCheckPkg = checkPkg;
 	}
 
 	@Override
@@ -26,17 +29,17 @@ public class NormalSkinChecker implements SkinChecker {
 			if (skinFile.exists() && skinFile.isFile()) {
 				PackageManager manager = context.getPackageManager();
 				PackageInfo info = manager.getPackageArchiveInfo(skinFile.getAbsolutePath(), PackageManager.GET_ACTIVITIES);
-				isValid = TextUtils.equals(context.getPackageName(), info.packageName);
+				if (mCheckPkg) {
+					isValid = TextUtils.equals(context.getPackageName(), info.packageName);
+				} else {
+					isValid = true;
+				}
 			}
 		}
 		return isValid;
 	}
-
-	private static class NormalSkinCheckerHolder {
-		private static final NormalSkinChecker INSTANCE = new NormalSkinChecker();
-	}
-
-	public static NormalSkinChecker getInstance() {
-		return NormalSkinCheckerHolder.INSTANCE;
+	
+	public static NormalSkinChecker newInstance(boolean checkPkg) {
+		return new NormalSkinChecker(checkPkg);
 	}
 }

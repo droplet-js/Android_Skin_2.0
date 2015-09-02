@@ -27,7 +27,8 @@ public class CompatTextView extends TextView implements XTextViewCall, EnvCallba
 	}
 
 	public CompatTextView(Context context, AttributeSet attrs) {
-		this(context, attrs, com.android.internal.R.attr.textViewStyle);
+//		this(context, attrs, com.android.internal.R.attr.textViewStyle);
+		this(context, attrs, InternalTransfer.transferAttr(context, "textViewStyle"));
 	}
 
 	public CompatTextView(Context context, AttributeSet attrs, int defStyle) {

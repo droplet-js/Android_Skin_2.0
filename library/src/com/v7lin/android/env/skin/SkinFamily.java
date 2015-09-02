@@ -10,16 +10,22 @@ import android.content.res.Resources;
 public class SkinFamily {
 
 	private String mSkinPath;
+	private String mSkinPkg;
 	private Resources mResources;
 
-	public SkinFamily(String skinPath, Resources resources) {
+	public SkinFamily(String skinPath, String skinPkg, Resources resources) {
 		super();
-		this.mSkinPath = skinPath;
-		this.mResources = resources;
+		mSkinPath = skinPath;
+		mSkinPkg = skinPkg;
+		mResources = resources;
 	}
 
 	public String getSkinPath() {
 		return mSkinPath;
+	}
+
+	public String getSkinPkg() {
+		return mSkinPkg;
 	}
 
 	public Resources getResources() {

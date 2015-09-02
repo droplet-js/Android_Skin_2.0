@@ -26,7 +26,8 @@ public class CompatListView extends ListView implements XListViewCall, EnvCallba
 	}
 
 	public CompatListView(Context context, AttributeSet attrs) {
-		this(context, attrs, com.android.internal.R.attr.listViewStyle);
+//		this(context, attrs, com.android.internal.R.attr.listViewStyle);
+		this(context, attrs, InternalTransfer.transferAttr(context, "listViewStyle"));
 	}
 
 	public CompatListView(Context context, AttributeSet attrs, int defStyle) {

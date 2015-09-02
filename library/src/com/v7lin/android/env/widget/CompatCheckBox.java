@@ -28,7 +28,8 @@ public class CompatCheckBox extends CheckBox implements XCompoundButtonCall, Env
 	}
 
 	public CompatCheckBox(Context context, AttributeSet attrs) {
-		this(context, attrs, com.android.internal.R.attr.checkboxStyle);
+//		this(context, attrs, com.android.internal.R.attr.checkboxStyle);
+		this(context, attrs, InternalTransfer.transferAttr(context, "checkboxStyle"));
 	}
 
 	public CompatCheckBox(Context context, AttributeSet attrs, int defStyle) {

@@ -28,7 +28,8 @@ public class CompatButton extends Button implements XTextViewCall, EnvCallback {
 	}
 
 	public CompatButton(Context context, AttributeSet attrs) {
-		this(context, attrs, com.android.internal.R.attr.buttonStyle);
+//		this(context, attrs, com.android.internal.R.attr.buttonStyle);
+		this(context, attrs, InternalTransfer.transferAttr(context, "buttonStyle"));
 	}
 
 	public CompatButton(Context context, AttributeSet attrs, int defStyle) {

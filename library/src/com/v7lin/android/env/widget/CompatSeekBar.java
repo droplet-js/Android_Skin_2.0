@@ -27,7 +27,8 @@ public class CompatSeekBar extends SeekBar implements XAbsSeekBarCall, EnvCallba
 	}
 
 	public CompatSeekBar(Context context, AttributeSet attrs) {
-		this(context, attrs, com.android.internal.R.attr.seekBarStyle);
+//		this(context, attrs, com.android.internal.R.attr.seekBarStyle);
+		this(context, attrs, InternalTransfer.transferAttr(context, "seekBarStyle"));
 	}
 
 	public CompatSeekBar(Context context, AttributeSet attrs, int defStyle) {

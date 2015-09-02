@@ -106,7 +106,8 @@ public class EnvProgressBarChanger<PB extends ProgressBar, PBC extends XProgress
 			int progress = view.getProgress();
 			Method mRefreshProgressMethod = ProgressBar.class.getDeclaredMethod("refreshProgress", new Class[] { int.class, int.class, Boolean.TYPE });
 			mRefreshProgressMethod.setAccessible(true);
-			mRefreshProgressMethod.invoke(view, com.android.internal.R.id.progress, progress, false);
+//			mRefreshProgressMethod.invoke(view, com.android.internal.R.id.progress, progress, false);
+			mRefreshProgressMethod.invoke(view, InternalTransfer.transferId(view.getContext(), "progress"), progress, false);
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {

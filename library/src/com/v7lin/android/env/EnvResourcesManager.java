@@ -21,7 +21,7 @@ public class EnvResourcesManager {
 	private boolean mScheduleSkin = true;
 	private boolean mScheduleFont = true;
 	private EnvSetup mEnvSetup = NullEnvSetup.getInstance();
-	private SkinChecker mSkinChecker = NormalSkinChecker.getInstance();
+	private SkinChecker mSkinChecker = NullSkinChecker.getInstance();
 
 	public EnvResourcesManager() {
 		super();
@@ -47,12 +47,12 @@ public class EnvResourcesManager {
 
 		@Override
 		public String getFontPath(Context context) {
-			return mWrapped.getFontPath(context);
+			return mScheduleFont ? mWrapped.getFontPath(context) : "";
 		}
 	}
 
 	public void setSkinChecker(SkinChecker checker) {
-		mSkinChecker = checker != null ? checker : NormalSkinChecker.getInstance();
+		mSkinChecker = checker != null ? checker : NullSkinChecker.getInstance();
 	}
 
 	void setScheduleSkin(boolean scheduleSkin) {
@@ -69,6 +69,11 @@ public class EnvResourcesManager {
 			skinPath = "";
 		}
 		return skinPath;
+	}
+
+	public String getSkinPkg(Context context) {
+		SkinFamily skinFamily = getSkinFamily(context);
+		return skinFamily != null ? skinFamily.getSkinPkg() : context.getPackageName();
 	}
 
 	public Resources getSkinRes(Context context) {
@@ -118,11 +123,7 @@ public class EnvResourcesManager {
 	}
 
 	public FontFamily getFontFamily(Context context) {
-		FontFamily fontFamily = FontFamily.DEFAULT_FONT;
-		if (mScheduleFont) {
-			fontFamily = getTopLevelFontFamily(context, getRealFontPath(context));
-		}
-		return fontFamily;
+		return getTopLevelFontFamily(context, getRealFontPath(context));
 	}
 
 	private String getRealFontPath(Context context) {

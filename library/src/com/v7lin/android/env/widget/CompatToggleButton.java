@@ -27,7 +27,8 @@ public class CompatToggleButton extends ToggleButton implements XCompoundButtonC
 	}
 
 	public CompatToggleButton(Context context, AttributeSet attrs) {
-		this(context, attrs, com.android.internal.R.attr.buttonStyleToggle);
+//		this(context, attrs, com.android.internal.R.attr.buttonStyleToggle);
+		this(context, attrs, InternalTransfer.transferAttr(context, "buttonStyleToggle"));
 	}
 
 	public CompatToggleButton(Context context, AttributeSet attrs, int defStyle) {

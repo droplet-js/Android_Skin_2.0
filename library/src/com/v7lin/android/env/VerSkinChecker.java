@@ -14,11 +14,13 @@ import android.text.TextUtils;
  */
 public class VerSkinChecker implements SkinChecker {
 
-	private final int ver;
+	private final int mVer;
+	private final boolean mCheckPkg;
 
-	private VerSkinChecker(int ver) {
+	private VerSkinChecker(int ver, boolean checkPkg) {
 		super();
-		this.ver = ver;
+		mVer = ver;
+		mCheckPkg = checkPkg;
 	}
 
 	@Override
@@ -29,13 +31,17 @@ public class VerSkinChecker implements SkinChecker {
 			if (skinFile.exists() && skinFile.isFile()) {
 				PackageManager manager = context.getPackageManager();
 				PackageInfo info = manager.getPackageArchiveInfo(skinFile.getAbsolutePath(), PackageManager.GET_ACTIVITIES);
-				isValid = TextUtils.equals(context.getPackageName(), info.packageName) && info.versionCode == ver;
+				if (mCheckPkg) {
+					isValid = TextUtils.equals(context.getPackageName(), info.packageName) && info.versionCode == mVer;
+				} else {
+					isValid = info.versionCode == mVer;
+				}
 			}
 		}
 		return isValid;
 	}
 
-	public static VerSkinChecker newInstance(int ver) {
-		return new VerSkinChecker(ver);
+	public static VerSkinChecker newInstance(int ver, boolean checkPkg) {
+		return new VerSkinChecker(ver, checkPkg);
 	}
 }

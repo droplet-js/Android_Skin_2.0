@@ -26,7 +26,8 @@ public class CompatProgressBar extends ProgressBar implements XProgressBarCall, 
 	}
 
 	public CompatProgressBar(Context context, AttributeSet attrs) {
-		this(context, attrs, com.android.internal.R.attr.progressBarStyle);
+//		this(context, attrs, com.android.internal.R.attr.progressBarStyle);
+		this(context, attrs, InternalTransfer.transferAttr(context, "progressBarStyle"));
 	}
 
 	public CompatProgressBar(Context context, AttributeSet attrs, int defStyle) {

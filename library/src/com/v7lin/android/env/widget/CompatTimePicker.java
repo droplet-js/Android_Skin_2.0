@@ -8,7 +8,6 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import android.widget.TimePicker;
 
-import com.android.internal.R;
 import com.v7lin.android.env.EnvCallback;
 
 /**
@@ -28,7 +27,8 @@ public class CompatTimePicker extends TimePicker implements XFrameLayoutCall, En
 	}
 
 	public CompatTimePicker(Context context, AttributeSet attrs) {
-		this(context, attrs, R.attr.timePickerStyle);
+//		this(context, attrs, com.android.internal.R.attr.timePickerStyle);
+		this(context, attrs, InternalTransfer.transferAttr(context, "timePickerStyle"));
 	}
 
 	public CompatTimePicker(Context context, AttributeSet attrs, int defStyle) {

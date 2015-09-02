@@ -27,7 +27,8 @@ public class CompatRatingBar extends RatingBar implements XAbsSeekBarCall, EnvCa
 	}
 
 	public CompatRatingBar(Context context, AttributeSet attrs) {
-		this(context, attrs, com.android.internal.R.attr.ratingBarStyle);
+//		this(context, attrs, com.android.internal.R.attr.ratingBarStyle);
+		this(context, attrs, InternalTransfer.transferAttr(context, "ratingBarStyle"));
 	}
 
 	public CompatRatingBar(Context context, AttributeSet attrs, int defStyle) {

@@ -26,7 +26,8 @@ public class CompatExpandableListView extends ExpandableListView implements XExp
 	}
 
 	public CompatExpandableListView(Context context, AttributeSet attrs) {
-		this(context, attrs, com.android.internal.R.attr.expandableListViewStyle);
+//		this(context, attrs, com.android.internal.R.attr.expandableListViewStyle);
+		this(context, attrs, InternalTransfer.transferAttr(context, "expandableListViewStyle"));
 	}
 
 	public CompatExpandableListView(Context context, AttributeSet attrs, int defStyle) {

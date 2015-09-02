@@ -7,8 +7,6 @@ import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -61,22 +59,12 @@ public class SuperActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		TypedArray array = getTheme().obtainStyledAttributes(new int[] { android.R.attr.windowAnimationStyle });
-		int windowAnimationStyleResId = array.getResourceId(0, 0);
+		final int windowAnimationStyleResId = array.getResourceId(0, 0);
 		array.recycle();
 		array = getTheme().obtainStyledAttributes(windowAnimationStyleResId, new int[] { android.R.attr.activityCloseEnterAnimation, android.R.attr.activityCloseExitAnimation });
 		activityCloseEnterAnimation = array.getResourceId(0, 0);
 		activityCloseExitAnimation = array.getResourceId(1, 0);
 		array.recycle();
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		return super.onCreateOptionsMenu(menu);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
@@ -99,22 +87,9 @@ public class SuperActivity extends Activity {
 		super.onRestoreInstanceState(savedInstanceState);
 	}
 
-	/**
-	 * 初始化最好在这里执行
-	 */
-	@Override
-	protected void onPostCreate(Bundle savedInstanceState) {
-		super.onPostCreate(savedInstanceState);
-	}
-
 	@Override
 	protected void onResume() {
 		super.onResume();
-	}
-
-	@Override
-	protected void onPostResume() {
-		super.onPostResume();
 	}
 
 	@Override
@@ -149,11 +124,6 @@ public class SuperActivity extends Activity {
 	public void finish() {
 		super.finish();
 		overridePendingTransition(activityCloseEnterAnimation, activityCloseExitAnimation);
-	}
-
-	@Override
-	public void startActivityForResult(Intent intent, int requestCode) {
-		super.startActivityForResult(intent, requestCode);
 	}
 
 	@Override

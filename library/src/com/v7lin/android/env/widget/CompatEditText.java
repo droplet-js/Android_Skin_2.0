@@ -28,7 +28,8 @@ public class CompatEditText extends EditText implements XTextViewCall, EnvCallba
 	}
 
 	public CompatEditText(Context context, AttributeSet attrs) {
-		this(context, attrs, com.android.internal.R.attr.editTextStyle);
+//		this(context, attrs, com.android.internal.R.attr.editTextStyle);
+		this(context, attrs, InternalTransfer.transferAttr(context, "editTextStyle"));
 	}
 
 	public CompatEditText(Context context, AttributeSet attrs, int defStyle) {

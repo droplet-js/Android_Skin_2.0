@@ -12,26 +12,17 @@ import android.content.res.Resources.Theme;
  * 
  * 非 inflater 的 View，救不了 ...
  * 
- * 特别的，要注意
- * 
- * <color name="white_delegate">@color/white</color> 取到的 resid为
- * white，不会是white_delegate
- * 
  * @author v7lin E-mail:v7lin@qq.com
  */
 public class EnvContextWrapper extends ContextWrapper {
 
-	private final EnvViewMap mViewMap;
 	private final EnvResourcesManager mResourcesManager;
-
-	private ClassLoader mClassLoader;
 
 	private EnvSystemResourcesWrapper mResources;
 	private Theme mTheme;
 
-	public EnvContextWrapper(Context base, EnvViewMap viewMap, EnvResourcesManager manager) {
+	public EnvContextWrapper(Context base, EnvResourcesManager manager) {
 		super(base);
-		mViewMap = viewMap;
 		mResourcesManager = manager;
 	}
 
@@ -40,23 +31,12 @@ public class EnvContextWrapper extends ContextWrapper {
 		mResources.setSystemResMap(resourcesMap);
 	}
 
-	/**
-	 * 尽量不用
-	 */
 	public void setScheduleSkin(boolean scheduleSkin) {
 		mResourcesManager.setScheduleSkin(scheduleSkin);
 	}
 
 	public void setScheduleFont(boolean scheduleFont) {
 		mResourcesManager.setScheduleFont(scheduleFont);
-	}
-	
-	@Override
-	public ClassLoader getClassLoader() {
-		if (mClassLoader == null) {
-			mClassLoader = new EnvClassLoaderWrapper(super.getClassLoader(), mViewMap);
-		}
-		return mClassLoader;
 	}
 
 	@Override

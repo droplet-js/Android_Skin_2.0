@@ -29,6 +29,7 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 	private final EnvResourcesManager mResourcesManager;
 	private final AtomicBoolean mInitSkinRes = new AtomicBoolean(false);
 	private String mSkinPath;
+	private String mSkinPkg;
 	private Resources mSkinRes;
 
 	public EnvSkinResourcesWrapper(Context context, Resources res, EnvResourcesManager manager) {
@@ -41,6 +42,7 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 	private synchronized void ensureSkinRes(Context context) {
 		if (mInitSkinRes.compareAndSet(false, true) || mResourcesManager.isSkinChanged(context, mSkinPath)) {
 			mSkinPath = mResourcesManager.getSkinPath(context);
+			mSkinPkg = mResourcesManager.getSkinPkg(context);
 			mSkinRes = mResourcesManager.getSkinRes(context);
 		}
 	}
@@ -57,7 +59,7 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 			if (TextUtils.equals(packageName, mPackageName)) {
 				String typeName = getResourceTypeName(resid);
 				String entryName = getResourceEntryName(resid);
-				final int mappingid = mSkinRes.getIdentifier(entryName, typeName, packageName);
+				final int mappingid = mSkinRes.getIdentifier(entryName, typeName, mSkinPkg/*packageName*/);
 				mapping = new EnvRes(mappingid);
 			}
 		}

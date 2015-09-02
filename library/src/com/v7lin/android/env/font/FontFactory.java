@@ -17,10 +17,10 @@ public class FontFactory {
 	public static final String TTF_ENDING = ".ttf";
 	public static final String OTF_ENDING = ".otf";
 
-	private static final FontParser TTF_FONT_PARSER = new FontParser() {
+	private static final FontCreator TTF_FONT_CREATOR = new FontCreator() {
 
 		@Override
-		public FontFamily parse(Context context, String fontPath) {
+		public FontFamily createFrom(Context context, String fontPath) {
 			FontFamily family = null;
 			try {
 				TTFParser parser = new TTFParser();
@@ -35,10 +35,10 @@ public class FontFactory {
 		}
 	};
 
-	private static final FontParser OTF_FONT_PARSER = new FontParser() {
+	private static final FontCreator OTF_FONT_CREATOR = new FontCreator() {
 
 		@Override
-		public FontFamily parse(Context context, String fontPath) {
+		public FontFamily createFrom(Context context, String fontPath) {
 			return null;
 		}
 	};
@@ -51,9 +51,9 @@ public class FontFactory {
 		FontFamily family = null;
 		if (!TextUtils.isEmpty(fontPath)) {
 			if (fontPath.toLowerCase(Locale.getDefault()).endsWith(TTF_ENDING)) {
-				family = TTF_FONT_PARSER.parse(context, fontPath);
+				family = TTF_FONT_CREATOR.createFrom(context, fontPath);
 			} else if (fontPath.toLowerCase(Locale.getDefault()).endsWith(OTF_ENDING)) {
-				family = OTF_FONT_PARSER.parse(context, fontPath);
+				family = OTF_FONT_CREATOR.createFrom(context, fontPath);
 			}
 		}
 		return family;
