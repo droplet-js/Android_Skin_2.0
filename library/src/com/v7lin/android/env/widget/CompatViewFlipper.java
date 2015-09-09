@@ -29,7 +29,7 @@ public class CompatViewFlipper extends ViewFlipper implements XFrameLayoutCall, 
 	public CompatViewFlipper(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
-		mEnvUIChanger = new EnvFrameLayoutChanger<FrameLayout, XFrameLayoutCall>();
+		mEnvUIChanger = new EnvFrameLayoutChanger<FrameLayout, XFrameLayoutCall>(context);
 		mEnvUIChanger.applyStyle(context, attrs, 0, 0, ALLOW_SYSRES, isInEditMode());
 	}
 

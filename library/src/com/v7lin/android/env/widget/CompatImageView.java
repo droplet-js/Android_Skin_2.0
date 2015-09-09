@@ -33,7 +33,7 @@ public class CompatImageView extends ImageView implements XImageViewCall, EnvCal
 	public CompatImageView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
-		mEnvUIChanger = new EnvImageViewChanger<ImageView, XImageViewCall>();
+		mEnvUIChanger = new EnvImageViewChanger<ImageView, XImageViewCall>(context);
 		mEnvUIChanger.applyStyle(context, attrs, defStyle, 0, ALLOW_SYSRES, isInEditMode());
 	}
 

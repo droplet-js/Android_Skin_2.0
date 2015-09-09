@@ -29,8 +29,8 @@ public class EnvActivityChanger extends EnvUIChanger<Activity, XActivityCall> {
 
 	private EnvRes mWindowBackgroundEnvRes;
 
-	public EnvActivityChanger() {
-		super();
+	public EnvActivityChanger(Context context) {
+		super(context);
 	}
 
 	@Override
@@ -48,6 +48,7 @@ public class EnvActivityChanger extends EnvUIChanger<Activity, XActivityCall> {
 	@Override
 	protected void onScheduleSkin(Activity activity, XActivityCall call) {
 		scheduleWindowBackground(activity);
+		scheduleViewSkin(activity.findViewById(android.R.id.content));
 	}
 
 	private void scheduleWindowBackground(Activity activity) {
@@ -64,7 +65,6 @@ public class EnvActivityChanger extends EnvUIChanger<Activity, XActivityCall> {
 
 	@Override
 	protected void onScheduleFont(Activity activity, XActivityCall call) {
-
+		scheduleViewFont(activity.findViewById(android.R.id.content));
 	}
-
 }

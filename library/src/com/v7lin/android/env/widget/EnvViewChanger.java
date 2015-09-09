@@ -53,8 +53,8 @@ public class EnvViewChanger<V extends View, VC extends XViewCall> extends EnvUIC
 	private EnvRes mScrollbarTrackVerticalEnvRes;
 	private EnvRes mScrollbarThumbVerticalEnvRes;
 
-	public EnvViewChanger() {
-		super();
+	public EnvViewChanger(Context context) {
+		super(context);
 	}
 
 	@Override

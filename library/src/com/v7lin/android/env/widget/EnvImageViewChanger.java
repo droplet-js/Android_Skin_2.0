@@ -29,8 +29,8 @@ class EnvImageViewChanger<IV extends ImageView, IVC extends XImageViewCall> exte
 
 	private EnvRes mSrcEnvRes;
 
-	public EnvImageViewChanger() {
-		super();
+	public EnvImageViewChanger(Context context) {
+		super(context);
 	}
 
 	@Override

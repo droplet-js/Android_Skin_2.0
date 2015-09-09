@@ -31,7 +31,7 @@ public class CompatLinearLayout extends LinearLayout implements XViewGroupCall, 
 	public CompatLinearLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
-		mEnvUIChanger = new EnvViewGroupChanger<ViewGroup, XViewGroupCall>();
+		mEnvUIChanger = new EnvViewGroupChanger<ViewGroup, XViewGroupCall>(context);
 		mEnvUIChanger.applyStyle(context, attrs, 0, 0, ALLOW_SYSRES, isInEditMode());
 	}
 

@@ -68,8 +68,8 @@ class EnvTextViewChanger<TV extends TextView, TVC extends XTextViewCall> extends
 	private EnvRes mTextColorHintEnvRes;
 	private EnvRes mTextColorLinkEnvRes;
 
-	public EnvTextViewChanger() {
-		super();
+	public EnvTextViewChanger(Context context) {
+		super(context);
 	}
 
 	@Override
@@ -159,6 +159,12 @@ class EnvTextViewChanger<TV extends TextView, TVC extends XTextViewCall> extends
 	private void scheduleCompoundDrawable(TV view, TVC call) {
 		Resources res = view.getResources();
 		if (mDrawableLeftEnvRes != null || mDrawableTopEnvRes != null || mDrawableRightEnvRes != null || mDrawableBottomEnvRes != null) {
+			EnvRes[] compoundResCache = new EnvRes[4];
+			compoundResCache[0] = mDrawableLeftEnvRes;
+			compoundResCache[1] = mDrawableTopEnvRes;
+			compoundResCache[2] = mDrawableRightEnvRes;
+			compoundResCache[3] = mDrawableBottomEnvRes;
+
 			Drawable drawableLeft = mDrawableLeftEnvRes != null ? res.getDrawable(mDrawableLeftEnvRes.getResid()) : null;
 			Drawable drawableTop = mDrawableTopEnvRes != null ? res.getDrawable(mDrawableTopEnvRes.getResid()) : null;
 			Drawable drawableRight = mDrawableRightEnvRes != null ? res.getDrawable(mDrawableRightEnvRes.getResid()) : null;
@@ -167,6 +173,11 @@ class EnvTextViewChanger<TV extends TextView, TVC extends XTextViewCall> extends
 				final int drawablePadding = view.getCompoundDrawablePadding();
 				call.scheduleCompoundDrawablesWithIntrinsicBounds(drawableLeft, drawableTop, drawableRight, drawableBottom);
 				view.setCompoundDrawablePadding(drawablePadding);
+
+				mDrawableLeftEnvRes = compoundResCache[0];
+				mDrawableTopEnvRes = compoundResCache[1];
+				mDrawableRightEnvRes = compoundResCache[2];
+				mDrawableBottomEnvRes = compoundResCache[3];
 			}
 		}
 	}

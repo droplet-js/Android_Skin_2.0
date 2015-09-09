@@ -34,8 +34,8 @@ public class EnvProgressBarChanger<PB extends ProgressBar, PBC extends XProgress
 	private EnvRes mIndeterminateDrawableEnvRes;
 	private EnvRes mProgressDrawableEnvRes;
 
-	public EnvProgressBarChanger() {
-		super();
+	public EnvProgressBarChanger(Context context) {
+		super(context);
 	}
 
 	@Override

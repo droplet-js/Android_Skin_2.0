@@ -32,8 +32,8 @@ class EnvAbsListViewChanger<ALV extends AbsListView, ALVC extends XAbsListViewCa
 	private EnvRes mListSelectorEnvRes;
 	private EnvRes mCacheColorHint;
 
-	public EnvAbsListViewChanger() {
-		super();
+	public EnvAbsListViewChanger(Context context) {
+		super(context);
 	}
 
 	@Override

@@ -29,8 +29,8 @@ class EnvAbsSeekBarChanger<ASB extends AbsSeekBar, ASBC extends XAbsSeekBarCall>
 
 	private EnvRes mThumbEnvRes;
 
-	public EnvAbsSeekBarChanger() {
-		super();
+	public EnvAbsSeekBarChanger(Context context) {
+		super(context);
 	}
 
 	@Override

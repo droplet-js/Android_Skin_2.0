@@ -29,8 +29,8 @@ public class EnvListViewChanger<LV extends ListView, LVC extends XListViewCall> 
 
 	private EnvRes mDividerEnvRes;
 
-	public EnvListViewChanger() {
-		super();
+	public EnvListViewChanger(Context context) {
+		super(context);
 	}
 
 	@Override

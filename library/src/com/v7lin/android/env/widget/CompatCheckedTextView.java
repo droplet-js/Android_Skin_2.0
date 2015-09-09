@@ -34,7 +34,7 @@ public class CompatCheckedTextView extends CheckedTextView implements XCheckedTe
 	public CompatCheckedTextView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
-		mEnvUIChanger = new EnvCheckedTextViewChanger<CheckedTextView, XCheckedTextViewCall>();
+		mEnvUIChanger = new EnvCheckedTextViewChanger<CheckedTextView, XCheckedTextViewCall>(context);
 		mEnvUIChanger.applyStyle(context, attrs, defStyle, 0, ALLOW_SYSRES, isInEditMode());
 	}
 

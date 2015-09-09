@@ -35,7 +35,7 @@ public class CompatRelativeLayout extends RelativeLayout implements XViewGroupCa
 	public CompatRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
-		mEnvUIChanger = new EnvViewGroupChanger<ViewGroup, XViewGroupCall>();
+		mEnvUIChanger = new EnvViewGroupChanger<ViewGroup, XViewGroupCall>(context);
 		mEnvUIChanger.applyStyle(context, attrs, 0, 0, ALLOW_SYSRES, isInEditMode());
 	}
 

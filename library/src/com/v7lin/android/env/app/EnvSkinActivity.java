@@ -4,11 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.v7lin.android.app.SuperActivity;
-import com.v7lin.android.env.EnvCallback;
 import com.v7lin.android.env.EnvContextWrapper;
 import com.v7lin.android.env.EnvLayoutInflaterWrapper;
 import com.v7lin.android.env.EnvResourcesManager;
@@ -29,9 +26,6 @@ public class EnvSkinActivity extends SuperActivity implements XActivityCall {
 	private LayoutInflater mLayoutInflater;
 
 	private EnvUIChanger<Activity, XActivityCall> mEnvUIChanger;
-
-	private String mSkinPath;
-	private String mFontPath;
 
 	@Override
 	protected void attachBaseContext(Context newBase) {
@@ -74,95 +68,32 @@ public class EnvSkinActivity extends SuperActivity implements XActivityCall {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		mEnvUIChanger = new EnvActivityChanger();
+		mEnvUIChanger = new EnvActivityChanger(this);
 		mEnvUIChanger.applyStyle(this, null, 0, 0, false, false);
-
-		mSkinPath = EnvResourcesManager.getGlobal().getSkinPath(this);
-		mFontPath = EnvResourcesManager.getGlobal().getFontPath(this);
 	}
 
 	/**
 	 * 可继承 {@link EnvSkinActivity} 重写该函数
 	 * 
 	 * 设置视图资源，实现不支持换肤功能的视图，进行换肤
-	 * 
-	 * @param skinPath
 	 */
-	public void scheduleSkin(String skinPath) {
-		mSkinPath = skinPath;
+	public void scheduleSkin() {
 		mEnvUIChanger.scheduleSkin(this, this, false);
-		scheduleViewSkin(findViewById(android.R.id.content));
-	}
-
-	private void scheduleViewSkin(View view) {
-		if (view != null) {
-			if (view instanceof EnvCallback) {
-				((EnvCallback) view).scheduleSkin();
-			} else if (view instanceof ViewGroup) {
-				scheduleViewGroupSkin((ViewGroup) view);
-			}
-		}
-	}
-
-	private void scheduleViewGroupSkin(ViewGroup group) {
-		if (group != null) {
-			final int childCount = group.getChildCount();
-			for (int i = 0; i < childCount; i++) {
-				View child = group.getChildAt(i);
-				scheduleViewSkin(child);
-			}
-		}
 	}
 
 	/**
 	 * 可继承 {@link EnvSkinActivity} 重写该函数
 	 * 
 	 * 设置视图字体，实现不支持换字体功能的视图，进行换字体
-	 * 
-	 * @param skinPath
 	 */
-	public void scheduleFont(String fontPath) {
-		mFontPath = fontPath;
+	public void scheduleFont() {
 		mEnvUIChanger.scheduleFont(this, this, false);
-		scheduleViewFont(findViewById(android.R.id.content));
-	}
-
-	private void scheduleViewFont(View view) {
-		if (view != null) {
-			if (view instanceof EnvCallback) {
-				((EnvCallback) view).scheduleFont();
-			} else if (view instanceof ViewGroup) {
-				scheduleViewGroupFont((ViewGroup) view);
-			}
-		}
-	}
-
-	private void scheduleViewGroupFont(ViewGroup group) {
-		if (group != null) {
-			final int childCount = group.getChildCount();
-			for (int i = 0; i < childCount; i++) {
-				View child = group.getChildAt(i);
-				scheduleViewFont(child);
-			}
-		}
-	}
-
-	protected boolean isSkinChanged() {
-		return EnvResourcesManager.getGlobal().isSkinChanged(this, mSkinPath);
-	}
-
-	protected boolean isFontChanged() {
-		return EnvResourcesManager.getGlobal().isFontChanged(this, mFontPath);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if (isSkinChanged()) {
-			scheduleSkin(EnvResourcesManager.getGlobal().getSkinPath(this));
-		}
-		if (isFontChanged()) {
-			scheduleFont(EnvResourcesManager.getGlobal().getFontPath(this));
-		}
+		scheduleSkin();
+		scheduleFont();
 	}
 }

@@ -29,6 +29,10 @@ public class EnvCheckedTextViewChanger<CTV extends CheckedTextView, CTVC extends
 
 	private EnvRes mCheckMarkEnvRes;
 
+	public EnvCheckedTextViewChanger(Context context) {
+		super(context);
+	}
+
 	@Override
 	protected void onApplyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, boolean allowSysRes) {
 		super.onApplyStyle(context, attrs, defStyleAttr, defStyleRes, allowSysRes);

@@ -34,7 +34,7 @@ public class CompatSeekBar extends SeekBar implements XAbsSeekBarCall, EnvCallba
 	public CompatSeekBar(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
-		mEnvUIChanger = new EnvAbsSeekBarChanger<AbsSeekBar, XAbsSeekBarCall>();
+		mEnvUIChanger = new EnvAbsSeekBarChanger<AbsSeekBar, XAbsSeekBarCall>(context);
 		mEnvUIChanger.applyStyle(context, attrs, defStyle, 0, ALLOW_SYSRES, isInEditMode());
 	}
 

@@ -33,7 +33,7 @@ public class CompatProgressBar extends ProgressBar implements XProgressBarCall, 
 	public CompatProgressBar(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
-		mEnvUIChanger = new EnvProgressBarChanger<ProgressBar, XProgressBarCall>();
+		mEnvUIChanger = new EnvProgressBarChanger<ProgressBar, XProgressBarCall>(context);
 		mEnvUIChanger.applyStyle(context, attrs, defStyle, 0, ALLOW_SYSRES, isInEditMode());
 	}
 

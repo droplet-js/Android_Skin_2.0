@@ -35,8 +35,8 @@ public class EnvExpandableListViewChanger<ELV extends ExpandableListView, ELVC e
 	private EnvRes mChildIndicatorEnvRes;
 	private EnvRes mChildDividerEnvRes;
 
-	public EnvExpandableListViewChanger() {
-		super();
+	public EnvExpandableListViewChanger(Context context) {
+		super(context);
 	}
 
 	@Override

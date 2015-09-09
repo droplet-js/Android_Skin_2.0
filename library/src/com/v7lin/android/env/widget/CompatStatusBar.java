@@ -29,7 +29,7 @@ public class CompatStatusBar extends LinearLayout implements XViewGroupCall, Env
 	public CompatStatusBar(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
-		mEnvUIChanger = new EnvViewGroupChanger<ViewGroup, XViewGroupCall>();
+		mEnvUIChanger = new EnvViewGroupChanger<ViewGroup, XViewGroupCall>(context);
 		mEnvUIChanger.applyStyle(context, attrs, 0, 0, ALLOW_SYSRES, isInEditMode());
 	}
 

@@ -34,7 +34,7 @@ public class CompatToggleButton extends ToggleButton implements XCompoundButtonC
 	public CompatToggleButton(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
-		mEnvUIChanger = new EnvCompoundButtonChanger<CompoundButton, XCompoundButtonCall>();
+		mEnvUIChanger = new EnvCompoundButtonChanger<CompoundButton, XCompoundButtonCall>(context);
 		mEnvUIChanger.applyStyle(context, attrs, defStyle, 0, ALLOW_SYSRES, isInEditMode());
 	}
 

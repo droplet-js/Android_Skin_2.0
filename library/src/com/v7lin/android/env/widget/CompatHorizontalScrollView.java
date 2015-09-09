@@ -34,7 +34,7 @@ public class CompatHorizontalScrollView extends HorizontalScrollView implements 
 	public CompatHorizontalScrollView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
-		mEnvUIChanger = new EnvFrameLayoutChanger<FrameLayout, XFrameLayoutCall>();
+		mEnvUIChanger = new EnvFrameLayoutChanger<FrameLayout, XFrameLayoutCall>(context);
 		mEnvUIChanger.applyStyle(context, attrs, defStyle, 0, ALLOW_SYSRES, isInEditMode());
 	}
 

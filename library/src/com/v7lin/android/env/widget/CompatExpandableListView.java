@@ -2,9 +2,11 @@ package com.v7lin.android.env.widget;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ExpandableListView;
 
 import com.v7lin.android.env.EnvCallback;
@@ -33,8 +35,16 @@ public class CompatExpandableListView extends ExpandableListView implements XExp
 	public CompatExpandableListView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
-		mEnvUIChanger = new EnvExpandableListViewChanger<ExpandableListView, XExpandableListViewCall>();
+		mEnvUIChanger = new EnvExpandableListViewChanger<ExpandableListView, XExpandableListViewCall>(context);
 		mEnvUIChanger.applyStyle(context, attrs, defStyle, 0, ALLOW_SYSRES, isInEditMode());
+	}
+
+	@Override
+	protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
+		if (child instanceof EnvCallback) {
+			((EnvCallback) child).scheduleSkin();
+		}
+		return super.drawChild(canvas, child, drawingTime);
 	}
 
 	@Override

@@ -28,8 +28,8 @@ class EnvCompoundButtonChanger<CB extends CompoundButton, CBC extends XCompoundB
 
 	private EnvRes mButtonEnvRes;
 
-	public EnvCompoundButtonChanger() {
-		super();
+	public EnvCompoundButtonChanger(Context context) {
+		super(context);
 	}
 
 	@Override

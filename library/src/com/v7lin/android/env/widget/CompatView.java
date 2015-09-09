@@ -32,7 +32,7 @@ public class CompatView extends View implements XViewCall, EnvCallback {
 	public CompatView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
-		mEnvUIChanger = new EnvViewChanger<View, XViewCall>();
+		mEnvUIChanger = new EnvViewChanger<View, XViewCall>(context);
 		mEnvUIChanger.applyStyle(context, attrs, defStyle, 0, ALLOW_SYSRES, isInEditMode());
 	}
 

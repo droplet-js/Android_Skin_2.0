@@ -29,8 +29,8 @@ class EnvFrameLayoutChanger<FL extends FrameLayout, FLC extends XFrameLayoutCall
 
 	private EnvRes mForegroundEnvRes;
 
-	public EnvFrameLayoutChanger() {
-		super();
+	public EnvFrameLayoutChanger(Context context) {
+		super(context);
 	}
 
 	@Override

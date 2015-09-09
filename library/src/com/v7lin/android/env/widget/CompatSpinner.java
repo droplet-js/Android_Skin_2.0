@@ -34,7 +34,7 @@ public class CompatSpinner extends Spinner implements XViewGroupCall, EnvCallbac
 	public CompatSpinner(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
-		mEnvUIChanger = new EnvViewGroupChanger<ViewGroup, XViewGroupCall>();
+		mEnvUIChanger = new EnvViewGroupChanger<ViewGroup, XViewGroupCall>(context);
 		mEnvUIChanger.applyStyle(context, attrs, defStyle, 0, ALLOW_SYSRES, isInEditMode());
 	}
 

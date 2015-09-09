@@ -35,7 +35,7 @@ public class CompatEditText extends EditText implements XTextViewCall, EnvCallba
 	public CompatEditText(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
-		mEnvUIChanger = new EnvTextViewChanger<TextView, XTextViewCall>();
+		mEnvUIChanger = new EnvTextViewChanger<TextView, XTextViewCall>(context);
 		mEnvUIChanger.applyStyle(context, attrs, defStyle, 0, ALLOW_SYSRES, isInEditMode());
 	}
 
