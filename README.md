@@ -35,7 +35,7 @@ Library使用相关注意事项，请认真阅读《Library说明文档.doc》
 
 9.2：ClassLoader 换肤模式有 BUG，换回 LayoutInflater 换肤模式（“睡啊”App的Android研发反馈）
 
-9.10：修正 TextView 和 ListView 在动态换肤上出现的 BUG。
+9.10：修正 TextView 和 ListView 在动态换肤上出现的 BUG （“睡啊”App的Android研发反馈）
 
 # 重大版本迭代
 7.3：Library 由 2.2 升级到 2.4。新增EnvViewMap。支持额外视图替换（AppCompat的支持不在话下，具体实现请阅读《Library说明文档.doc》）。
