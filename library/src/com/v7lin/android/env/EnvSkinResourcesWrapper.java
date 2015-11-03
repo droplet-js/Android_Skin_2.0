@@ -272,30 +272,28 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 
 	@Override
 	public Drawable getDrawable(int id) throws NotFoundException {
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-			ensureSkinRes(mContext);
-			EnvRes mapping = mappingSystemRes(id);// 系统资源->APP资源
-			if (mapping != null && mapping.isValid()) {
-				EnvRes mappingSkinRes = mappingSkinRes(mapping.getResid());// APP资源->Skin资源
-				if (mappingSkinRes != null && mappingSkinRes.isValid()) {
-					mapping = mappingSkinRes;
-				}
-			} else {
-				mapping = mappingSkinRes(id);
+		ensureSkinRes(mContext);
+		EnvRes mapping = mappingSystemRes(id);// 系统资源->APP资源
+		if (mapping != null && mapping.isValid()) {
+			EnvRes mappingSkinRes = mappingSkinRes(mapping.getResid());// APP资源->Skin资源
+			if (mappingSkinRes != null && mappingSkinRes.isValid()) {
+				mapping = mappingSkinRes;
 			}
-			if (mapping != null && mapping.isValid()) {
-				try {
-					if (mSkinRes != null) {
-						try {
-							return mSkinRes.getDrawable(mapping.getResid());
-						} catch (NotFoundException e) {
-							return super.getDrawable(mapping.getResid());
-						}
-					} else {
+		} else {
+			mapping = mappingSkinRes(id);
+		}
+		if (mapping != null && mapping.isValid()) {
+			try {
+				if (mSkinRes != null) {
+					try {
+						return mSkinRes.getDrawable(mapping.getResid());
+					} catch (NotFoundException e) {
 						return super.getDrawable(mapping.getResid());
 					}
-				} catch (NotFoundException e) {
+				} else {
+					return super.getDrawable(mapping.getResid());
 				}
+			} catch (NotFoundException e) {
 			}
 		}
 		return super.getDrawable(id);
@@ -304,30 +302,28 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
 	@Override
 	public Drawable getDrawableForDensity(int id, int density) throws NotFoundException {
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-			ensureSkinRes(mContext);
-			EnvRes mapping = mappingSystemRes(id);// 系统资源->APP资源
-			if (mapping != null && mapping.isValid()) {
-				EnvRes mappingSkinRes = mappingSkinRes(mapping.getResid());// APP资源->Skin资源
-				if (mappingSkinRes != null && mappingSkinRes.isValid()) {
-					mapping = mappingSkinRes;
-				}
-			} else {
-				mapping = mappingSkinRes(id);
+		ensureSkinRes(mContext);
+		EnvRes mapping = mappingSystemRes(id);// 系统资源->APP资源
+		if (mapping != null && mapping.isValid()) {
+			EnvRes mappingSkinRes = mappingSkinRes(mapping.getResid());// APP资源->Skin资源
+			if (mappingSkinRes != null && mappingSkinRes.isValid()) {
+				mapping = mappingSkinRes;
 			}
-			if (mapping != null && mapping.isValid()) {
-				try {
-					if (mSkinRes != null) {
-						try {
-							return mSkinRes.getDrawableForDensity(mapping.getResid(), density);
-						} catch (Exception e) {
-							return super.getDrawableForDensity(mapping.getResid(), density);
-						}
-					} else {
+		} else {
+			mapping = mappingSkinRes(id);
+		}
+		if (mapping != null && mapping.isValid()) {
+			try {
+				if (mSkinRes != null) {
+					try {
+						return mSkinRes.getDrawableForDensity(mapping.getResid(), density);
+					} catch (Exception e) {
 						return super.getDrawableForDensity(mapping.getResid(), density);
 					}
-				} catch (NotFoundException e) {
+				} else {
+					return super.getDrawableForDensity(mapping.getResid(), density);
 				}
+			} catch (NotFoundException e) {
 			}
 		}
 		return super.getDrawableForDensity(id, density);
@@ -395,30 +391,28 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 
 	@Override
 	public int getColor(int id) throws NotFoundException {
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-			ensureSkinRes(mContext);
-			EnvRes mapping = mappingSystemRes(id);// 系统资源->APP资源
-			if (mapping != null && mapping.isValid()) {
-				EnvRes mappingSkinRes = mappingSkinRes(mapping.getResid());// APP资源->Skin资源
-				if (mappingSkinRes != null && mappingSkinRes.isValid()) {
-					mapping = mappingSkinRes;
-				}
-			} else {
-				mapping = mappingSkinRes(id);
+		ensureSkinRes(mContext);
+		EnvRes mapping = mappingSystemRes(id);// 系统资源->APP资源
+		if (mapping != null && mapping.isValid()) {
+			EnvRes mappingSkinRes = mappingSkinRes(mapping.getResid());// APP资源->Skin资源
+			if (mappingSkinRes != null && mappingSkinRes.isValid()) {
+				mapping = mappingSkinRes;
 			}
-			if (mapping != null && mapping.isValid()) {
-				try {
-					if (mSkinRes != null) {
-						try {
-							return mSkinRes.getColor(mapping.getResid());
-						} catch (NotFoundException e) {
-							return super.getColor(mapping.getResid());
-						}
-					} else {
+		} else {
+			mapping = mappingSkinRes(id);
+		}
+		if (mapping != null && mapping.isValid()) {
+			try {
+				if (mSkinRes != null) {
+					try {
+						return mSkinRes.getColor(mapping.getResid());
+					} catch (NotFoundException e) {
 						return super.getColor(mapping.getResid());
 					}
-				} catch (NotFoundException e) {
+				} else {
+					return super.getColor(mapping.getResid());
 				}
+			} catch (NotFoundException e) {
 			}
 		}
 		return super.getColor(id);
@@ -426,30 +420,28 @@ public final class EnvSkinResourcesWrapper extends EnvSystemResourcesWrapper {
 
 	@Override
 	public ColorStateList getColorStateList(int id) throws NotFoundException {
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-			ensureSkinRes(mContext);
-			EnvRes mapping = mappingSystemRes(id);// 系统资源->APP资源
-			if (mapping != null && mapping.isValid()) {
-				EnvRes mappingSkinRes = mappingSkinRes(mapping.getResid());// APP资源->Skin资源
-				if (mappingSkinRes != null && mappingSkinRes.isValid()) {
-					mapping = mappingSkinRes;
-				}
-			} else {
-				mapping = mappingSkinRes(id);
+		ensureSkinRes(mContext);
+		EnvRes mapping = mappingSystemRes(id);// 系统资源->APP资源
+		if (mapping != null && mapping.isValid()) {
+			EnvRes mappingSkinRes = mappingSkinRes(mapping.getResid());// APP资源->Skin资源
+			if (mappingSkinRes != null && mappingSkinRes.isValid()) {
+				mapping = mappingSkinRes;
 			}
-			if (mapping != null && mapping.isValid()) {
-				try {
-					if (mSkinRes != null) {
-						try {
-							return mSkinRes.getColorStateList(mapping.getResid());
-						} catch (NotFoundException e) {
-							return super.getColorStateList(mapping.getResid());
-						}
-					} else {
+		} else {
+			mapping = mappingSkinRes(id);
+		}
+		if (mapping != null && mapping.isValid()) {
+			try {
+				if (mSkinRes != null) {
+					try {
+						return mSkinRes.getColorStateList(mapping.getResid());
+					} catch (NotFoundException e) {
 						return super.getColorStateList(mapping.getResid());
 					}
-				} catch (NotFoundException e) {
+				} else {
+					return super.getColorStateList(mapping.getResid());
 				}
+			} catch (NotFoundException e) {
 			}
 		}
 		return super.getColorStateList(id);

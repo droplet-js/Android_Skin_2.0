@@ -56,6 +56,7 @@ public abstract class EnvUIChanger<UI, UIC> {
 
 	public final void scheduleSkin(UI ui, UIC call, boolean isInEditMode) {
 		if (!isInEditMode && (isSkinChanged() || mInitSkinFlag.compareAndSet(false, true))) {
+			mSkinPath = EnvResourcesManager.getGlobal().getSkinPath(mContext);
 			onScheduleSkin(ui, call);
 		}
 	}
@@ -64,6 +65,7 @@ public abstract class EnvUIChanger<UI, UIC> {
 
 	public final void scheduleFont(UI ui, UIC call, boolean isInEditMode) {
 		if (!isInEditMode && (isFontChanged() || mInitFontFlag.compareAndSet(false, true))) {
+			mFontPath = EnvResourcesManager.getGlobal().getFontPath(mContext);
 			onScheduleFont(ui, call);
 		}
 	}
