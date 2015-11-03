@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import com.v7lin.android.env.EnvCallback;
 import com.v7lin.android.env.EnvResourcesManager;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 /**
  * 
  * 
@@ -18,6 +20,8 @@ public abstract class EnvUIChanger<UI, UIC> {
 	private Context mContext;
 	private String mSkinPath;
 	private String mFontPath;
+	private final AtomicBoolean mInitSkinFlag = new AtomicBoolean(false);
+	private final AtomicBoolean mInitFontFlag = new AtomicBoolean(false);
 
 	public EnvUIChanger(Context context) {
 		super();
@@ -51,7 +55,7 @@ public abstract class EnvUIChanger<UI, UIC> {
 	protected abstract void onApplyAttr(Context context, int attr, int resid, boolean allowSysRes);
 
 	public final void scheduleSkin(UI ui, UIC call, boolean isInEditMode) {
-		if (!isInEditMode && isSkinChanged()) {
+		if (!isInEditMode && (isSkinChanged() || mInitSkinFlag.compareAndSet(false, true))) {
 			onScheduleSkin(ui, call);
 		}
 	}
@@ -59,7 +63,7 @@ public abstract class EnvUIChanger<UI, UIC> {
 	protected abstract void onScheduleSkin(UI ui, UIC call);
 
 	public final void scheduleFont(UI ui, UIC call, boolean isInEditMode) {
-		if (!isInEditMode && isFontChanged()) {
+		if (!isInEditMode && (isFontChanged() || mInitFontFlag.compareAndSet(false, true))) {
 			onScheduleFont(ui, call);
 		}
 	}

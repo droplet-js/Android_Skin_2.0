@@ -209,6 +209,18 @@ public abstract class EnvResourcesWrapper extends Resources {
 		return mWrapped != null ? mWrapped.getColorStateList(id) : super.getColorStateList(id);
 	}
 
+	@TargetApi(Build.VERSION_CODES.M)
+	@Override
+	public int getColor(int id, Theme theme) throws NotFoundException {
+		return mWrapped != null ? mWrapped.getColor(id, theme) : super.getColor(id, theme);
+	}
+
+	@TargetApi(Build.VERSION_CODES.M)
+	@Override
+	public ColorStateList getColorStateList(int id, Theme theme) throws NotFoundException {
+		return mWrapped != null ? mWrapped.getColorStateList(id, theme) : super.getColorStateList(id, theme);
+	}
+
 	@Override
 	public boolean getBoolean(int id) throws NotFoundException {
 		return mWrapped != null ? mWrapped.getBoolean(id) : super.getBoolean(id);

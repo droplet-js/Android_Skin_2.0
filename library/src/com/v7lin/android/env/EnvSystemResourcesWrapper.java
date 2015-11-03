@@ -8,7 +8,7 @@ import android.content.res.Resources;
  * 
  * @author v7lin Email:v7lin@qq.com
  */
-public class EnvSystemResourcesWrapper extends EnvResourcesWrapper {
+public abstract class EnvSystemResourcesWrapper extends EnvResourcesWrapper {
 
 	private final Context mContext;
 	private SystemResMap mSystemResMap = NullResMap.getInstance();

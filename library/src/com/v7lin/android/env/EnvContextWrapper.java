@@ -18,16 +18,21 @@ public class EnvContextWrapper extends ContextWrapper {
 
 	private final EnvResourcesManager mResourcesManager;
 
-	private EnvSystemResourcesWrapper mResources;
+	private EnvSkinResourcesWrapper mResources;
 	private Theme mTheme;
 
 	public EnvContextWrapper(Context base, EnvResourcesManager manager) {
 		super(base);
 		mResourcesManager = manager;
+		ensureEnvSkinResources();
+	}
+
+	private void ensureEnvSkinResources() {
+		getResources();
 	}
 
 	public void setSystemResMap(SystemResMap resourcesMap) {
-		getResources();
+		ensureEnvSkinResources();
 		mResources.setSystemResMap(resourcesMap);
 	}
 
