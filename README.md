@@ -37,6 +37,8 @@ Library使用相关注意事项，请认真阅读《Library说明文档.doc》
 
 9.10：修正 TextView 和 ListView 在动态换肤上出现的 BUG （“睡啊”App的Android研发反馈）
 
+11.3：修正 5.x 上资源映射错误，并兼容 6.x 上取 Color 和 ColorStateList 资源（“麦潮”App的Android研发反馈）
+
 # 重大版本迭代
 7.3：Library 由 2.2 升级到 2.4。新增EnvViewMap。支持额外视图替换（AppCompat的支持不在话下，具体实现请阅读《Library说明文档.doc》）。
 
