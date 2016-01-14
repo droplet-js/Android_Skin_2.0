@@ -1,3 +1,6 @@
+@Deprecated
+项目已迁移至 https://github.com/v7lin/Android_Skin_3.x
+
 # 前言
 基于 Android Skin 1.0 修改而来，替换换肤解决方案，让换肤变得更加简单。
 无须对项目作出太大修改，就可以完美实现换肤功能。
